@@ -1,7 +1,8 @@
 package org.codeforworld.winterredserver.service;
 
-import org.codeforworld.winterredserver.entity.CheckMan;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.codeforworld.winterredserver.entity.User;
+
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ import java.util.List;
  * @author kfzx-ganhy
  * @since 2020-07-25
  */
-public interface CheckManService extends IService<CheckMan> {
+public interface UserService extends IService<User> {
 
-    List<CheckMan> queryCheckMan(CheckMan checkMan);
+    List<User> queryUser(User user);
 }

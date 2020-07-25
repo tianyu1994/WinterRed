@@ -2,7 +2,6 @@ package org.codeforworld.winterredserver.service;
 
 import org.codeforworld.winterredserver.entity.UserFieldRelation;
 import com.baomidou.mybatisplus.extension.service.IService;
-import org.codeforworld.winterredserver.queryParam.QueryParamVo;
 
 import java.util.List;
 

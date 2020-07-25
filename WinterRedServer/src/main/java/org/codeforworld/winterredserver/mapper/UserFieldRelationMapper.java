@@ -2,8 +2,6 @@ package org.codeforworld.winterredserver.mapper;
 
 import org.codeforworld.winterredserver.entity.UserFieldRelation;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.codeforworld.winterredserver.queryParam.QueryParamVo;
-
 import java.util.List;
 
 /**

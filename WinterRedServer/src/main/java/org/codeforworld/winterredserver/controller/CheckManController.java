@@ -1,16 +1,12 @@
 package org.codeforworld.winterredserver.controller;
 
-
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.codeforworld.winterredserver.entity.CheckMan;
-import org.codeforworld.winterredserver.entity.CheckmanFieldRelation;
-import org.codeforworld.winterredserver.lang.Page;
 import org.codeforworld.winterredserver.lang.Result;
 import org.codeforworld.winterredserver.service.CheckManService;
 import org.springframework.web.bind.annotation.*;
-
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -42,7 +38,7 @@ public class CheckManController {
     }
 
     @PostMapping("/saveOrUpdate")
-    public Result saveOrUpdate(CheckMan checkMan){
+    public Result saveOrUpdate(@RequestBody CheckMan checkMan){
         Result result = new Result();
         boolean isSuccess = checkManService.saveOrUpdate(checkMan);
         if(isSuccess){

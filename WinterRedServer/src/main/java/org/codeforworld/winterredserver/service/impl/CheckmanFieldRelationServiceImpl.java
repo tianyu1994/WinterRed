@@ -1,12 +1,10 @@
 package org.codeforworld.winterredserver.service.impl;
 
 import org.codeforworld.winterredserver.entity.CheckmanFieldRelation;
-import org.codeforworld.winterredserver.lang.Result;
 import org.codeforworld.winterredserver.mapper.CheckmanFieldRelationMapper;
 import org.codeforworld.winterredserver.service.CheckmanFieldRelationService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.Resource;
 import java.util.List;
 

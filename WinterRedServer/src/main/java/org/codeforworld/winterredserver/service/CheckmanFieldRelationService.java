@@ -2,8 +2,6 @@ package org.codeforworld.winterredserver.service;
 
 import org.codeforworld.winterredserver.entity.CheckmanFieldRelation;
 import com.baomidou.mybatisplus.extension.service.IService;
-import org.codeforworld.winterredserver.lang.Result;
-
 import java.util.List;
 
 /**

@@ -2,7 +2,6 @@ package org.codeforworld.winterredserver.mapper;
 
 import org.codeforworld.winterredserver.entity.CheckmanFieldRelation;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-
 import java.util.List;
 
 /**

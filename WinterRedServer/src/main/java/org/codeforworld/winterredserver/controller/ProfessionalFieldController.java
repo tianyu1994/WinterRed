@@ -1,16 +1,12 @@
 package org.codeforworld.winterredserver.controller;
 
-
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
-import org.codeforworld.winterredserver.entity.CheckMan;
 import org.codeforworld.winterredserver.entity.ProfessionalField;
 import org.codeforworld.winterredserver.lang.Result;
-import org.codeforworld.winterredserver.service.CheckManService;
 import org.codeforworld.winterredserver.service.ProfessionalFieldService;
 import org.springframework.web.bind.annotation.*;
-
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -41,7 +37,7 @@ public class ProfessionalFieldController {
     }
 
     @PostMapping("/saveOrUpdate")
-    public Result saveOrUpdate(ProfessionalField professionalField){
+    public Result saveOrUpdate(@RequestBody ProfessionalField professionalField){
         Result result = new Result();
         boolean isSuccess = professionalFieldService.saveOrUpdate(professionalField);
         if(isSuccess){
