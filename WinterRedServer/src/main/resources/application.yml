@@ -1,0 +1,16 @@
+server:
+  port: 8088
+  servlet:
+    context-path: /
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/winter_red?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    username: root
+    password: root
+
+
+mybatis-plus:
+  type-aliases-package: org.codeforworld.winterredserver.entity
+  mapper-locations: classpath:/mapper/*Mapper.xml

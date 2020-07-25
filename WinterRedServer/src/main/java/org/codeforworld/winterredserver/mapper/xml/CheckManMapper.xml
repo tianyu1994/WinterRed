@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.codeforworld.winterredserver.mapper.CheckManMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="org.codeforworld.winterredserver.entity.CheckMan">
+        <id column="id" property="id" />
+        <result column="organization_id" property="organizationId" />
+        <result column="checkman_name" property="checkmanName" />
+        <result column="sex" property="sex" />
+        <result column="email" property="email" />
+        <result column="user_name" property="userName" />
+        <result column="belong_area" property="belongArea" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, organization_id, checkman_name, sex, email, user_name, belong_area
+    </sql>
+
+</mapper>

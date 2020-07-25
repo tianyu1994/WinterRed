@@ -1,11 +1,9 @@
 package org.codeforworld.winterredserver;
 
 import org.mybatis.spring.annotation.MapperScan;
-import org.codeforworld.winterredserver.dao.CityDao;
-import org.codeforworld.winterredserver.domain.City;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * Spring Boot 应用启动类
@@ -15,12 +13,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 // Spring Boot 应用的标识
 @SpringBootApplication
 // mapper 接口类扫描包配置
-@MapperScan("org.codeforworld.winterredserver.dao")
-public class Application {
+@MapperScan("org.codeforworld.winterredserver.mapper")
+public class WinterRedServerStartUp {
 
     public static void main(String[] args) {
         // 程序启动入口
         // 启动嵌入式的 Tomcat 并初始化 Spring 环境及其各 Spring 组件
-        SpringApplication.run(Application.class,args);
+        SpringApplication.run(WinterRedServerStartUp.class,args);
     }
 }
