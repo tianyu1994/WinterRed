@@ -1,4 +1,8 @@
 .idea/
 *.iml
 */target/
+<<<<<<< HEAD
 *.log
+=======
+./winterredfact-front/node_modules
+>>>>>>> 前端
