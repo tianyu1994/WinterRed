@@ -2,6 +2,9 @@ package org.codeforworld.winterredserver.service;
 
 import org.codeforworld.winterredserver.entity.CheckmanFieldRelation;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.codeforworld.winterredserver.lang.Result;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +15,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2020-07-25
  */
 public interface CheckmanFieldRelationService extends IService<CheckmanFieldRelation> {
+
+    List<CheckmanFieldRelation> queryCheckManFieldRelation(CheckmanFieldRelation checkmanFieldRelation);
 
 }

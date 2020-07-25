@@ -13,4 +13,23 @@
         id, field_name
     </sql>
 
+
+    <sql id="base_where">
+        <if test="id != null">
+            <![CDATA[ AND id = #{id}]]>
+        </if>
+        <if test="fieldName != null and fieldName != ''">
+            <![CDATA[ AND field_name = #{fieldName}]]>
+        </if>
+    </sql>
+
+    <select id="queryProfessionalField" parameterType="org.codeforworld.winterredserver.entity.ProfessionalField"
+            resultType="org.codeforworld.winterredserver.entity.ProfessionalField">
+        select
+        <include refid="Base_Column_List"/>
+        from professional_field
+        <where>
+            <include refid="base_where"/>
+        </where>
+    </select>
 </mapper>

@@ -6,6 +6,9 @@ import org.codeforworld.winterredserver.service.CheckPlatService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import java.util.List;
+
 /**
  * <p>
  * 核查平台表 服务实现类
@@ -17,4 +20,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class CheckPlatServiceImpl extends ServiceImpl<CheckPlatMapper, CheckPlat> implements CheckPlatService {
 
+    @Resource
+    private CheckPlatMapper platMapper;
+
+    @Override
+    public List<CheckPlat> queryCheckPlat(CheckPlat checkPlat) {
+        return platMapper.queryCheckPlat(checkPlat);
+    }
 }

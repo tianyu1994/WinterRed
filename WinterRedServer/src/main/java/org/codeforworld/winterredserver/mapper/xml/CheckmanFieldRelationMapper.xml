@@ -14,4 +14,25 @@
         id, check_man_id, professional_field_id
     </sql>
 
+    <sql id="base_where">
+        <if test="id != null">
+            <![CDATA[ AND id = #{id}]]>
+        </if>
+        <if test="checkManId != null">
+            <![CDATA[ AND check_man_id = #{checkManId}]]>
+        </if>
+        <if test="professionalFieldId != null">
+            <![CDATA[ AND professional_field_id = #{professionalFieldId}]]>
+        </if>
+    </sql>
+
+    <select id="queryCheckManFieldRelation" parameterType="org.codeforworld.winterredserver.entity.CheckmanFieldRelation"
+            resultType="org.codeforworld.winterredserver.entity.CheckmanFieldRelation">
+        select
+        <include refid="Base_Column_List"/>
+        from checkman_field_relation
+        <where>
+            <include refid="base_where"/>
+        </where>
+    </select>
 </mapper>

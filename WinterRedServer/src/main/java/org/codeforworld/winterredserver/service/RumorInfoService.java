@@ -3,6 +3,8 @@ package org.codeforworld.winterredserver.service;
 import org.codeforworld.winterredserver.entity.RumorInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  * 谣言信息表 服务类
@@ -13,4 +15,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface RumorInfoService extends IService<RumorInfo> {
 
+    List<RumorInfo> queryRumorInfo(RumorInfo humorInfo);
+
+    Integer insert(RumorInfo rumorInfo);
 }

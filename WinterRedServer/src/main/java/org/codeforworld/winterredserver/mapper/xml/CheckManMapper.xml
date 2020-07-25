@@ -18,4 +18,38 @@
         id, organization_id, checkman_name, sex, email, user_name, belong_area
     </sql>
 
+    <sql id="base_where">
+        <if test="id != null">
+            <![CDATA[ AND id = #{id}]]>
+        </if>
+        <if test="organizationId != null">
+            <![CDATA[ AND organization_id = #{organizationId}]]>
+        </if>
+        <if test="checkmanName != null and checkmanName != ''">
+            <![CDATA[ AND checkman_name = #{checkmanName}]]>
+        </if>
+        <if test="sex != null and sex != ''">
+            <![CDATA[ AND sex = #{sex}]]>
+        </if>
+        <if test="email != null and email != ''">
+            <![CDATA[ AND email = #{email}]]>
+        </if>
+        <if test="userName != null and userName != ''">
+            <![CDATA[ AND user_name = #{userName}]]>
+        </if>
+        <if test="belongArea != null and belongArea != ''">
+            <![CDATA[ AND belong_area = #{belongArea}]]>
+        </if>
+    </sql>
+
+    <select id="queryCheckMan" parameterType="org.codeforworld.winterredserver.entity.CheckMan"
+            resultType="org.codeforworld.winterredserver.entity.CheckMan">
+        select
+        <include refid="Base_Column_List"/>
+        from check_man
+        <where>
+            <include refid="base_where"/>
+        </where>
+    </select>
+
 </mapper>

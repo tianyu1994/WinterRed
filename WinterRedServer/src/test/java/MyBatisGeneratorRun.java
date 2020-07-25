@@ -32,13 +32,13 @@ public class MyBatisGeneratorRun {
     //作者名
     private final String author = "kfzx-ganhy";
     //指定生成的表名(需要根据项目修改)
-    private final String[] tableNames = new String[]{"table_name"};
+    private final String[] tableNames = new String[]{"user"};
 
 
     @Test
     public void generateCode() {
         //serviceNameStartWithI：user -> UserService, 设置成true: user -> IUserService
-//        generateByTables(false, packageName, tableNames);
+        generateByTables(false, packageName, tableNames);
     }
     /**
      * 根据表自动生成

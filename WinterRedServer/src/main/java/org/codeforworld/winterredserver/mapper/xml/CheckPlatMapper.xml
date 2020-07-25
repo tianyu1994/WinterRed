@@ -14,4 +14,25 @@
         id, organization_name, belong_area
     </sql>
 
+    <sql id="base_where">
+        <if test="id != null">
+            <![CDATA[ AND id = #{id}]]>
+        </if>
+        <if test="organizationName != null and organizationName != ''">
+            <![CDATA[ AND organization_name = #{organizationName}]]>
+        </if>
+        <if test="belongArea != null and belongArea != ''">
+            <![CDATA[ AND belong_area = #{belongArea}]]>
+        </if>
+    </sql>
+
+    <select id="queryCheckPlat" parameterType="org.codeforworld.winterredserver.entity.CheckPlat"
+            resultType="org.codeforworld.winterredserver.entity.CheckPlat">
+        select
+        <include refid="Base_Column_List"/>
+        from check_plat
+        <where>
+            <include refid="base_where"/>
+        </where>
+    </select>
 </mapper>

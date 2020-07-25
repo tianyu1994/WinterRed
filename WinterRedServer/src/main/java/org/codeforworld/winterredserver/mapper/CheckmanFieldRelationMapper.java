@@ -3,6 +3,8 @@ package org.codeforworld.winterredserver.mapper;
 import org.codeforworld.winterredserver.entity.CheckmanFieldRelation;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
+import java.util.List;
+
 /**
  * <p>
  * 核查人员领域关系表 Mapper 接口
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface CheckmanFieldRelationMapper extends BaseMapper<CheckmanFieldRelation> {
 
+    List<CheckmanFieldRelation> queryCheckManFieldRelation(CheckmanFieldRelation checkmanFieldRelation);
 }
