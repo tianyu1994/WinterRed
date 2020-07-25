@@ -14,4 +14,24 @@
         id, user_id, professional_field_id
     </sql>
 
+    <sql id="base_where">
+        <if test="id != null">
+            <![CDATA[ AND id = #{id}]]>
+        </if>
+        <if test="userId != null">
+            <![CDATA[ AND user_id = #{userId}]]>
+        </if>
+        <if test="professionalFieldId != null">
+            <![CDATA[ AND professional_field_id = #{professionalFieldId}]]>
+        </if>
+    </sql>
+
+    <select id="queryUserFieldRelation" parameterType="org.codeforworld.winterredserver.entity.UserFieldRelation" resultType="org.codeforworld.winterredserver.entity.UserFieldRelation">
+        select <include refid="Base_Column_List" />
+        from user_field_relation
+        <where>
+            <include refid="base_where"/>
+        </where>
+    </select>
+
 </mapper>

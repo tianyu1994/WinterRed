@@ -1,19 +1,18 @@
 package org.codeforworld.winterredserver;
 
+import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * Spring Boot 应用启动类
  *
  * Created by bysocket on 16/4/26.
  */
-// Spring Boot 应用的标识
 @SpringBootApplication
-// mapper 接口类扫描包配置
 @MapperScan("org.codeforworld.winterredserver.mapper")
+@Slf4j
 public class WinterRedServerStartUp {
 
     public static void main(String[] args) {

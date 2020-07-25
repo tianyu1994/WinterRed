@@ -14,8 +14,6 @@ public class Result<T> implements Serializable {
     private String status = CodeConstant.STATUS_SUCCESS;
     private String msg = "";
     private T results;
-    private long total = 0;
-    private String countDate;
 
     public Result(){}
 
@@ -44,8 +42,6 @@ public class Result<T> implements Serializable {
                 ", status='" + status + '\'' +
                 ", msg='" + msg + '\'' +
                 ", results=" + results +
-                ", total=" + total +
-                ", countDate='" + countDate + '\'' +
                 '}';
     }
 }

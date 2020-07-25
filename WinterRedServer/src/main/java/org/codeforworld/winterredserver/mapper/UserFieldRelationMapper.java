@@ -2,6 +2,9 @@ package org.codeforworld.winterredserver.mapper;
 
 import org.codeforworld.winterredserver.entity.UserFieldRelation;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.codeforworld.winterredserver.queryParam.QueryParamVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface UserFieldRelationMapper extends BaseMapper<UserFieldRelation> {
 
+    List<UserFieldRelation> queryUserFieldRelation(UserFieldRelation userFieldRelation);
 }

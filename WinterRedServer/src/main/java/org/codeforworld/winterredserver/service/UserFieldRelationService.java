@@ -2,6 +2,9 @@ package org.codeforworld.winterredserver.service;
 
 import org.codeforworld.winterredserver.entity.UserFieldRelation;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.codeforworld.winterredserver.queryParam.QueryParamVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2020-07-25
  */
 public interface UserFieldRelationService extends IService<UserFieldRelation> {
-
+    List<UserFieldRelation> queryUserFieldRelation(UserFieldRelation userFieldRelation);
 }
