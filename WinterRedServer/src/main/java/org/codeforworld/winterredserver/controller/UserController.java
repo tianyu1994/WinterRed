@@ -8,6 +8,7 @@ import org.codeforworld.winterredserver.lang.Result;
 import org.codeforworld.winterredserver.service.UserService;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -38,7 +39,7 @@ public class UserController {
     }
 
     @PostMapping("/saveOrUpdate")
-    public Result saveOrUpdate(@RequestBody User user){
+    public Result saveOrUpdate(@RequestBody @Valid User user){
         Result result = new Result();
         boolean isSuccess = userService.saveOrUpdate(user);
         if(isSuccess){

@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import java.io.Serializable;
 
 /**
@@ -34,6 +36,7 @@ public class User implements Serializable {
     /**
      * 邮箱
      */
+    @NotNull(message = "邮箱不能为空")
     private String email;
 
 
