@@ -6,6 +6,6 @@
 
 <script>
 export default {
-  name: 'RumorList'
+  name: 'Detail'
 }
 </script>
