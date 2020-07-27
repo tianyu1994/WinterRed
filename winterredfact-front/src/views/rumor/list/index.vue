@@ -1,140 +1,139 @@
 <template>
-  <div style='margin:15px 300px; padding:15px;'>
-    <div>
+  <div style='margin:15px 300px; padding:15px;' class='page'>
+    <div style='position:relative; margin-bottom:20px;'>
+      <!--首页顶端-->
       <div>
-        <!--首页顶端-->
-        <div class='background'>
-          <img :src='imgSrc' width='100%' height='100%' alt />
-        </div>
-        <div style='height: 70px'></div>
-        <div style='width: 100%; text-align: center'>
-          <div style='width: 25%; display: inline'></div>
-          <el-input placeholder='请输入内容' style='width: 60%;'>
-            <template slot='append' style='background-color: #bbbb;'>搜索</template>
-          </el-input>
-          <el-button type="info">订阅</el-button>
-          <el-button type="info" @click="checkerRegist">专家注册</el-button>
-        </div>
-        <div style='height: 80px'></div>
+        <img class='background' width='100%' height="100%" src='@/assets/bg.jpg'/>
+      </div>
+      <div class="absolute-aligned-right">
+        <el-row style='margin-right:15px;'>
+          <el-col :span="12"><subscribe/></el-col>
+          <el-col :span="12"><el-button type='primary' @click='checkerRegist' plain>专家注册</el-button></el-col>
+        </el-row>
+      </div>
+      <div class="absolute-aligned">
+        <el-input placeholder='请输入内容' size="large">
+          <el-button slot='append' style="color:#fff; background:#EB6368;">搜索</el-button>
+        </el-input>
       </div>
     </div>
-    <div>
-      <ul v-for='(item,index) in tableData' :key='index'>
-        <li style='list-style: none; float:left; width: 100%; border-bottom: 0.6px solid purple;'>
-          <div style="display: inline-block">
-            <div style='height: 20px'></div>
-            <div style='height: 30px'>
-              <span style="font-size: 20px;">{{item.info}}</span>
-              <span> {{item.result}} </span>
-            </div>
-            <div style='height: 30px'>{{item.date}}</div>
-            <div style='height: 20px'></div>
+    <div v-for='(item,index) in tableData' :key='index'>
+      <el-row style='line-height:2;'>
+        <el-col :span="22">
+          <div>
+            <span style='font-size:20px; margin-right:15px;'>{{item.info}}</span>
+            <el-tag type="success">{{item.result}}</el-tag>
           </div>
-          <div style="display: inline-block; height: 100px; width: 100px; float: right;">
-            <div style="height: 10%; "></div>
-            <img :src = 'img' width="80%" height="80%" style="transform: rotate(15deg)"  alt />
-          </div>
-
-        </li>
-      </ul>
+          <div style='color:#808080;'>{{item.date}}</div>
+        </el-col>
+        <el-col :span="2">
+          <img :src='img' style='width:80px; height:80px; transform:rotate(15deg); vertical-align: middle;'/>
+        </el-col>
+      </el-row>
+      <el-divider></el-divider>
     </div>
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'List',
-    data() {
-      return {
-        input: '',
-        words: '',
-        img: require('@/assets/100false.png'),
-        imgSrc: require('@/assets/bg.jpg'),
-        tableData: [
-          {
-            date: '2016-05-03',
-            result: '谣言',
-            info: '钟南山院士已抵达新疆乌鲁木齐抗击疫情'
-          },
-          {
-            date: '2016-05-02',
-            result: '确实如此',
-            info: '西班牙从去年3月的废水检出新冠病毒相关研究漏洞大'
-          },
-          {
-            date: '2016-05-04',
-            result: '谣言',
-            info: '因疫情原因，中国驻纳米比亚使馆组织包机回国'
-          },
-          {
-            date: '2016-05-01',
-            result: '谣言',
-            info: '钟南山院士已抵达新疆乌鲁木齐抗击疫情'
-          },
-          {
-            date: '2016-05-08',
-            result: '谣言',
-            info: '钟南山院士已抵达新疆乌鲁木齐抗击疫情'
-          }
-        ]
-      }
-    },
-    mounted() {
-    },
-    methods: {
-      checkerRegist() {
-        this.$router.push('/rumor/checkerRegist')
-      }
+import subscribe from './component/subscribe'
+
+export default {
+  name: 'List',
+  components: {
+    subscribe
+  },
+  data() {
+    return {
+      input: '',
+      words: '',
+      img: require('@/assets/100false.png'),
+      tableData: [
+        {
+          date: '2016-05-03',
+          result: '谣言',
+          info: '钟南山院士已抵达新疆乌鲁木齐抗击疫情'
+        },
+        {
+          date: '2016-05-02',
+          result: '确实如此',
+          info: '西班牙从去年3月的废水检出新冠病毒相关研究漏洞大'
+        },
+        {
+          date: '2016-05-04',
+          result: '谣言',
+          info: '因疫情原因，中国驻纳米比亚使馆组织包机回国'
+        },
+        {
+          date: '2016-05-01',
+          result: '谣言',
+          info: '钟南山院士已抵达新疆乌鲁木齐抗击疫情'
+        },
+        {
+          date: '2016-05-08',
+          result: '谣言',
+          info: '钟南山院士已抵达新疆乌鲁木齐抗击疫情'
+        },
+        {
+          date: '2016-06-01',
+          result: '谣言',
+          info: '钟南山院士已抵达新疆乌鲁木齐抗击疫情'
+        },
+        {
+          date: '2016-06-08',
+          result: '谣言',
+          info: '钟南山院士已抵达新疆乌鲁木齐抗击疫情'
+        }
+      ]
+    }
+  },
+  mounted() {},
+  methods: {
+    checkerRegist() {
+      this.$router.push('/rumor/checkerRegist')
     }
   }
+}
 </script>
 
 <style lang='scss'>
-  .middle {
-    height: 180px;
-    width: 800px;
-    align-content: center;
-    position: relative;
-    background-repeat: none;
+.background {
+  background-size: cover;
+  background-position: center;
+  top: 0;
+  z-index: -1;
+  opacity:0.95;
+}
+.page {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+}
+.el-divider--horizontal {
+  display: block;
+  height: 1px;
+  width: 100%;
+  margin: 12px 0;
+}
+.absolute-aligned {
+  width: 50%;
+  min-width: 200px;
+  height: auto;
+  overflow: auto;
+  margin: auto;
+  position: absolute;
+  top: 40%; left: 0;
+  bottom: 0; right: 0;
+  .el-input-group__append {
+    background-color: #EB6368;
+    border: 1px solid #f56c6c;
   }
-  .background {
-    width: 60%;
-    height: 25%; /**宽高100%是为了图片铺满屏幕 */
-    z-index: -1;
-    position: absolute;
-  }
-  .page {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
-  }
-  .searchBar {
-    .isFixed {
-      position: fixed;
-      background-color: #fff;
-      top: 0;
-      z-index: 999;
-    }
-    ul {
-      width: 100%;
-      height: 40px;
-      line-height: 40px;
-      display: flex;
-      li {
-        font-size: 0.8rem;
-        text-align: center;
-        flex: 1;
-        i {
-          font-size: 0.9rem;
-          padding-left: 5px;
-          color: #ccc;
-        }
-      }
-      border-bottom: 1px solid #ddd;
-    }
-    .el-select .el-input {
-      width: 70%;
-    }
-    .input-with-select .el-input-group__prepend {
-      background-color: #fff;
-    }
-  }
+}
+.absolute-aligned-right {
+  padding: 15px;
+  height: auto;
+  overflow: auto;
+  margin: auto;
+  position: absolute;
+  top: 0; left: 80;
+  bottom: 0; right: 0;
+}
 </style>
