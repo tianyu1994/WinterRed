@@ -1,6 +1,7 @@
 package org.codeforworld.winterredserver.service.impl;
 
 import org.codeforworld.winterredserver.entity.RumorInfo;
+import org.codeforworld.winterredserver.lang.Result;
 import org.codeforworld.winterredserver.mapper.RumorInfoMapper;
 import org.codeforworld.winterredserver.service.RumorInfoService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -29,5 +30,14 @@ public class RumorInfoServiceImpl extends ServiceImpl<RumorInfoMapper, RumorInfo
     @Override
     public Integer insert(RumorInfo rumorInfo) {
         return rumorInfoMapper.insert(rumorInfo);
+    }
+
+    @Override
+    public Result modifyStatus(RumorInfo param){
+        Result result = new Result();
+        RumorInfo rumorInfo = rumorInfoMapper.selectById(param.getId());
+        rumorInfo.setStatus(param.getStatus());
+        rumorInfoMapper.updateById(rumorInfo);
+        return result;
     }
 }

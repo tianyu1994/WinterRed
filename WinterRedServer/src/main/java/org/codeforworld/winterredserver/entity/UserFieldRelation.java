@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * <p>
  * 订阅用户领域关系表
@@ -28,11 +30,13 @@ public class UserFieldRelation implements Serializable {
     /**
      * 用户id
      */
+    @NotNull(message = "用户id不能为空")
     private Integer userId;
 
     /**
      * 领域id
      */
+    @NotNull(message = "领域id不能为空")
     private Integer professionalFieldId;
 
 

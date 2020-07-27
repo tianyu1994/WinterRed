@@ -3,6 +3,7 @@ package org.codeforworld.winterredserver.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import lombok.extern.slf4j.Slf4j;
 import org.codeforworld.winterredserver.entity.AskUser;
 import org.codeforworld.winterredserver.lang.Result;
 import org.codeforworld.winterredserver.service.AskUserService;
@@ -22,6 +23,8 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/askUser")
+@CrossOrigin
+@Slf4j
 public class AskUserController {
     @Resource
     private AskUserService askUserService;

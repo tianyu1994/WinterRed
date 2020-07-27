@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * <p>
  * 领域表
@@ -28,6 +30,7 @@ public class ProfessionalField implements Serializable {
     /**
      * 专业领域名
      */
+    @NotNull(message = "专业领域名不能为空")
     private String fieldName;
 
 

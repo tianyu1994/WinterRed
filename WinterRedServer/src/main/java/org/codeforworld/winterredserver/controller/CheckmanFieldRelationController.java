@@ -8,6 +8,7 @@ import org.codeforworld.winterredserver.lang.Result;
 import org.codeforworld.winterredserver.service.CheckmanFieldRelationService;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -37,7 +38,7 @@ public class CheckmanFieldRelationController {
     }
 
     @PostMapping("/saveOrUpdate")
-    public Result saveOrUpdate (@RequestBody CheckmanFieldRelation checkmanFieldRelation) {
+    public Result saveOrUpdate (@RequestBody @Valid CheckmanFieldRelation checkmanFieldRelation) {
         Result result = new Result();
         boolean isSuccess = checkmanFieldRelationService.saveOrUpdate(checkmanFieldRelation);
         if(isSuccess){

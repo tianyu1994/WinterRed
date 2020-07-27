@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * <p>
  * 核查人员领域关系表
@@ -28,11 +30,13 @@ public class CheckmanFieldRelation implements Serializable {
     /**
      * 核查人员id
      */
+    @NotNull(message = "核查人员id不能为空")
     private Integer checkManId;
 
     /**
      * 领域id
      */
+    @NotNull(message = "领域id不能为空")
     private Integer professionalFieldId;
 
 
