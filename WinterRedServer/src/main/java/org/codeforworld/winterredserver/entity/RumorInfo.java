@@ -66,5 +66,15 @@ public class RumorInfo implements Serializable {
      */
     private Integer professionalFieldId;
 
+    /**
+     * 信息来源渠道
+     */
+    private String source;
+
+    /**
+     * 提问用户id
+     */
+    private Integer askUserId;
+
 
 }

@@ -14,10 +14,10 @@ public class MyBatisGeneratorRun {
     //数据库类型(需要根据项目修改)
     private final DbType dbType = DbType.MYSQL;
     //数据库连结信息(需要根据项目修改)
-    private final String dbUrl = "jdbc:mysql://127.0.0.1:3306/winter_red?useUnicode=true&characterEncoding=utf8";
+    private final String dbUrl = "jdbc:mysql://192.168.44.128:3306/winter_red?useUnicode=true&characterEncoding=utf8";
     private final String driver = "com.mysql.cj.jdbc.Driver";
     private final String userName = "root";
-    private final String password = "root";
+    private final String password = "rootroot";
 
     //项目名(需要根据项目修改)
     private final String projectName = "WinterRedServer";
@@ -32,13 +32,13 @@ public class MyBatisGeneratorRun {
     //作者名
     private final String author = "kfzx-ganhy";
     //指定生成的表名(需要根据项目修改)
-    private final String[] tableNames = new String[]{"user"};
+    private final String[] tableNames = new String[]{"tablename"};
 
 
     @Test
     public void generateCode() {
         //serviceNameStartWithI：user -> UserService, 设置成true: user -> IUserService
-        generateByTables(false, packageName, tableNames);
+//        generateByTables(false, packageName, tableNames);
     }
     /**
      * 根据表自动生成
@@ -132,7 +132,7 @@ public class MyBatisGeneratorRun {
     private String getOutputDir(String projectName) {
 //        String path = this.getClass().getClassLoader().getResource("").getPath();
 //        int index = path.indexOf(projectName);
-        return "C:/Users/ImSherlocked/Desktop/winterRed/WinterRed/" + projectName + "/src/main/java/";
+        return "F:/gitItems/myItems/WinterRed/" + projectName + "/src/main/java/";
     }
     /**
      * 策略配置(需要根据项目修改)

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.codeforworld.winterredserver.mapper.AskUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="org.codeforworld.winterredserver.entity.AskUser">
+        <id column="id" property="id" />
+        <result column="email" property="email" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, email
+    </sql>
+
+    <sql id="base_where">
+        <if test="id != null">
+            <![CDATA[ AND id = #{id}]]>
+        </if>
+        <if test="email != null and email !=''">
+            <![CDATA[ AND email = #{email}]]>
+        </if>
+    </sql>
+
+    <select id="queryAskUser" parameterType="org.codeforworld.winterredserver.entity.AskUser"
+            resultType="org.codeforworld.winterredserver.entity.AskUser">
+        select
+        <include refid="Base_Column_List"/>
+        from ask_user
+        <where>
+            <include refid="base_where"/>
+        </where>
+    </select>
+</mapper>
