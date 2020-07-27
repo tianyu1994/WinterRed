@@ -24,5 +24,5 @@ public class GlobalExcetionAdvice {
     private static void logError(HttpServletRequest request, Exception e){
         log.error("url:{}|error:{}",request.getRequestURI(), e);
     }
-    
+
 }
