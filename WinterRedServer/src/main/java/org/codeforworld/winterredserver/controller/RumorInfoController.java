@@ -66,13 +66,7 @@ public class RumorInfoController {
      */
     @PostMapping("/saveOrUpdate")
     public Result saveOrUpdate(@RequestBody @Valid RumorInfo rumorInfo) {
-        Result result = new Result<>();
-        boolean isSuccess = rumorInfoService.saveOrUpdate(rumorInfo);
-        if(isSuccess){
-            result.setSuccessMsg("保存成功！");
-        }else {
-            result.setFailedMsg("保存失败！");
-        }
+        Result result = rumorInfoService.saveOrUpdateRumorInfo(rumorInfo);
         return result;
     }
 

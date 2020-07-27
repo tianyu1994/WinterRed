@@ -1,12 +1,15 @@
 package org.codeforworld.winterredserver.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import org.aspectj.lang.annotation.Aspect;
 
 /**
  * <p>
@@ -52,11 +55,6 @@ public class RumorInfo implements Serializable {
     private LocalDateTime createOn;
 
     /**
-     * 更新时间
-     */
-    private LocalDateTime updateOn;
-
-    /**
      * 核查人员id
      */
     private Integer checkManId;
@@ -76,5 +74,16 @@ public class RumorInfo implements Serializable {
      */
     private Integer askUserId;
 
+    /**
+     * 更新人
+     */
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private String updateBy;
+
+    /**
+     * 更新时间
+     */
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private LocalDateTime updateOn;
 
 }
