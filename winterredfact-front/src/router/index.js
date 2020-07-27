@@ -34,6 +34,14 @@ const router = new VueRouter({
       meta: {
         title: '核查谣言'
       }
+    },
+    {
+      path: '/rumor/checkerRegist',
+      name: 'CheckerRegist',
+      component: () => import('@/views/rumor/checkerRegist/index.vue'),
+      meta: {
+        title: '专家注册'
+      }
     }
   ]
 })
