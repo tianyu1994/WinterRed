@@ -1,4 +1,4 @@
-# winterredfact-front
+# winterredfact
 
 ## Project setup
 ```

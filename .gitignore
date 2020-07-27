@@ -3,3 +3,4 @@
 */target/
 *.log
 ./winterredfact-front/node_modules
+/winterredfact-front/package-lock.json
