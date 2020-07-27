@@ -1,11 +1,11 @@
 <template>
-  <div style="margin:15px 350px; padding:15px;" class="page">
+  <div style="margin:15px 300px; padding:15px;" class="page">
     <div style="position:sticky; top:30px;">
       <el-button @click="handleReturnHome" icon="el-icon-s-home">返回首页</el-button>
     </div>
     <div>
       <el-row>
-        <el-col :span="22"><h1>vue滚动固定顶部及修改样式</h1></el-col>
+        <el-col :span="22"><h1>“钟南山来新疆了”？网友调侃：已通过朋友圈抵达乌鲁木齐</h1></el-col>
         <el-col :span="2"><img src="@/assets/tmp/false.png" class="title_mark"></el-col>
       </el-row>
     </div>
@@ -20,7 +20,7 @@
       <div>
         <span class="common_title">鉴定结果：</span>
         <img src="@/assets/tmp/假谣言.png" style="width:65px; height:26px; vertical-align: middle;">
-      </div>
+      </div><br/>
       <div>
         <span class="common_title">查证要点：</span>
         <div v-for="(point, index) in pointList" :key='index'>
@@ -34,9 +34,15 @@
         <span>解放日报•上观新闻运营的辟谣新闻和辟谣服务网络平台</span>
       </div>
     </div>
-    <el-divider></el-divider>
     <div>
-      <span>更新时间：2020-07-23</span>
+      <span style="line-height:3.5;">更新时间：2020-07-23</span>
+    </div>
+    <el-divider></el-divider>
+    <div style="font-size: 24px; line-height:1.5; vertical-align:middle;">
+      <span>相关资料：</span>
+      <p class="subtitle">
+        据四川媒体报道，一家以“吸氢气”为卖点的生活体验馆涉嫌虚假宣传。相关视频显示，该店店员宣称，通过他们的仪器制备氢气并吸入包治百病，甚至对治新冠肺炎都有效，该店还用钟南山头像做宣传。目前市场监管部门正对该店进行核查取证，店铺暂停营业。
+      </p>
     </div>
   </div>
 </template>
