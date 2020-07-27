@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * 统一异常处理
+ */
 @Slf4j
 @RestControllerAdvice
 public class GlobalExcetionAdvice {

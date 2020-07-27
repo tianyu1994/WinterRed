@@ -8,6 +8,7 @@ import org.codeforworld.winterredserver.lang.Result;
 import org.codeforworld.winterredserver.service.CheckPlatService;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -37,7 +38,7 @@ public class CheckPlatController {
     }
 
     @PostMapping("/saveOrUpdate")
-    public Result saveOrUpdate (@RequestBody CheckPlat checkPlat) {
+    public Result saveOrUpdate (@RequestBody @Valid CheckPlat checkPlat) {
         Result result = new Result();
         boolean isSuccess = checkPlatService.saveOrUpdate(checkPlat);
         if(isSuccess){

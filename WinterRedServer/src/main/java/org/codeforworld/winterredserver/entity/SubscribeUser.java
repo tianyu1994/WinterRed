@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * <p>
  * 
@@ -28,6 +30,7 @@ public class SubscribeUser implements Serializable {
     /**
      * 邮箱
      */
+    @NotNull(message = "邮箱不能为空")
     private String email;
 
 

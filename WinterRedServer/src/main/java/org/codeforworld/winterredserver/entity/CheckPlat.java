@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * <p>
  * 核查平台表
@@ -28,11 +30,13 @@ public class CheckPlat implements Serializable {
     /**
      * 机构名称
      */
+    @NotNull(message = "机构名称不能为空")
     private String organizationName;
 
     /**
      * 所属地区
      */
+    @NotNull(message = "所属地区不能为空")
     private String belongArea;
 
 

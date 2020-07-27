@@ -8,6 +8,7 @@ import org.codeforworld.winterredserver.lang.Result;
 import org.codeforworld.winterredserver.service.ProfessionalFieldService;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -37,7 +38,7 @@ public class ProfessionalFieldController {
     }
 
     @PostMapping("/saveOrUpdate")
-    public Result saveOrUpdate(@RequestBody ProfessionalField professionalField){
+    public Result saveOrUpdate(@RequestBody @Valid ProfessionalField professionalField){
         Result result = new Result();
         boolean isSuccess = professionalFieldService.saveOrUpdate(professionalField);
         if(isSuccess){

@@ -9,6 +9,7 @@ import org.codeforworld.winterredserver.service.UserFieldRelationService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -40,7 +41,7 @@ public class UserFieldRelationController {
     }
 
     @PostMapping("/saveOrUpdate")
-    public Result saveOrUpdate(@RequestBody UserFieldRelation userFieldRelation){
+    public Result saveOrUpdate(@RequestBody @Valid UserFieldRelation userFieldRelation){
         Result result = new Result();
         boolean isSuccess = userFieldRelationService.saveOrUpdate(userFieldRelation);
         if(isSuccess){

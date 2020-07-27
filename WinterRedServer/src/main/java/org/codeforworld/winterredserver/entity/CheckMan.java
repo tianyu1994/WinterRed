@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * <p>
  * 核查人员表
@@ -28,11 +30,13 @@ public class CheckMan implements Serializable {
     /**
      * 机构id
      */
+    @NotNull(message = "机构id不能为空")
     private String organizationId;
 
     /**
      * 真实姓名
      */
+    @NotNull(message = "真实姓名不能为空")
     private String checkmanName;
 
     /**
@@ -43,6 +47,7 @@ public class CheckMan implements Serializable {
     /**
      * 邮箱
      */
+    @NotNull(message = "邮箱不能为空")
     private String email;
 
     /**
@@ -53,6 +58,7 @@ public class CheckMan implements Serializable {
     /**
      * 所属领域
      */
+    @NotNull(message = "所属领域不能为空")
     private String belongArea;
 
 

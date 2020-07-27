@@ -16,4 +16,5 @@ import java.util.List;
 public interface RumorInfoMapper extends BaseMapper<RumorInfo> {
 
     List<RumorInfo> queryRumorInfo();
+
 }
