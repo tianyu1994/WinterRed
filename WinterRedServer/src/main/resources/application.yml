@@ -6,9 +6,9 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/winter_red?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    url: jdbc:mysql://192.168.44.128:3306/winter_red?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
     username: root
-    password: root
+    password: rootroot
 
 
 mybatis-plus:
