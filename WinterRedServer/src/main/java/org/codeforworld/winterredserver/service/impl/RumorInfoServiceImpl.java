@@ -40,4 +40,9 @@ public class RumorInfoServiceImpl extends ServiceImpl<RumorInfoMapper, RumorInfo
         rumorInfoMapper.updateById(rumorInfo);
         return result;
     }
+
+    @Override
+    public RumorInfo queryRumorInfoById(String id) {
+        return rumorInfoMapper.queryRumorInfoById(id);
+    }
 }

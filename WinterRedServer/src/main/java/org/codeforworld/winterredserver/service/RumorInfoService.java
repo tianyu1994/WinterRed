@@ -21,4 +21,6 @@ public interface RumorInfoService extends IService<RumorInfo> {
     Integer insert(RumorInfo rumorInfo);
 
     Result modifyStatus(RumorInfo rumorInfo);
+
+    RumorInfo queryRumorInfoById(String id);
 }
