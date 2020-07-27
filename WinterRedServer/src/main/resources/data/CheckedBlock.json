@@ -1,0 +1,16 @@
+{
+  "rumor_info_1": 
+  {
+    "id": 1,
+    "title": "",
+    "abstract_info" : "",
+    "body": "",
+    "status" : "",
+    "create_on": "",
+    "update_on": "",
+    "check_man_id":1,
+    "professional_field_id": "",
+    "source": "",
+    "ask_user_id": 1
+}
+}

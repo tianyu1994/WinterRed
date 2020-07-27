@@ -1,0 +1,22 @@
+{
+  "check_man_1":
+  {
+    "id": 1,
+    "organizationId": 1001,
+    "checkmanName": "james",
+    "sex": "M",
+    "email": "james1994@gmail.com",
+    "userName": "Tough Man",
+    "belongArea": "USA"
+  },
+  "check_man_2":
+  {
+    "id": 2,
+    "organizationId": 1001,
+    "checkmanName": "Tom",
+    "sex": "M",
+    "email": "Tom@gmail.com",
+    "userName": "Tough Man",
+    "belongArea": "USA"
+  }
+}
