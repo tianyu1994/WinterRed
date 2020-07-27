@@ -28,7 +28,7 @@ public class AgentTest {
         List<Block> blockchain = a.getBlockchain();
 
         ObjectOutputStream oo = new ObjectOutputStream(new FileOutputStream(
-                new File("C:/Users/ImSherlocked/Desktop/winterRed/WinterRed/WinterRedServer/src/main/resources/data/blockchain.txt")));
+                new File("src/main/resources/blockchain.txt")));
         oo.writeObject(blockchain);
         System.out.println("blockchain对象序列化成功！");
         oo.close();
@@ -43,9 +43,17 @@ public class AgentTest {
     @Test
     public void deserializeTest() throws IOException, ClassNotFoundException {
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream(
-                new File("C:/Users/ImSherlocked/Desktop/winterRed/WinterRed/WinterRedServer/src/main/resources/data/blockchain.txt")));
+                new File("src/main/resources/blockchain.txt")));
         List<Block> blockchain = (List<Block>) ois.readObject();
         System.out.println(blockchain);
         System.out.println("Person对象反序列化成功！");
     }
+
+    @Test
+    public void getBlockChain() {
+        Agent a = new Agent("localhost",root, agents);
+        List<Block> blockch = a.deserializeBlockChain();
+        System.out.println(blockch);
+    }
+
 }
