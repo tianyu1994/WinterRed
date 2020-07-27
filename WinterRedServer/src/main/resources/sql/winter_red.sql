@@ -18,7 +18,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 -- Table structure for ask_user
 -- ----------------------------
-DROP TABLE IF EXISTS `ask_user`;
+--DROP TABLE IF EXISTS `ask_user`;
 CREATE TABLE `ask_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(45) CHARACTER SET latin1 NOT NULL COMMENT '邮箱',
@@ -31,7 +31,7 @@ CREATE TABLE `ask_user` (
 -- ----------------------------
 -- Table structure for check_man
 -- ----------------------------
-DROP TABLE IF EXISTS `check_man`;
+--DROP TABLE IF EXISTS `check_man`;
 CREATE TABLE `check_man` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `organization_id` varchar(11) NOT NULL COMMENT '机构id',
@@ -48,7 +48,7 @@ CREATE TABLE `check_man` (
 -- ----------------------------
 -- Table structure for check_plat
 -- ----------------------------
-DROP TABLE IF EXISTS `check_plat`;
+--DROP TABLE IF EXISTS `check_plat`;
 CREATE TABLE `check_plat` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `organization_name` varchar(200) NOT NULL COMMENT '机构名称',
@@ -61,7 +61,7 @@ CREATE TABLE `check_plat` (
 -- ----------------------------
 -- Table structure for checkman_field_relation
 -- ----------------------------
-DROP TABLE IF EXISTS `checkman_field_relation`;
+--DROP TABLE IF EXISTS `checkman_field_relation`;
 CREATE TABLE `checkman_field_relation` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `check_man_id` int(11) NOT NULL COMMENT '核查人员id',
@@ -74,7 +74,7 @@ CREATE TABLE `checkman_field_relation` (
 -- ----------------------------
 -- Table structure for professional_field
 -- ----------------------------
-DROP TABLE IF EXISTS `professional_field`;
+--DROP TABLE IF EXISTS `professional_field`;
 CREATE TABLE `professional_field` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `field_name` varchar(200) NOT NULL COMMENT '专业领域名',
@@ -86,7 +86,7 @@ CREATE TABLE `professional_field` (
 -- ----------------------------
 -- Table structure for rumor_info
 -- ----------------------------
-DROP TABLE IF EXISTS `rumor_info`;
+--DROP TABLE IF EXISTS `rumor_info`;
 CREATE TABLE `rumor_info` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(200) NOT NULL COMMENT '标题',
@@ -106,7 +106,7 @@ CREATE TABLE `rumor_info` (
 -- ----------------------------
 -- Table structure for subscribe_user
 -- ----------------------------
-DROP TABLE IF EXISTS `subscribe_user`;
+--DROP TABLE IF EXISTS `subscribe_user`;
 CREATE TABLE `subscribe_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(45) CHARACTER SET latin1 NOT NULL COMMENT '邮箱',
@@ -119,7 +119,7 @@ CREATE TABLE `subscribe_user` (
 -- ----------------------------
 -- Table structure for user_field_relation
 -- ----------------------------
-DROP TABLE IF EXISTS `user_field_relation`;
+--DROP TABLE IF EXISTS `user_field_relation`;
 CREATE TABLE `user_field_relation` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL COMMENT '用户id',
