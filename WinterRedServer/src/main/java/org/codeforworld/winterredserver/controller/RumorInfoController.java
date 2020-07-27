@@ -66,13 +66,7 @@ public class RumorInfoController {
      */
     @PostMapping("/saveOrUpdate")
     public Result saveOrUpdate(@RequestBody @Valid RumorInfo rumorInfo) {
-        Result result = new Result<>();
-        boolean isSuccess = rumorInfoService.saveOrUpdate(rumorInfo);
-        if(isSuccess){
-            result.setSuccessMsg("保存成功！");
-        }else {
-            result.setFailedMsg("保存失败！");
-        }
+        Result result = rumorInfoService.saveOrUpdateRumorInfo(rumorInfo);
         return result;
     }
 
@@ -102,6 +96,19 @@ public class RumorInfoController {
         }else {
             result.setFailedMsg("删除失败！");
         }
+        return result;
+    }
+
+    /**
+     * 根据id查记录
+     * @param id
+     * @return
+     */
+    @GetMapping("/queryById")
+    public Result queryById(String id) {
+        Result result = new Result();
+        RumorInfo rumorInfo = rumorInfoService.queryRumorInfoById(id);
+        result.setResults(rumorInfo);
         return result;
     }
 }
