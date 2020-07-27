@@ -26,6 +26,14 @@ const router = new VueRouter({
       meta: {
         title: '辟谣详情'
       }
+    },
+    {
+      path: '/rumor/check',
+      name: 'Check',
+      component: () => import('@/views/rumor/check/index.vue'),
+      meta: {
+        title: '核查谣言'
+      }
     }
   ]
 })
