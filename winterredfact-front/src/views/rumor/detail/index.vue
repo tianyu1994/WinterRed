@@ -16,15 +16,19 @@
       </p>
     </div>
     <el-divider></el-divider>
-    <div style="font-size: 24px; line-height:1.7">
+    <div style="font-size: 24px; line-height:1.7; vertical-align:middle;">
       <div>
         <span class="common_title">鉴定结果：</span>
         <img src="@/assets/tmp/假谣言.png" style="width:65px; height:26px; vertical-align: middle;">
       </div>
       <div>
         <span class="common_title">查证要点：</span>
+        <div v-for="(point, index) in pointList" :key='index'>
+          <span class="common_title">{{(index + 1) + ' - '}}</span>
+          {{point}}
+          <br/><br/>
+        </div>
       </div>
-      <br/>
       <div>
         <span class="common_title">查证者：</span>
         <span>解放日报•上观新闻运营的辟谣新闻和辟谣服务网络平台</span>
@@ -40,6 +44,14 @@
 <script>
 export default {
   name: 'Detail',
+  data() {
+    return {
+      pointList: [
+        '喀什网警巡查执法官方账号辟谣称：钟南山并没有来新疆，请大家不要放大疫情。请大家不要转发非官方信息。阿勒泰新闻网也在网络上辟谣：7月20日钟南山飞抵乌鲁木齐抗击疫情是谣言。',
+        '网传视频中有一个明显的麦当劳标志，但乌鲁木齐市并没有麦当劳门店，由此可以判断网传视频并非拍自新疆。'
+      ]
+    }
+  },
   methods: {
     handleReturnHome() {
       this.$router.push({
@@ -55,7 +67,7 @@ export default {
     box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
   }
   .title_mark {
-    width: 90px;
+    width: 85px;
     height: 100px;
     z-index: -1;
     opacity: 0.8;
@@ -69,6 +81,5 @@ export default {
   }
   .common_title {
     font-weight: bold;
-    vertical-align: middle;
   }
 </style>
