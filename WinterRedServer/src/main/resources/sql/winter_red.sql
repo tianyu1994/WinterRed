@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50729
 File Encoding         : 65001
 
-Date: 2020-07-27 16:22:48
+Date: 2020-07-27 18:46:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -42,7 +42,8 @@ CREATE TABLE `check_man` (
   `belong_area` varchar(200) NOT NULL COMMENT '所属领域',
   `update_on` datetime DEFAULT NULL COMMENT '更新时间',
   `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uniqu` (`organization_id`,`email`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='核查人员表';
 
 -- ----------------------------
@@ -55,8 +56,9 @@ CREATE TABLE `check_plat` (
   `belong_area` varchar(200) NOT NULL COMMENT '所属地区',
   `update_on` datetime DEFAULT NULL COMMENT '更新时间',
   `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='核查平台表';
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique` (`organization_name`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='核查平台表';
 
 -- ----------------------------
 -- Table structure for checkman_field_relation
@@ -68,7 +70,8 @@ CREATE TABLE `checkman_field_relation` (
   `professional_field_id` int(11) NOT NULL COMMENT '领域id',
   `update_on` datetime DEFAULT NULL COMMENT '更新时间',
   `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique` (`check_man_id`,`professional_field_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='核查人员领域关系表';
 
 -- ----------------------------
@@ -80,8 +83,9 @@ CREATE TABLE `professional_field` (
   `field_name` varchar(200) NOT NULL COMMENT '专业领域名',
   `update_on` datetime DEFAULT NULL COMMENT '更新时间',
   `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='领域表';
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique` (`field_name`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='领域表';
 
 -- ----------------------------
 -- Table structure for rumor_info
@@ -101,7 +105,7 @@ CREATE TABLE `rumor_info` (
   `ask_user_id` int(11) DEFAULT NULL COMMENT '提问用户id',
   `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COMMENT='谣言信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COMMENT='谣言信息表';
 
 -- ----------------------------
 -- Table structure for subscribe_user
@@ -114,7 +118,7 @@ CREATE TABLE `subscribe_user` (
   `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
   PRIMARY KEY (`id`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Table structure for user_field_relation
@@ -126,5 +130,6 @@ CREATE TABLE `user_field_relation` (
   `professional_field_id` int(11) NOT NULL COMMENT '领域id',
   `update_on` datetime DEFAULT NULL COMMENT '更新时间',
   `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='订阅用户领域关系表';
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique` (`user_id`,`professional_field_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COMMENT='订阅用户领域关系表';

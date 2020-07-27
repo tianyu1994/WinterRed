@@ -39,13 +39,7 @@ public class CheckmanFieldRelationController {
 
     @PostMapping("/saveOrUpdate")
     public Result saveOrUpdate (@RequestBody @Valid CheckmanFieldRelation checkmanFieldRelation) {
-        Result result = new Result();
-        boolean isSuccess = checkmanFieldRelationService.saveOrUpdate(checkmanFieldRelation);
-        if(isSuccess){
-            result.setSuccessMsg("保存成功！");
-        }else {
-            result.setFailedMsg("保存失败！");
-        }
+        Result result = checkmanFieldRelationService.saveOrUpdateCheckmanFieldRelation(checkmanFieldRelation);
         return result;
     }
 

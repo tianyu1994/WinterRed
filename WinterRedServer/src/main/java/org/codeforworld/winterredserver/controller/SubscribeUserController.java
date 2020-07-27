@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * <p>
- *  前端控制器
+ *  订阅用户表 前端控制器
  * </p>
  *
  * @author kfzx-ganhy
@@ -41,13 +41,7 @@ public class SubscribeUserController {
 
     @PostMapping("/saveOrUpdate")
     public Result saveOrUpdate(@RequestBody @Valid SubscribeUser subscribeUser){
-        Result result = new Result();
-        boolean isSuccess = subscribeUserService.saveOrUpdate(subscribeUser);
-        if(isSuccess){
-            result.setSuccessMsg("保存成功！");
-        }else {
-            result.setFailedMsg("保存失败！");
-        }
+        Result result = subscribeUserService.saveOrUpdateSubscribeUser(subscribeUser);
         return result;
     }
 

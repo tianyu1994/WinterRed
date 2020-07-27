@@ -1,7 +1,9 @@
 package org.codeforworld.winterredserver.service;
 
+import org.codeforworld.winterredserver.entity.AskUser;
 import org.codeforworld.winterredserver.entity.SubscribeUser;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.codeforworld.winterredserver.lang.Result;
 
 import java.util.List;
 
@@ -15,4 +17,6 @@ import java.util.List;
  */
 public interface SubscribeUserService extends IService<SubscribeUser> {
     List<SubscribeUser> querySubscribeUser(SubscribeUser subscribeUser);
+
+    Result saveOrUpdateSubscribeUser(SubscribeUser subscribeUser);
 }

@@ -42,13 +42,7 @@ public class UserFieldRelationController {
 
     @PostMapping("/saveOrUpdate")
     public Result saveOrUpdate(@RequestBody @Valid UserFieldRelation userFieldRelation){
-        Result result = new Result();
-        boolean isSuccess = userFieldRelationService.saveOrUpdate(userFieldRelation);
-        if(isSuccess){
-            result.setSuccessMsg("保存成功！");
-        }else {
-            result.setFailedMsg("保存失败！");
-        }
+        Result result = userFieldRelationService.saveOrUpdateUserFieldRelation(userFieldRelation);
         return result;
     }
 

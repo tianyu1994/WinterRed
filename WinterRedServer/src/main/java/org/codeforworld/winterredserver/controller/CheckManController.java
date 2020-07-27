@@ -39,13 +39,7 @@ public class CheckManController {
 
     @PostMapping("/saveOrUpdate")
     public Result saveOrUpdate(@RequestBody CheckMan checkMan){
-        Result result = new Result();
-        boolean isSuccess = checkManService.saveOrUpdate(checkMan);
-        if(isSuccess){
-            result.setSuccessMsg("保存成功！");
-        }else {
-            result.setFailedMsg("保存失败！");
-        }
+        Result result = checkManService.saveOrUpdateCheckMan(checkMan);
         return result;
     }
 

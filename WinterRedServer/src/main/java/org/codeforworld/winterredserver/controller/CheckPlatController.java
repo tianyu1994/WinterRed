@@ -39,13 +39,7 @@ public class CheckPlatController {
 
     @PostMapping("/saveOrUpdate")
     public Result saveOrUpdate (@RequestBody @Valid CheckPlat checkPlat) {
-        Result result = new Result();
-        boolean isSuccess = checkPlatService.saveOrUpdate(checkPlat);
-        if(isSuccess){
-            result.setSuccessMsg("保存成功！");
-        }else {
-            result.setFailedMsg("保存失败！");
-        }
+        Result result = checkPlatService.saveOrUpdateCheckPlat(checkPlat);
         return result;
     }
 

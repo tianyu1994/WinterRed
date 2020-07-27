@@ -2,6 +2,7 @@ package org.codeforworld.winterredserver.service;
 
 import org.codeforworld.winterredserver.entity.CheckPlat;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.codeforworld.winterredserver.lang.Result;
 
 import java.util.List;
 
@@ -15,4 +16,6 @@ import java.util.List;
  */
 public interface CheckPlatService extends IService<CheckPlat> {
     List<CheckPlat> queryCheckPlat(CheckPlat checkPlat);
+
+    Result saveOrUpdateCheckPlat(CheckPlat checkPlat);
 }

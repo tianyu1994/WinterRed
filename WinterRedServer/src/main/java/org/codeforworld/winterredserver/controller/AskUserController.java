@@ -1,6 +1,7 @@
 package org.codeforworld.winterredserver.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +16,7 @@ import java.util.List;
 
 /**
  * <p>
- *  前端控制器
+ * 提问用户表  前端控制器
  * </p>
  *
  * @author kfzx-ganhy
@@ -41,13 +42,7 @@ public class AskUserController {
 
     @PostMapping("/saveOrUpdate")
     public Result saveOrUpdate(@RequestBody @Valid AskUser askUser){
-        Result result = new Result();
-        boolean isSuccess = askUserService.saveOrUpdate(askUser);
-        if(isSuccess){
-            result.setSuccessMsg("保存成功！");
-        }else {
-            result.setFailedMsg("保存失败！");
-        }
+        Result result = askUserService.saveOrUpdateAskUser(askUser);
         return result;
     }
 

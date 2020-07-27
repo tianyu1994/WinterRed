@@ -1,6 +1,8 @@
 package org.codeforworld.winterredserver.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.codeforworld.winterredserver.entity.CheckmanFieldRelation;
+import org.codeforworld.winterredserver.lang.Result;
 import org.codeforworld.winterredserver.mapper.CheckmanFieldRelationMapper;
 import org.codeforworld.winterredserver.service.CheckmanFieldRelationService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -27,4 +29,46 @@ public class CheckmanFieldRelationServiceImpl extends ServiceImpl<CheckmanFieldR
         return checkmanFieldRelationMapper.queryCheckManFieldRelation(checkmanFieldRelation);
     }
 
+    @Override
+    public Result saveOrUpdateCheckmanFieldRelation(CheckmanFieldRelation checkmanFieldRelation) {
+        Result result = new Result();
+        boolean isExists = checkUnique(checkmanFieldRelation);
+        int i = 0;
+        if(isExists){
+            result.setErrorMsg("核查人员id+专业领域id已经存在，不能重复新增核查人员领域关系信息！");
+            return result;
+        }
+        if(checkmanFieldRelation.getId() != null){
+            i = checkmanFieldRelationMapper.updateById(checkmanFieldRelation);
+        }else {
+            i = checkmanFieldRelationMapper.insert(checkmanFieldRelation);
+        }
+        if(i > 0){
+            result.setSuccessMsg("保存成功！");
+        }else {
+            result.setFailedMsg("保存失败！");
+        }
+        return result;
+    }
+
+    /**
+     * 检查唯一索引
+     * @param checkmanFieldRelation
+     * @return
+     */
+    private boolean checkUnique(CheckmanFieldRelation checkmanFieldRelation) {
+        boolean isExists = false;
+        QueryWrapper<CheckmanFieldRelation> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("check_man_id", checkmanFieldRelation.getCheckManId());
+        queryWrapper.eq("professional_field_id", checkmanFieldRelation.getProfessionalFieldId());
+        List<CheckmanFieldRelation> askUserList = checkmanFieldRelationMapper.selectList(queryWrapper);
+        if (askUserList == null || askUserList.size() < 1) {
+            return isExists;
+        } else if (checkmanFieldRelation.getId() != null && askUserList.get(0).getId() == checkmanFieldRelation.getId()) {
+            return isExists;
+        } else {
+            isExists = true;
+            return isExists;
+        }
+    }
 }
