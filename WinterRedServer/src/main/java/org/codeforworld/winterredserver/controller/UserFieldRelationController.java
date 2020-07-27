@@ -3,7 +3,6 @@ package org.codeforworld.winterredserver.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
-import org.codeforworld.winterredserver.entity.User;
 import org.codeforworld.winterredserver.entity.UserFieldRelation;
 import org.codeforworld.winterredserver.lang.Result;
 import org.codeforworld.winterredserver.service.UserFieldRelationService;
