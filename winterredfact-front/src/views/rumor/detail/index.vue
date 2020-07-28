@@ -25,7 +25,7 @@
       </div><br/>
       <div>
         <span class="common_title">查证要点：</span>
-        <div v-for="(point, index) in pointList" :key='index'>
+        <div v-for="(point, index) in rumorInfo.checkPoints" :key='index'>
           <span class="common_title">{{(index + 1) + ' - '}}</span>
           {{point}}
           <br/><br/>
@@ -60,11 +60,7 @@ export default {
       falseSmallImg: require('@/assets/tmp/假谣言.png'),
       doubtSmallImg: require('@/assets/tmp/争议.png'),
       trueSmallImg: require('@/assets/tmp/真的.png'),
-      rumorInfo: {},
-      pointList: [
-        '喀什网警巡查执法官方账号辟谣称：钟南山并没有来新疆，请大家不要放大疫情。请大家不要转发非官方信息。阿勒泰新闻网也在网络上辟谣：7月20日钟南山飞抵乌鲁木齐抗击疫情是谣言。',
-        '网传视频中有一个明显的麦当劳标志，但乌鲁木齐市并没有麦当劳门店，由此可以判断网传视频并非拍自新疆。'
-      ]
+      rumorInfo: {}
     }
   },
   methods: {
