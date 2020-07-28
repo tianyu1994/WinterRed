@@ -26,7 +26,7 @@
             <![CDATA[ AND id = #{id}]]>
         </if>
         <if test="title != null and title != ''">
-            <![CDATA[ AND title like CONCAT('%',#{title},'%']]>
+            <![CDATA[ AND title like "%"#{title}"%"]]>
         </if>
         <if test="abstractInfo != null and abstractInfo != ''">
             <![CDATA[ AND abstract_info = #{abstractInfo}]]>
