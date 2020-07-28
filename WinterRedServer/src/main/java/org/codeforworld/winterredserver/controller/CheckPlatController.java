@@ -27,6 +27,14 @@ public class CheckPlatController {
     @Resource
     private CheckPlatService checkPlatService;
 
+    @GetMapping("/queryAll")
+    public Result queryAll(CheckPlat checkPlat){
+        Result result = new Result();
+        List<CheckPlat> list = checkPlatService.queryCheckPlat(checkPlat);
+        result.setResults(list);
+        return result;
+    }
+
     @GetMapping("/queryByPage")
     public Result queryByPage(@RequestParam("curPage") Integer curPage, @RequestParam("pageSize") Integer pageSize, CheckPlat checkPlat){
         Result result = new Result();

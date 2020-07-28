@@ -27,6 +27,14 @@ public class CheckManController {
     @Resource
     private CheckManService checkManService;
 
+    @GetMapping("/queryAll")
+    public Result queryAll (CheckMan checkMan) {
+        Result result = new Result();
+        List<CheckMan> list = checkManService.queryCheckMan(checkMan);
+        result.setResults(list);
+        return result;
+    }
+
     @GetMapping("/queryByPage")
     public Result queryByPage (@RequestParam("curPage") Integer curPage, @RequestParam("pageSize") Integer pageSize, CheckMan checkMan) {
         Result result = new Result();

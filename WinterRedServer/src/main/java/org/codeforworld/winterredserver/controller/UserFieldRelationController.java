@@ -29,6 +29,14 @@ public class UserFieldRelationController {
     @Resource
     private UserFieldRelationService userFieldRelationService;
 
+    @GetMapping("/queryAll")
+    public Result queryAll(UserFieldRelation userFieldRelation){
+        Result result = new Result();
+        List<UserFieldRelation> list = userFieldRelationService.queryUserFieldRelation(userFieldRelation);
+        result.setResults(list);
+        return result;
+    }
+
     @GetMapping("/queryByPage")
     public Result queryByPage(@RequestParam("curPage") Integer curPage, @RequestParam("pageSize") Integer pageSize,  UserFieldRelation userFieldRelation){
         Result result = new Result();

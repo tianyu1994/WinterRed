@@ -27,6 +27,16 @@ public class CheckmanFieldRelationController {
     @Resource
     private CheckmanFieldRelationService checkmanFieldRelationService;
 
+    @GetMapping("/queryAll")
+    public Result queryAll(@RequestParam("curPage") Integer curPage, @RequestParam("pageSize") Integer pageSize, CheckmanFieldRelation checkmanFieldRelation){
+        Result result = new Result();
+        PageHelper.startPage(curPage, pageSize);
+        List<CheckmanFieldRelation> list = checkmanFieldRelationService.queryCheckManFieldRelation(checkmanFieldRelation);
+        PageInfo<CheckmanFieldRelation> page = new PageInfo<>(list);
+        result.setResults(page);
+        return result;
+    }
+
     @GetMapping("/queryByPage")
     public Result queryByPage(@RequestParam("curPage") Integer curPage, @RequestParam("pageSize") Integer pageSize, CheckmanFieldRelation checkmanFieldRelation){
         Result result = new Result();

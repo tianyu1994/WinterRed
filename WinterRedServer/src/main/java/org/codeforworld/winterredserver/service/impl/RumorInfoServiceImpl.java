@@ -26,8 +26,8 @@ public class RumorInfoServiceImpl extends ServiceImpl<RumorInfoMapper, RumorInfo
     @Resource
     private RumorInfoMapper rumorInfoMapper;
     @Override
-    public List<RumorInfo> queryRumorInfo(RumorInfo humorInfo) {
-        return rumorInfoMapper.queryRumorInfo();
+    public List<RumorInfo> queryRumorInfo(RumorInfo rumorInfo) {
+        return rumorInfoMapper.queryRumorInfo(rumorInfo);
     }
 
     @Override

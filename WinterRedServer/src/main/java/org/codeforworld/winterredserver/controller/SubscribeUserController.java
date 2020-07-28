@@ -36,6 +36,15 @@ public class SubscribeUserController {
     @Resource
     private UserFieldRelationService userFieldRelationService;
 
+    @GetMapping("/queryAll")
+    public Result queryAll (SubscribeUser subscribeUser) {
+        Result result = new Result();
+        List<SubscribeUser> list = subscribeUserService.querySubscribeUser(subscribeUser);
+        result.setResults(list);
+        return result;
+    }
+
+
     @GetMapping("/queryByPage")
     public Result queryByPage (@RequestParam("curPage") Integer curPage, @RequestParam("pageSize") Integer pageSize, SubscribeUser subscribeUser) {
         Result result = new Result();
