@@ -48,6 +48,8 @@
 </template>
 
 <script>
+import { queryRumor } from '@/api/api.js'
+
 export default {
   name: 'Detail',
   data() {
@@ -59,11 +61,24 @@ export default {
     }
   },
   methods: {
+    queryRumorDetail() {
+      const queryParam = {
+        id: this.$route.query.rumorId
+      }
+      queryRumor(queryParam).then((res) => {
+        console.log(res.results.list[0].title)
+      }).catch((err) => {
+        this.$message.error(err)
+      })
+    },
     handleReturnHome() {
       this.$router.push({
         path: '/rumor/list'
       })
     }
+  },
+  mounted() {
+    this.queryRumorDetail()
   }
 }
 </script>
