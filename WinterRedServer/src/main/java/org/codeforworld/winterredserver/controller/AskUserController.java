@@ -30,6 +30,14 @@ public class AskUserController {
     @Resource
     private AskUserService askUserService;
 
+    @GetMapping("/queryAll")
+    public Result queryAll (AskUser askUser) {
+        Result result = new Result();
+        List<AskUser> list = askUserService.queryAskUser(askUser);
+        result.setResults(list);
+        return result;
+    }
+
     @GetMapping("/queryByPage")
     public Result queryByPage (@RequestParam("curPage") Integer curPage, @RequestParam("pageSize") Integer pageSize, AskUser askUser) {
         Result result = new Result();
