@@ -13,7 +13,7 @@
       </div>
       <div class='absolute-aligned'>
         <el-col :span='18'>
-          <el-input placeholder='请输入内容' size='large'>
+          <el-input placeholder='请输入内容' size='large' v-model="keyWord">
             <el-button slot='append' style='color:#fff; background:#EB6368;' @click='queryRumor'>
               搜索<i class='el-icon-search el-icon--right'></i>
             </el-button>
@@ -41,14 +41,15 @@
             <el-link target="_blank" style='font-size:24px; margin-right:15px;' @click="handleClickRumor(item.id)">
               {{item.title}}
             </el-link>
-            <el-tag :type='item.status === "待核查" ? "info" : (item.status === "真" ? "success" : (item.status === "存疑" ? "warning" : "danger"))'>
+            <el-tag :type='item.status === "真" ? "success" : (item.status === "存疑" ? "warning" : "danger")'>
               {{item.status}}
             </el-tag>
           </div>
           <div style='color:#808080;'>{{dateFormat(item.updateOn)}}</div>
         </el-col>
         <el-col :span='2'>
-          <img :src='img' style='width:80px; height:80px; transform:rotate(15deg); vertical-align:middle; opacity:0.9;'/>
+          <img :src='item.status === "真" ? trueImg : (item.status === "存疑" ? doubtImg : falseImg)'
+            style='width:80px; height:80px; transform:rotate(15deg); vertical-align:middle; opacity:0.9;'/>
         </el-col>
       </el-row>
       <el-divider></el-divider>
@@ -76,7 +77,10 @@ export default {
     return {
       input: '',
       words: '',
-      img: require('@/assets/100false.png'),
+      keyWord: '',
+      falseImg: require('@/assets/100false.png'),
+      doubtImg: require('@/assets/doubt.png'),
+      trueImg: require('@/assets/true.png'),
       tableData: [],
       addRumorDialogVisible: false,
       professionalList: [
@@ -101,7 +105,10 @@ export default {
       })
     },
     queryRumor() {
-      queryRumor().then((res) => {
+      const queryParam = {
+        title: this.keyWord
+      }
+      queryRumor(queryParam).then((res) => {
         this.tableData = res.results
       }).catch((err) => {
         this.$message.error(err)

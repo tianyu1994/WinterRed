@@ -6,7 +6,9 @@
     <div>
       <el-row>
         <el-col :span="22"><h1>{{rumorInfo.title}}</h1></el-col>
-        <el-col :span="2"><img src="@/assets/tmp/false.png" class="title_mark"></el-col>
+        <el-col :span="2">
+          <img :src='rumorInfo.status === "真" ? trueImg : (rumorInfo.status === "存疑" ? doubtImg : falseImg)' class="title_mark">
+        </el-col>
       </el-row>
     </div>
     <div>
@@ -19,7 +21,7 @@
     <div style="font-size: 24px; line-height:1.7; vertical-align:middle;">
       <div>
         <span class="common_title">鉴定结果：</span>
-        <img src="@/assets/tmp/假谣言.png" style="width:65px; height:26px; vertical-align: middle;">
+        <img :src='rumorInfo.status === "真" ? trueSmallImg : (rumorInfo.status === "存疑" ? doubtSmallImg : falseSmallImg)' style="width:65px; height:26px; vertical-align: middle;">
       </div><br/>
       <div>
         <span class="common_title">查证要点：</span>
@@ -52,6 +54,12 @@ export default {
   name: 'Detail',
   data() {
     return {
+      falseImg: require('@/assets/100false.png'),
+      doubtImg: require('@/assets/doubt.png'),
+      trueImg: require('@/assets/true.png'),
+      falseSmallImg: require('@/assets/rumor.png'),
+      doubtSmallImg: require('@/assets/condition.png'),
+      trueSmallImg: require('@/assets/fact.png'),
       rumorInfo: {},
       pointList: [
         '喀什网警巡查执法官方账号辟谣称：钟南山并没有来新疆，请大家不要放大疫情。请大家不要转发非官方信息。阿勒泰新闻网也在网络上辟谣：7月20日钟南山飞抵乌鲁木齐抗击疫情是谣言。',
@@ -97,10 +105,11 @@ export default {
     box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
   }
   .title_mark {
-    width: 85px;
+    width: 100px;
     height: 100px;
     z-index: -1;
     opacity: 0.8;
+    transform:rotate(15deg);
   }
   .subtitle {
     font-size: 24px;
