@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import java.io.Serializable;
+import java.util.List;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -121,4 +123,10 @@ public class RumorInfo implements Serializable {
      */
     @TableField(exist = false)
     private String keyWord;
+
+    /**
+     * 前后端传checkPoint信息用list传值
+     */
+    @TableField(exist = false)
+    private List<String> checkPoints;
 }

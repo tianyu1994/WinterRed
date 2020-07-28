@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -37,30 +38,45 @@ public class RumorInfoServiceImpl extends ServiceImpl<RumorInfoMapper, RumorInfo
     private CheckManMapper checkManMapper;
     @Resource
     private CheckPlatMapper checkPlatMapper;
+    private static final String SEPARATE = "#===这是分隔符===#";
 
     @Override
     public List<RumorInfo> queryRumorInfo(RumorInfo rumorInfo) {
         List<RumorInfo> list = rumorInfoMapper.queryRumorInfo(rumorInfo);
         for (RumorInfo info : list) {
-            if(info.getProfessionalFieldId() != null){
-                ProfessionalField param = new ProfessionalField();
-                param.setId(info.getProfessionalFieldId());
-                List<String> fieldList = professionalFieldMapper.getAllFieldName(param);
-                info.setProfessionalFieldName(fieldList.get(0));
-            }
-            if(info.getCheckManId() != null){
-                CheckMan checkMan = checkManMapper.selectById(info.getCheckManId());
-                if(checkMan != null){
-                    info.setCheckManName(checkMan.getCheckmanName());
-                    CheckPlat checkPlat = checkPlatMapper.selectById(checkMan.getOrganizationId());
-                    if(checkPlat != null){
-                        info.setOrganizationName(checkPlat.getOrganizationName());
-                    }
-                }
-
-            }
+            setRumorOtherInfo(info);
         }
         return list;
+    }
+
+    /**
+     * 封装谣言信息关联表的信息
+     * @param rumorInfo
+     */
+    private void setRumorOtherInfo(RumorInfo rumorInfo){
+        if(rumorInfo.getProfessionalFieldId() != null){
+            ProfessionalField param = new ProfessionalField();
+            param.setId(rumorInfo.getProfessionalFieldId());
+            List<String> fieldList = professionalFieldMapper.getAllFieldName(param);
+            rumorInfo.setProfessionalFieldName(fieldList.get(0));
+        }
+        if(rumorInfo.getCheckManId() != null){
+            CheckMan checkMan = checkManMapper.selectById(rumorInfo.getCheckManId());
+            if(checkMan != null){
+                rumorInfo.setCheckManName(checkMan.getCheckmanName());
+                CheckPlat checkPlat = checkPlatMapper.selectById(checkMan.getOrganizationId());
+                if(checkPlat != null){
+                    rumorInfo.setOrganizationName(checkPlat.getOrganizationName());
+                }
+            }
+
+        }
+        String checkPoint = rumorInfo.getCheckPoint();
+        if(StringUtils.isNotEmpty(checkPoint)){
+            String[] checkPointArr = checkPoint.split(SEPARATE);
+            List<String> checkPoints = Arrays.asList(checkPointArr);
+            rumorInfo.setCheckPoints(checkPoints);
+        }
     }
 
     @Override
@@ -71,16 +87,26 @@ public class RumorInfoServiceImpl extends ServiceImpl<RumorInfoMapper, RumorInfo
     @Override
     public Result saveOrUpdateRumorInfo(RumorInfo rumorInfo) {
         Result result = new Result();
-        int i = 0;
+        int count = 0;
+        List<String> checkPointList = rumorInfo.getCheckPoints();
+        StringBuffer checkPoint = new StringBuffer();
+        if(checkPointList != null && checkPointList.size() > 0){
+            for (int i = 0; i < checkPointList.size(); i++) {
+                int order = i + 1;
+                checkPoint.append(order).append("、").append(checkPointList.get(i)).append(SEPARATE);
+            }
+            rumorInfo.setCheckPoint(checkPoint.toString());
+        }
         if(rumorInfo.getId() == null){
             rumorInfo.setStatus(CheckStatus.WAIT_CHECK.getName());
             rumorInfo.setCreateOn(LocalDateTime.now());
             rumorInfo.setUpdateOn(LocalDateTime.now());
-            i = rumorInfoMapper.insert(rumorInfo);
+            count = rumorInfoMapper.insert(rumorInfo);
+        }else{
+            rumorInfo.setUpdateOn(LocalDateTime.now());
+            count = rumorInfoMapper.updateById(rumorInfo);
         }
-        rumorInfo.setUpdateOn(LocalDateTime.now());
-        i = rumorInfoMapper.updateById(rumorInfo);
-        if(i > 0){
+        if(count > 0){
             result.setSuccessMsg("保存成功！");
         }else {
             result.setFailedMsg("保存失败！");
@@ -100,23 +126,7 @@ public class RumorInfoServiceImpl extends ServiceImpl<RumorInfoMapper, RumorInfo
     @Override
     public RumorInfo queryById(Integer id) {
         RumorInfo info = rumorInfoMapper.queryById(id);
-        if(info.getProfessionalFieldId() != null){
-            ProfessionalField param = new ProfessionalField();
-            param.setId(info.getProfessionalFieldId());
-            List<String> fieldList = professionalFieldMapper.getAllFieldName(param);
-            info.setProfessionalFieldName(fieldList.get(0));
-        }
-        if(info.getCheckManId() != null){
-            CheckMan checkMan = checkManMapper.selectById(info.getCheckManId());
-            if(checkMan != null){
-                info.setCheckManName(checkMan.getCheckmanName());
-                CheckPlat checkPlat = checkPlatMapper.selectById(checkMan.getOrganizationId());
-                if(checkPlat != null){
-                    info.setOrganizationName(checkPlat.getOrganizationName());
-                }
-            }
-
-        }
+        setRumorOtherInfo(info);
         return info;
     }
 
