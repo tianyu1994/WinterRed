@@ -42,7 +42,13 @@ public class RumorInfo implements Serializable {
     /**
      * 正文
      */
-    private String body;
+//    private String body;
+
+    /**
+     * 引用的内容
+     */
+    private String quotedContent;
+
 
     /**
      * 辟谣状态

@@ -7,7 +7,7 @@
         <id column="id" property="id"/>
         <result column="title" property="title"/>
         <result column="abstract_info" property="abstractInfo"/>
-        <result column="body" property="body"/>
+        <result column="quoted_content" property="quotedContent"/>
         <result column="status" property="status"/>
         <result column="create_on" property="createOn"/>
         <result column="update_on" property="updateOn"/>
@@ -17,7 +17,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, title, abstract_info, body, status, create_on, update_on, check_man_id, professional_field_id
+        id, title, abstract_info, quoted_content, status, create_on, update_on, check_man_id, professional_field_id
     </sql>
 
     <sql id="base_where">
@@ -30,8 +30,8 @@
         <if test="abstractInfo != null and abstractInfo != ''">
             <![CDATA[ AND abstract_info = #{abstractInfo}]]>
         </if>
-        <if test="body != null and body != ''">
-            <![CDATA[ AND body = #{body}]]>
+        <if test="quotedContent != null and quotedContent != ''">
+            <![CDATA[ AND quoted_content = #{quotedContent}]]>
         </if>
         <if test="status != null and status != ''">
             <![CDATA[ AND status = #{status}]]>
