@@ -1,4 +1,12 @@
-import request from '@/utils/http.js' // axios的封�后续添加axios二次封装
+import request from '@/utils/http.js' // axios的封�后续添加axios二次封装
+
+export function getEmailCode(params) {
+  return request({
+    url: '/subscribeUser/sendEmail',
+    method: 'get',
+    params: params
+  })
+}
 
 // post方式传参用data
 export function getCommonList(query) {
