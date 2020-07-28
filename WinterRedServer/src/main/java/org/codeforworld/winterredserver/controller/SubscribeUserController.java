@@ -5,8 +5,10 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.codeforworld.winterredserver.entity.ProfessionalField;
 import org.codeforworld.winterredserver.entity.SubscribeUser;
 import org.codeforworld.winterredserver.entity.UserFieldRelation;
+import org.codeforworld.winterredserver.lang.CodeConstant;
 import org.codeforworld.winterredserver.lang.Result;
 import org.codeforworld.winterredserver.service.SubscribeUserService;
 import org.codeforworld.winterredserver.service.UserFieldRelationService;
@@ -73,17 +75,22 @@ public class SubscribeUserController {
         return result;
     }
 
-
     /**
      * 更新用户订阅
      * @param email
-     * @param professionalFieldId
+     * @param professionalFieldIdList
      * @return
      */
     @PostMapping("/saveOrUpdateByemail")
-    public Result saveOrUpdateByemail(String email, Integer professionalFieldId)  throws IOException {
-        Result result = subscribeUserService.saveOrUpdateByemail(email, professionalFieldId);
-        return result;
+    public boolean saveOrUpdateByemail(String email, List<Integer> professionalFieldIdList)  throws IOException {
+        boolean isSuccess = true;
+        for(Integer professionalFieldId : professionalFieldIdList){
+            Result result = subscribeUserService.saveOrUpdateByemail(email, professionalFieldId);
+            if(result.getRetCode() != CodeConstant.RETCODE_200){
+                isSuccess = false;
+            }
+        }
+        return isSuccess;
     }
 
     @GetMapping("/sendEmail")
@@ -106,16 +113,25 @@ public class SubscribeUserController {
     }
 
     @GetMapping("/checkIdentifyingCode")
-    public Result checkIdentifyingCode(String email, String identifyingCode, Integer professionalFieldId)  throws IOException {
+    public Result checkIdentifyingCode(String email, String identifyingCode, @RequestBody List<Integer> professionalFieldIdList)  throws IOException {
         Result result = new Result();
         //更新验证码配置文件
         IdentifyingCodeUtils identifyingCodeUtils = new IdentifyingCodeUtils();
 
+        boolean isSuccess = true;
         if (identifyingCodeUtils.checkFile(email, identifyingCode)){
-            return subscribeUserService.saveOrUpdateByemail(email,professionalFieldId);
-        } else {
-            result.setFailedMsg("验证码错误！");
-            return result;
+            for(Integer professionalFieldId : professionalFieldIdList){
+                result = subscribeUserService.saveOrUpdateByemail(email,professionalFieldId);
+                if(result.getRetCode() != CodeConstant.RETCODE_200){
+                    isSuccess = false;
+                }
+            }
         }
+        if(isSuccess){
+            result.setSuccessMsg("订阅成功");
+        }else {
+            result.setFailedMsg("订阅失败");
+        }
+        return result;
     }
 }
