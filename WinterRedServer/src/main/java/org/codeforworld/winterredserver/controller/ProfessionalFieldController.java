@@ -60,4 +60,12 @@ public class ProfessionalFieldController {
         }
         return result;
     }
+
+    @GetMapping("/getAllFieldName")
+    public Result getAllFieldName (ProfessionalField professionalField) {
+        Result result = new Result();
+        List<String> list = professionalFieldService.getAllFieldName(professionalField);
+        result.setResults(list);
+        return result;
+    }
 }

@@ -32,4 +32,15 @@
             <include refid="base_where"/>
         </where>
     </select>
+
+    <select id="getAllFieldName" parameterType="org.codeforworld.winterredserver.entity.ProfessionalField"
+            resultType="String">
+        select
+        field_name
+        from professional_field
+        <where>
+            <include refid="base_where"/>
+        </where>
+    </select>
+
 </mapper>

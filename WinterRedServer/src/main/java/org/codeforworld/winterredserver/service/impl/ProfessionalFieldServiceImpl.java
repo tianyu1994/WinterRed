@@ -25,4 +25,10 @@ public class ProfessionalFieldServiceImpl extends ServiceImpl<ProfessionalFieldM
     public List<ProfessionalField> queryProfessionalField(ProfessionalField professionalField) {
         return professionalFieldMapper.queryProfessionalField(professionalField);
     }
+
+    @Override
+    public List<String> getAllFieldName(ProfessionalField professionalField) {
+        List<String> list = professionalFieldMapper.getAllFieldName(professionalField);
+        return list;
+    }
 }

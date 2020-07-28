@@ -15,4 +15,6 @@ import java.util.List;
  */
 public interface ProfessionalFieldService extends IService<ProfessionalField> {
     List<ProfessionalField> queryProfessionalField(ProfessionalField professionalField);
+
+    List<String> getAllFieldName(ProfessionalField professionalField);
 }
