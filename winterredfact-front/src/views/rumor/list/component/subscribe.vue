@@ -18,7 +18,7 @@
           </el-form-item>
           <el-form-item label='订阅领域' :label-width='formLabelWidth' prop='professionalFieldIdList'>
             <el-checkbox-group v-model="subscribeForm.professionalFieldIdList">
-              <el-checkbox v-for="field in fieldList" :label="field.id" :key="field.id">{{field.name}}</el-checkbox>
+              <el-checkbox v-for="field in fieldList" :label="field.id" :key="field.id">{{field.fieldName}}</el-checkbox>
             </el-checkbox-group>
           </el-form-item>
         </el-form>
@@ -32,7 +32,8 @@
 </template>
 
 <script>
-import { getEmailCode } from '@/api/api.js'
+import { getEmailCode, subscribe, queryAllPerssional } from '@/api/api.js'
+
 export default {
   data() {
     return {
@@ -46,20 +47,7 @@ export default {
         professionalFieldIdList: []
       },
       formLabelWidth: '80px',
-      fieldList: [
-        {
-          id: 1,
-          name: '医学前沿'
-        },
-        {
-          id: 2,
-          name: '防疫'
-        },
-        {
-          id: 3,
-          name: '5G技术'
-        }
-      ],
+      fieldList: [],
       subscribeRules: {
         email: [
           { required: true, message: '请输入邮箱', trigger: 'change' }
@@ -80,7 +68,14 @@ export default {
     handleSubscribe() {
       this.$refs.subscribeForm.validate((valid) => {
         if (valid) {
-          console.log(this.subscribeForm)
+          subscribe(this.subscribeForm).then(() => {
+            this.$message({
+              message: '订阅成功',
+              type: 'success'
+            })
+          }).catch((err) => {
+            this.$message.error(err)
+          })
         }
       })
     },
@@ -115,6 +110,13 @@ export default {
         this.btntxt = '获取验证码'
       }
     }
+  },
+  mounted() {
+    queryAllPerssional().then((res) => {
+      this.fieldList = res.results
+    }).catch((err) => {
+      this.$message.error(err)
+    })
   }
 }
 </script>
