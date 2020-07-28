@@ -84,11 +84,8 @@ export default {
       })
     },
     sendCode() {
-      var regEmail = /^[A-Za-z1-9]+([-_.][A-Za-z1-9]+)*@([A-Za-z1-9]+[-.])+[A-Za-z]{2,5}$/
       if (this.subscribeForm.email === '') {
         this.$message.error('请先输入邮箱')
-      } else if (!regEmail.test(this.subscribeForm.email)) {
-        this.$message.error('请输入正确的邮箱')
       } else {
         console.log('发送验证吗')
 

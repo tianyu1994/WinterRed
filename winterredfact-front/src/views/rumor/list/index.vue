@@ -105,8 +105,9 @@ export default {
       })
     },
     queryRumor() {
-      const queryParam = {
-        title: this.keyWord
+      const queryParam = {}
+      if (this.keyWord !== null && this.keyWord !== '') {
+        queryParam.keyWord = this.keyWord
       }
       queryRumor(queryParam).then((res) => {
         this.tableData = res.results
