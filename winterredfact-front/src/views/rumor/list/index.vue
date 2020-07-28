@@ -83,16 +83,7 @@ export default {
       trueImg: require('@/assets/true.png'),
       tableData: [],
       addRumorDialogVisible: false,
-      professionalList: [
-        {
-          id: 1,
-          fieldName: '计算机科学'
-        },
-        {
-          id: 2,
-          fieldName: '医学'
-        }
-      ]
+      professionalList: []
     }
   },
   methods: {
@@ -136,7 +127,8 @@ export default {
       this.addRumorDialogVisible = false
       saveOrUpdate(rumorFormData).then(res => {
         if (res.status === 'success') {
-          this.professionalList = res.results
+          this.$message.success('提问成功。')
+          this.addRumorDialogVisible = false
         } else {
           this.$message.error(res.msg)
         }
