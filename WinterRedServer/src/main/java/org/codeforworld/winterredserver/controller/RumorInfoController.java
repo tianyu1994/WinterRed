@@ -69,8 +69,8 @@ public class RumorInfoController {
     @PostMapping("/saveOrUpdate")
     public Result saveOrUpdate(@RequestBody @Valid RumorInfo rumorInfo) {
         Result result = new Result();
-        if(!Arrays.asList(RumorSource.values()).contains(rumorInfo.getSource())){
-            result.setErrorMsg("信息来源渠道必须为：" + JSONArray.toJSONString(Arrays.asList(RumorSource.values())) + "中的一种！");
+        if(!RumorSource.getAllNames().contains(rumorInfo.getSource())){
+            result.setErrorMsg("信息来源渠道必须为：" + JSONArray.toJSONString(RumorSource.getAllNames()) + "中的一种！");
             return result;
         }
         result = rumorInfoService.saveOrUpdateRumorInfo(rumorInfo);
