@@ -11,7 +11,7 @@ export function getCommonList(query) {
 }
 export function getPerssionalField() {
   return request({
-    url: '/cosmopaas-dev/algorithm/getAlgorithmModelPage',
+    url: '/professionalField/getAllFieldName',
     method: 'get'
   })
 }

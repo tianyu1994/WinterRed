@@ -67,6 +67,9 @@ export default {
     subscribe,
     addRumorDialog
   },
+  created() {
+    this.getprofessionalList()
+  },
   data() {
     return {
       input: '',
@@ -147,9 +150,11 @@ export default {
     },
     // 获取领域列表
     getprofessionalList() {
-      const rep = getPerssionalField()
-      this.professionalList = rep.results
-      console.log(rep.results)
+      getPerssionalField().then(res => {
+        if (res.status === 'success') {
+          this.professionalList = res.results
+        }
+      })
     }
   }
 }

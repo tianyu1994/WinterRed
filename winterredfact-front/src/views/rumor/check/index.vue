@@ -20,6 +20,10 @@
 
 export default {
   name: 'checkRumor',
+  created() {
+    const { id } = this.$route.query
+    console.log(id)
+  },
   data() {
     return {
       professionalList: [
