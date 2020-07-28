@@ -98,6 +98,29 @@ public class RumorInfoServiceImpl extends ServiceImpl<RumorInfoMapper, RumorInfo
     }
 
     @Override
+    public RumorInfo queryById(Integer id) {
+        RumorInfo info = rumorInfoMapper.queryById(id);
+        if(info.getProfessionalFieldId() != null){
+            ProfessionalField param = new ProfessionalField();
+            param.setId(info.getProfessionalFieldId());
+            List<String> fieldList = professionalFieldMapper.getAllFieldName(param);
+            info.setProfessionalFieldName(fieldList.get(0));
+        }
+        if(info.getCheckManId() != null){
+            CheckMan checkMan = checkManMapper.selectById(info.getCheckManId());
+            if(checkMan != null){
+                info.setCheckManName(checkMan.getCheckmanName());
+                CheckPlat checkPlat = checkPlatMapper.selectById(checkMan.getOrganizationId());
+                if(checkPlat != null){
+                    info.setOrganizationName(checkPlat.getOrganizationName());
+                }
+            }
+
+        }
+        return info;
+    }
+
+    @Override
     public RumorInfo queryRumorInfoById(String id) {
         return rumorInfoMapper.queryRumorInfoById(id);
     }

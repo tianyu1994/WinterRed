@@ -69,6 +69,17 @@
         order by update_on desc
     </select>
 
+    <select id="queryById" parameterType="org.codeforworld.winterredserver.entity.RumorInfo"
+            resultType="org.codeforworld.winterredserver.entity.RumorInfo">
+        select
+        <include refid="Base_Column_List"/>
+        from rumor_info
+        <where>
+            id = #{id}
+        </where>
+        order by update_on desc
+    </select>
+
     <select id="queryRumorInfoById" parameterType="string"
             resultType="org.codeforworld.winterredserver.entity.RumorInfo">
         select

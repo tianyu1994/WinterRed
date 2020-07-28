@@ -117,7 +117,20 @@ public class RumorInfoController {
      * @return
      */
     @GetMapping("/queryById")
-    public Result queryById(String id) {
+    public Result queryById(@RequestParam("id") Integer id) {
+        Result result = new Result();
+        RumorInfo rumorInfo = rumorInfoService.queryById(id);
+        result.setResults(rumorInfo);
+        return result;
+    }
+
+    /**
+     * 根据id查记录
+     * @param id
+     * @return
+     */
+    @GetMapping("/queryRumorInfoById")
+    public Result queryRumorInfoById(String id) {
         Result result = new Result();
         RumorInfo rumorInfo = rumorInfoService.queryRumorInfoById(id);
         result.setResults(rumorInfo);
