@@ -10,6 +10,7 @@ import org.codeforworld.winterredserver.entity.SubscribeUser;
 import org.codeforworld.winterredserver.entity.UserFieldRelation;
 import org.codeforworld.winterredserver.lang.CodeConstant;
 import org.codeforworld.winterredserver.lang.Result;
+import org.codeforworld.winterredserver.request.SubscribeRequest;
 import org.codeforworld.winterredserver.service.SubscribeUserService;
 import org.codeforworld.winterredserver.service.UserFieldRelationService;
 import org.codeforworld.winterredserver.util.IdentifyingCodeUtils;
@@ -112,19 +113,27 @@ public class SubscribeUserController {
         return result;
     }
 
-    @GetMapping("/checkIdentifyingCode")
-    public Result checkIdentifyingCode(String email, String identifyingCode, @RequestBody List<Integer> professionalFieldIdList)  throws IOException {
+    @PostMapping ("/checkIdentifyingCode")
+    public Result checkIdentifyingCode(@RequestBody SubscribeRequest subscribeRequest)  throws IOException {
         Result result = new Result();
         //更新验证码配置文件
         IdentifyingCodeUtils identifyingCodeUtils = new IdentifyingCodeUtils();
-
+        String email = subscribeRequest.getEmail();
+        String identifyingCode = subscribeRequest.getIdentifyingCode();
         boolean isSuccess = true;
         if (identifyingCodeUtils.checkFile(email, identifyingCode)){
-            for(Integer professionalFieldId : professionalFieldIdList){
-                result = subscribeUserService.saveOrUpdateByemail(email,professionalFieldId);
-                if(result.getRetCode() != CodeConstant.RETCODE_200){
-                    isSuccess = false;
+            if (subscribeRequest.getProfessionalFieldIdList() != null && !"".equals(subscribeRequest.getProfessionalFieldIdList())){
+                List<Integer> professionalFieldIdList = subscribeRequest.getProfessionalFieldIdList();
+                for(Integer professionalFieldId : professionalFieldIdList){
+                    result = subscribeUserService.saveOrUpdateByemail(email,professionalFieldId);
+                    if(result.getRetCode() != CodeConstant.RETCODE_200){
+                        isSuccess = false;
+                    }
                 }
+            }
+            else {
+                result.setFailedMsg("您没有选择订阅的领域");
+                return result;
             }
         }
         if(isSuccess){
