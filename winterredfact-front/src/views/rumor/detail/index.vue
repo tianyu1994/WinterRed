@@ -31,11 +31,11 @@
       </div>
       <div>
         <span class="common_title">查证者：</span>
-        <span>{{rumorInfo.checkManName + ' • ' + rumorInfo.checkManName}}</span>
+        <span>{{rumorInfo.organizationName + ' • ' + rumorInfo.checkManName}}</span>
       </div>
     </div>
     <div>
-      <span style="line-height:3.5;">更新时间：2020-07-23</span>
+      <span style="line-height:3.5;">更新时间：{{dateFormat(rumorInfo.updateOn)}}</span>
     </div>
     <el-divider></el-divider>
     <div style="font-size: 24px; line-height:1.5; vertical-align:middle;">
@@ -60,6 +60,16 @@ export default {
     }
   },
   methods: {
+    dateFormat(time) {
+      var date = new Date(time)
+      var year = date.getFullYear()
+      var month = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1
+      var day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate()
+      var hours = date.getHours() < 10 ? '0' + date.getHours() : date.getHours()
+      var minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
+      var seconds = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds()
+      return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds
+    },
     queryRumorDetail() {
       const queryParam = {
         id: this.$route.query.rumorId
