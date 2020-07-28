@@ -13,6 +13,7 @@ import org.codeforworld.winterredserver.mapper.ProfessionalFieldMapper;
 import org.codeforworld.winterredserver.mapper.RumorInfoMapper;
 import org.codeforworld.winterredserver.service.RumorInfoService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.codeforworld.winterredserver.utils.BlockchainUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -81,6 +82,10 @@ public class RumorInfoServiceImpl extends ServiceImpl<RumorInfoMapper, RumorInfo
 
     @Override
     public Integer insert(RumorInfo rumorInfo) {
+        /**
+         * 入链
+         */
+        BlockchainUtil.pushRumorInfo2Chain(rumorInfo);
         return rumorInfoMapper.insert(rumorInfo);
     }
 
