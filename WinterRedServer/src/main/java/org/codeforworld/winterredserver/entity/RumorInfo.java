@@ -39,9 +39,9 @@ public class RumorInfo implements Serializable {
     private String abstractInfo;
 
     /**
-     * 正文
+     * 查证要点
      */
-//    private String body;
+    private String checkPoint;
 
     /**
      * 引用的内容
