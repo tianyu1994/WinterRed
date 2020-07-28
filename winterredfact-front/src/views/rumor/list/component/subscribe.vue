@@ -1,6 +1,8 @@
 <template>
   <div>
-    <el-button type='success' @click='subscribeDialog = true' plain>订阅</el-button>
+    <el-button type='success' @click='subscribeDialog = true' plain>
+      订阅<i class="el-icon-star-off el-icon--right"></i>
+    </el-button>
 
     <el-drawer title='订阅我，消息快人一步！' :visible.sync='subscribeDialog' direction='rtl' ref='drawer'>
       <div style='padding:20px;'>

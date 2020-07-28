@@ -8,13 +8,26 @@
       <div class="absolute-aligned-right">
         <el-row style='margin-right:15px;'>
           <el-col :span="12"><subscribe/></el-col>
-          <el-col :span="12"><el-button type='primary' @click='checkerRegist' plain>专家注册</el-button></el-col>
+          <el-col :span="12">
+            <el-button type='primary' @click='checkerRegist' plain>
+              专家注册<i class="el-icon-user el-icon--right"></i>
+            </el-button>
+          </el-col>
         </el-row>
       </div>
       <div class="absolute-aligned">
-        <el-input placeholder='请输入内容' size="large">
-          <el-button slot='append' style="color:#fff; background:#EB6368;">搜索</el-button>
-        </el-input>
+        <el-col :span="18">
+          <el-input placeholder='请输入内容' size="large">
+            <el-button slot='append' style="color:#fff; background:#EB6368;">
+              搜索<i class="el-icon-search el-icon--right"></i>
+            </el-button>
+          </el-input>
+        </el-col>
+          <el-col :span="6">
+            <el-button type="danger" size="large" style='margin-left:15px; background:#EB6368;'>
+              我要提问<i class="el-icon-mouse el-icon--right"></i>
+            </el-button>
+          </el-col>
       </div>
     </div>
     <div v-for='(item,index) in tableData' :key='index'>
@@ -115,7 +128,7 @@ export default {
 }
 .absolute-aligned {
   width: 50%;
-  min-width: 200px;
+  min-width: 250px;
   height: auto;
   overflow: auto;
   margin: auto;
