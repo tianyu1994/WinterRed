@@ -1,12 +1,16 @@
 package org.codeforworld.winterredserver.utils;
 
+import com.hankcs.hanlp.HanLP;
 import com.hankcs.hanlp.classification.classifiers.IClassifier;
 import com.hankcs.hanlp.classification.classifiers.NaiveBayesClassifier;
 import com.hankcs.hanlp.classification.models.NaiveBayesModel;
 import com.hankcs.hanlp.corpus.io.IOUtil;
+import com.hankcs.hanlp.seg.Segment;
+import com.hankcs.hanlp.seg.common.Term;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 public class Classifier {
     /**
@@ -21,6 +25,13 @@ public class Classifier {
     public static String recognizeTopicOf(String msg) throws IOException {
         IClassifier classifier = new NaiveBayesClassifier(trainOrLoadModel());
         return classifier.classify(msg);
+    }
+
+    public static String recognizeLocationOf(String msg) {
+        Segment segment = HanLP.newSegment().enablePlaceRecognize(true);
+        List<Term> termList = segment.seg(msg);
+        //todo 国家地区解析
+        return "中国";
     }
 
     private static NaiveBayesModel trainOrLoadModel() throws IOException

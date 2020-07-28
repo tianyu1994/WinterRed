@@ -1,6 +1,7 @@
 package org.codeforworld.winterredserver.controller;
 
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -77,14 +78,12 @@ public class SubscribeUserController {
     /**
      * 更新用户订阅
      * @param email
-     * @param professionalFieldId
+     * @param professionalFieldIdList
      * @return
      */
     @PostMapping("/saveOrUpdateByemail")
-    public Result saveOrUpdateByemail(String email, Integer professionalFieldId)  throws IOException {
-        Result result = new Result();
+    public Boolean saveOrUpdateByemail(String email, List<Integer> professionalFieldIdList)  throws IOException {
 
-        UserFieldRelation userFieldRelation = new UserFieldRelation();
         //查邮箱是否保存
         QueryWrapper<SubscribeUser> queryWrapper = new QueryWrapper<SubscribeUser>();
         queryWrapper.eq("email",email);
@@ -100,16 +99,15 @@ public class SubscribeUserController {
             SubscribeUser subscribeUser = subscribeUserService.getOne(queryWrapper);
             id = subscribeUser.getId();
         }
-        userFieldRelation.setUserId(id);
-        userFieldRelation.setProfessionalFieldId(professionalFieldId);
-        boolean isSuccess = userFieldRelationService.saveOrUpdate(userFieldRelation);
-
-        if (isSuccess){
-            result.setSuccessMsg("保存成功！");
-        }else {
-            result.setFailedMsg("保存失败！");
+        boolean isSuccess = false;
+        for (Integer professionalFieldId : professionalFieldIdList){
+            UserFieldRelation userFieldRelation = new UserFieldRelation();
+            userFieldRelation.setUserId(id);
+            userFieldRelation.setProfessionalFieldId(professionalFieldId);
+            isSuccess = userFieldRelationService.saveOrUpdate(userFieldRelation);
         }
-        return result;
+
+        return isSuccess;
     }
 
     @GetMapping("/sendEmail")
@@ -124,25 +122,28 @@ public class SubscribeUserController {
         boolean isSuccess = identifyingCodeUtils.updateFile(email,identifyingCode);
 
         if(isSuccess){
-            result.setSuccessMsg("保存成功！");
+            result.setSuccessMsg("获取验证码成功");
         }else {
-            result.setFailedMsg("保存失败！");
+            result.setFailedMsg("获取验证码失败");
         }
         return result;
     }
 
-    @GetMapping("/checkIdentifyingCode")
-    public Result checkIdentifyingCode(String email, String identifyingCode, Integer professionalFieldId)  throws IOException {
+    @PostMapping("/checkIdentifyingCode")
+    public Result checkIdentifyingCode(String email, String identifyingCode, @RequestBody List<Integer> professionalFieldIdList)  throws IOException {
         Result result = new Result();
         //更新验证码配置文件
         IdentifyingCodeUtils identifyingCodeUtils = new IdentifyingCodeUtils();
 
+        boolean isSuccess = false;
         if (identifyingCodeUtils.checkFile(email, identifyingCode)){
-            return saveOrUpdateByemail(email,professionalFieldId);
+            isSuccess = saveOrUpdateByemail(email,professionalFieldIdList);
         }
-        else {
-            result.setFailedMsg("验证码验证失败");
-            return result;
+        if(isSuccess){
+            result.setSuccessMsg("订阅成功");
+        }else {
+            result.setFailedMsg("订阅失败");
         }
+        return result;
     }
 }
