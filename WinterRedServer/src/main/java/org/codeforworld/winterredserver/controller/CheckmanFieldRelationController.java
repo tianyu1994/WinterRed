@@ -3,6 +3,7 @@ package org.codeforworld.winterredserver.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.codeforworld.winterredserver.entity.CheckMan;
 import org.codeforworld.winterredserver.entity.CheckmanFieldRelation;
 import org.codeforworld.winterredserver.lang.Result;
 import org.codeforworld.winterredserver.service.CheckmanFieldRelationService;
@@ -44,6 +45,20 @@ public class CheckmanFieldRelationController {
         List<CheckmanFieldRelation> list = checkmanFieldRelationService.queryCheckManFieldRelation(checkmanFieldRelation);
         PageInfo<CheckmanFieldRelation> page = new PageInfo<>(list);
         result.setResults(page);
+        return result;
+    }
+
+
+    /**
+     * 根据专业领域id查询核查人员信息列表
+     * @param professionalFieldId
+     * @return
+     */
+    @GetMapping("/queryByProfessionalFieldId")
+    public Result queryByProfessionalFieldId(@RequestParam("professionalFieldId") Integer professionalFieldId){
+        Result result = new Result();
+        List<CheckMan> list = checkmanFieldRelationService.queryByProfessionalFieldId(professionalFieldId);
+        result.setResults(list);
         return result;
     }
 

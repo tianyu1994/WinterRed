@@ -1,13 +1,16 @@
 package org.codeforworld.winterredserver.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import org.codeforworld.winterredserver.entity.CheckMan;
 import org.codeforworld.winterredserver.entity.CheckmanFieldRelation;
 import org.codeforworld.winterredserver.lang.Result;
+import org.codeforworld.winterredserver.mapper.CheckManMapper;
 import org.codeforworld.winterredserver.mapper.CheckmanFieldRelationMapper;
 import org.codeforworld.winterredserver.service.CheckmanFieldRelationService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,10 +27,15 @@ public class CheckmanFieldRelationServiceImpl extends ServiceImpl<CheckmanFieldR
     @Resource
     private CheckmanFieldRelationMapper checkmanFieldRelationMapper;
 
+    @Resource
+    private CheckManMapper CheckManMapper;
+
     @Override
     public List<CheckmanFieldRelation> queryCheckManFieldRelation(CheckmanFieldRelation checkmanFieldRelation) {
-        return checkmanFieldRelationMapper.queryCheckManFieldRelation(checkmanFieldRelation);
+        List<CheckmanFieldRelation> list = checkmanFieldRelationMapper.queryCheckManFieldRelation(checkmanFieldRelation);
+        return list;
     }
+
 
     @Override
     public Result saveOrUpdateCheckmanFieldRelation(CheckmanFieldRelation checkmanFieldRelation) {
@@ -49,6 +57,21 @@ public class CheckmanFieldRelationServiceImpl extends ServiceImpl<CheckmanFieldR
             result.setFailedMsg("保存失败！");
         }
         return result;
+    }
+
+    @Override
+    public List<CheckMan> queryByProfessionalFieldId(Integer professionalFieldId) {
+        CheckmanFieldRelation param = new CheckmanFieldRelation();
+        param.setProfessionalFieldId(professionalFieldId);
+        List<CheckmanFieldRelation> list = checkmanFieldRelationMapper.queryCheckManFieldRelation(param);
+        List<CheckMan> checkManList = new ArrayList<>();
+        for (CheckmanFieldRelation checkmanFieldRelation : list) {
+            if(checkmanFieldRelation.getCheckManId() != null){
+                CheckMan checkMan = CheckManMapper.selectById(checkmanFieldRelation.getCheckManId());
+                checkManList.add(checkMan);
+            }
+        }
+        return checkManList;
     }
 
     /**

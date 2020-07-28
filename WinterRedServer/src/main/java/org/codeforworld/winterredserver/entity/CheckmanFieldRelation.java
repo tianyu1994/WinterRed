@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -54,4 +55,10 @@ public class CheckmanFieldRelation implements Serializable {
      */
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateOn;
+
+    /**
+     * 核查人员信息
+     */
+    @TableField(exist = false)
+    private List<CheckMan> checkManList;
 }

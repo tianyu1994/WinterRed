@@ -2,11 +2,13 @@ package org.codeforworld.winterredserver.service.impl;
 
 import org.apache.commons.lang3.StringUtils;
 import org.codeforworld.winterredserver.entity.CheckMan;
+import org.codeforworld.winterredserver.entity.CheckPlat;
 import org.codeforworld.winterredserver.entity.ProfessionalField;
 import org.codeforworld.winterredserver.entity.RumorInfo;
 import org.codeforworld.winterredserver.enumType.CheckStatus;
 import org.codeforworld.winterredserver.lang.Result;
 import org.codeforworld.winterredserver.mapper.CheckManMapper;
+import org.codeforworld.winterredserver.mapper.CheckPlatMapper;
 import org.codeforworld.winterredserver.mapper.ProfessionalFieldMapper;
 import org.codeforworld.winterredserver.mapper.RumorInfoMapper;
 import org.codeforworld.winterredserver.service.RumorInfoService;
@@ -33,6 +35,8 @@ public class RumorInfoServiceImpl extends ServiceImpl<RumorInfoMapper, RumorInfo
     private ProfessionalFieldMapper professionalFieldMapper;
     @Resource
     private CheckManMapper checkManMapper;
+    @Resource
+    private CheckPlatMapper checkPlatMapper;
 
     @Override
     public List<RumorInfo> queryRumorInfo(RumorInfo rumorInfo) {
@@ -45,12 +49,15 @@ public class RumorInfoServiceImpl extends ServiceImpl<RumorInfoMapper, RumorInfo
                 info.setProfessionalFieldName(fieldList.get(0));
             }
             if(info.getCheckManId() != null){
-                CheckMan param = new CheckMan();
-                param.setId(info.getCheckManId());
-                List<CheckMan> checkManList = checkManMapper.queryCheckMan(param);
-                if(checkManList != null && checkManList.size() > 0){
-                    info.setCheckManName(checkManList.get(0).getCheckmanName());
+                CheckMan checkMan = checkManMapper.selectById(info.getCheckManId());
+                if(checkMan != null){
+                    info.setCheckManName(checkMan.getCheckmanName());
+                    CheckPlat checkPlat = checkPlatMapper.selectById(checkMan.getOrganizationId());
+                    if(checkPlat != null){
+                        info.setOrganizationName(checkPlat.getOrganizationName());
+                    }
                 }
+
             }
         }
         return list;

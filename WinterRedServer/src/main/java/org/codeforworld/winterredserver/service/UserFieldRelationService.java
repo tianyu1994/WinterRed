@@ -1,5 +1,6 @@
 package org.codeforworld.winterredserver.service;
 
+import org.codeforworld.winterredserver.entity.SubscribeUser;
 import org.codeforworld.winterredserver.entity.UserFieldRelation;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.codeforworld.winterredserver.lang.Result;
@@ -18,4 +19,6 @@ public interface UserFieldRelationService extends IService<UserFieldRelation> {
     List<UserFieldRelation> queryUserFieldRelation(UserFieldRelation userFieldRelation);
 
     Result saveOrUpdateUserFieldRelation(UserFieldRelation userFieldRelation);
+
+    List<SubscribeUser> queryByProfessionalFieldId(Integer professionalFieldId);
 }

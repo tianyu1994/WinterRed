@@ -1,14 +1,17 @@
 package org.codeforworld.winterredserver.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import org.codeforworld.winterredserver.entity.SubscribeUser;
 import org.codeforworld.winterredserver.entity.UserFieldRelation;
 import org.codeforworld.winterredserver.lang.Result;
+import org.codeforworld.winterredserver.mapper.SubscribeUserMapper;
 import org.codeforworld.winterredserver.mapper.UserFieldRelationMapper;
 import org.codeforworld.winterredserver.service.UserFieldRelationService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,6 +27,8 @@ public class UserFieldRelationServiceImpl extends ServiceImpl<UserFieldRelationM
 
     @Resource
     private UserFieldRelationMapper userFieldRelationMapper;
+    @Resource
+    private SubscribeUserMapper subscribeUserMapper;
 
     @Override
     public List<UserFieldRelation> queryUserFieldRelation(UserFieldRelation userFieldRelation) {
@@ -50,6 +55,21 @@ public class UserFieldRelationServiceImpl extends ServiceImpl<UserFieldRelationM
             result.setFailedMsg("保存失败！");
         }
         return result;
+    }
+
+    @Override
+    public List<SubscribeUser> queryByProfessionalFieldId(Integer professionalFieldId) {
+        UserFieldRelation param = new UserFieldRelation();
+        param.setProfessionalFieldId(professionalFieldId);
+        List<UserFieldRelation> list = userFieldRelationMapper.queryUserFieldRelation(param);
+        List<SubscribeUser> subscribeUserList = new ArrayList<>();
+        for (UserFieldRelation userFieldRelation : list) {
+            if(userFieldRelation.getUserId() != null){
+                SubscribeUser subscribeUser = subscribeUserMapper.selectById(userFieldRelation.getUserId());
+                subscribeUserList.add(subscribeUser);
+            }
+        }
+        return subscribeUserList;
     }
 
     /**

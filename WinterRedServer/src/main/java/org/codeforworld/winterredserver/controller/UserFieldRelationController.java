@@ -3,6 +3,7 @@ package org.codeforworld.winterredserver.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.codeforworld.winterredserver.entity.SubscribeUser;
 import org.codeforworld.winterredserver.entity.UserFieldRelation;
 import org.codeforworld.winterredserver.lang.Result;
 import org.codeforworld.winterredserver.service.UserFieldRelationService;
@@ -45,6 +46,14 @@ public class UserFieldRelationController {
         List<UserFieldRelation> list = userFieldRelationService.queryUserFieldRelation(userFieldRelation);
         PageInfo<UserFieldRelation> page = new PageInfo<>(list);
         result.setResults(page);
+        return result;
+    }
+
+    @GetMapping("/queryByProfessionalFieldId")
+    public Result queryByProfessionalFieldId(@RequestParam("professionalFieldId") Integer professionalFieldId){
+        Result result = new Result();
+        List<SubscribeUser> list = userFieldRelationService.queryByProfessionalFieldId(professionalFieldId);
+        result.setResults(list);
         return result;
     }
 

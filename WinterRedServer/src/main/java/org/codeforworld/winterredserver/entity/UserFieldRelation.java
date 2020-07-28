@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -54,4 +55,9 @@ public class UserFieldRelation implements Serializable {
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateOn;
 
+    /**
+     * 订阅用户信息列表
+     */
+    @TableField(exist = false)
+    private List<SubscribeUser> subscribeUserList;
 }

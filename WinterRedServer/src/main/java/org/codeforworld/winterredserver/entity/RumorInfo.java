@@ -9,7 +9,6 @@ import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-import org.aspectj.lang.annotation.Aspect;
 
 /**
  * <p>
@@ -103,4 +102,10 @@ public class RumorInfo implements Serializable {
      */
     @TableField(exist = false)
     private String professionalFieldName;
+
+    /**
+     * 核查人员所属机构名称
+     */
+    @TableField(exist = false)
+    private String organizationName;
 }
