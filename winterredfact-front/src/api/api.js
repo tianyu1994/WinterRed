@@ -1,5 +1,4 @@
 import request from '@/utils/http.js' // axios的封�后续添加axios二次封装
-<<<<<<< HEAD
 
 export function getEmailCode(params) {
   return request({
@@ -25,8 +24,6 @@ export function queryAllPerssional(params) {
     params: params
   })
 }
-=======
->>>>>>> 提问+核查
 
 // post方式传参用data
 export function getCommonList(query) {
