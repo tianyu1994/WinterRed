@@ -1,4 +1,5 @@
 import request from '@/utils/http.js' // axios的封�后续添加axios二次封装
+<<<<<<< HEAD
 
 export function getEmailCode(params) {
   return request({
@@ -24,19 +25,21 @@ export function queryAllPerssional(params) {
     params: params
   })
 }
+=======
+>>>>>>> 提问+核查
 
 // post方式传参用data
 export function getCommonList(query) {
   return request({
     url: '/algorithm/getAlgorithmModelPage',
-    method: 'get',
+    method: 'post',
     data: query
   })
 }
 
 export function getPerssionalField() {
   return request({
-    url: '/professionalField/getAllFieldName',
+    url: '/professionalField/queryAll',
     method: 'get'
   })
 }
@@ -44,6 +47,22 @@ export function getPerssionalField() {
 export function queryRumor(params) {
   return request({
     url: '/rumorInfo/queryAll',
+    method: 'get',
+    params: params
+  })
+}
+
+export function saveOrUpdate(params) {
+  return request({
+    url: '/rumorInfo/saveOrUpdate',
+    method: 'post',
+    data: params
+  })
+}
+
+export function queryRumorById(params) {
+  return request({
+    url: '/rumorInfo/queryById',
     method: 'get',
     params: params
   })
