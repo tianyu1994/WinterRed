@@ -16,7 +16,7 @@ public class Classifier {
     /**
      * 模型保存路径
      */
-    public static final String MODEL_PATH = "./src/main/resources/data/classification/classification-model.ser";
+    public static final String MODEL_PATH = "./src/main/resources/data/classification/model/classification-model.ser";
 
     public static String recognizeTopicOf(String msg) throws IOException {
         IClassifier classifier = new NaiveBayesClassifier(trainOrLoadModel());
