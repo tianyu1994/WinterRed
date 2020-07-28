@@ -13,11 +13,11 @@
               <el-button slot="append" :disabled="disabled" @click="sendCode">{{btntxt}}</el-button>
             </el-input>
           </el-form-item>
-          <el-form-item label='验证码' :label-width='formLabelWidth' prop='code'>
-            <el-input v-model='subscribeForm.code' autocomplete='off'></el-input>
+          <el-form-item label='验证码' :label-width='formLabelWidth' prop='identifyingCode'>
+            <el-input v-model='subscribeForm.identifyingCode' autocomplete='off'></el-input>
           </el-form-item>
-          <el-form-item label='订阅领域' :label-width='formLabelWidth' prop='field'>
-            <el-checkbox-group v-model="subscribeForm.field">
+          <el-form-item label='订阅领域' :label-width='formLabelWidth' prop='professionalFieldIdList'>
+            <el-checkbox-group v-model="subscribeForm.professionalFieldIdList">
               <el-checkbox v-for="field in fieldList" :label="field.id" :key="field.id">{{field.name}}</el-checkbox>
             </el-checkbox-group>
           </el-form-item>
@@ -42,8 +42,8 @@ export default {
       subscribeDialog: false,
       subscribeForm: {
         email: '',
-        code: '',
-        field: []
+        identifyingCode: '',
+        professionalFieldIdList: []
       },
       formLabelWidth: '80px',
       fieldList: [
@@ -64,10 +64,10 @@ export default {
         email: [
           { required: true, message: '请输入邮箱', trigger: 'change' }
         ],
-        code: [
+        identifyingCode: [
           { required: true, message: '请输入验证码', trigger: 'change' }
         ],
-        field: [
+        professionalFieldIdList: [
           { type: 'array', required: true, message: '请至少选择一个领域', trigger: 'change' }
         ]
       }
