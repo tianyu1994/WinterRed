@@ -41,7 +41,7 @@
             <el-link target="_blank" style='font-size:24px; margin-right:15px;' @click="handleClickRumor(item.id)">
               {{item.title}}
             </el-link>
-            <el-tag :type='item.status === "待核查" ? "info" : (item.status === "核查通过" ? "success" : "danger")'>
+            <el-tag :type='item.status === "待核查" ? "info" : (item.status === "真" ? "success" : (item.status === "存疑" ? "warning" : "danger"))'>
               {{item.status}}
             </el-tag>
           </div>
@@ -102,7 +102,7 @@ export default {
     },
     queryRumor() {
       queryRumor().then((res) => {
-        this.tableData = res.results.list
+        this.tableData = res.results
       }).catch((err) => {
         this.$message.error(err)
       })
