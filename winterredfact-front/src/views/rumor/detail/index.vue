@@ -31,7 +31,7 @@
       </div>
       <div>
         <span class="common_title">查证者：</span>
-        <span>解放日报•上观新闻运营的辟谣新闻和辟谣服务网络平台</span>
+        <span>{{rumorInfo.checkManName + ' • ' + rumorInfo.checkManName}}</span>
       </div>
     </div>
     <div>

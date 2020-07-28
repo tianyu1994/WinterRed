@@ -48,7 +48,7 @@
           <div style='color:#808080;'>{{dateFormat(item.updateOn)}}</div>
         </el-col>
         <el-col :span='2'>
-          <img :src='img' style='width:80px; height:80px; transform:rotate(15deg); vertical-align: middle;'/>
+          <img :src='img' style='width:80px; height:80px; transform:rotate(15deg); vertical-align:middle; opacity:0.9;'/>
         </el-col>
       </el-row>
       <el-divider></el-divider>

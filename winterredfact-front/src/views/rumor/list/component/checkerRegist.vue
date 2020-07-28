@@ -1,10 +1,11 @@
 <template>
   <div>
-    <el-button type='success' @click='registDialog = true' plain>
+    <el-button type='primary' @click='registDialog = true' plain>
       专家注册<i class='el-icon-user el-icon--right'></i>
     </el-button>
-    <el-drawer title='注册信息' :visible.sync='registDialog' direction='rtl' ref='drawer' style="font-size: 22px">
+    <el-drawer :with-header="false" :visible.sync='registDialog' direction='rtl' ref='drawer' style="font-size: 22px">
       <div style='padding:20px;'>
+        <p>专家注册页面</p><br/>
         <el-form :model='form' :rules='rules' ref='form'>
           <el-form-item label="用户名" :label-width='formLabelWidth' prop='user'>
             <el-input v-model="form.user"></el-input>
@@ -73,7 +74,7 @@ export default {
         },
         {
           id: 2,
-          name: '较真'
+          name: '是真的吗'
         }
       ],
       disabled: false,
@@ -116,7 +117,7 @@ export default {
   },
   methods: {
     cancelForm() {
-      this.subscribeDialog = false
+      this.registDialog = false
     },
     onSubmit() {
       this.$refs.form.validate((valid) => {
