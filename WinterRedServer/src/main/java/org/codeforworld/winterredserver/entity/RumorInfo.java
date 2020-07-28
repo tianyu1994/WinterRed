@@ -10,6 +10,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * <p>
  * 谣言信息表
@@ -31,11 +33,13 @@ public class RumorInfo implements Serializable {
     /**
      * 标题
      */
+    @NotNull(message = "标题不能为空")
     private String title;
 
     /**
      * 摘要
      */
+    @NotNull(message = "摘要不能为空")
     private String abstractInfo;
 
     /**
@@ -52,6 +56,7 @@ public class RumorInfo implements Serializable {
     /**
      * 辟谣状态
      */
+    @NotNull(message = "辟谣状态不能为空")
     private String status;
 
     /**
@@ -72,11 +77,13 @@ public class RumorInfo implements Serializable {
     /**
      * 信息来源渠道
      */
+    @NotNull(message = "信息来源渠道不能为空")
     private String source;
 
     /**
      * 提问用户id
      */
+    @NotNull(message = "提问用户id不能为空")
     private Integer askUserId;
 
     /**
