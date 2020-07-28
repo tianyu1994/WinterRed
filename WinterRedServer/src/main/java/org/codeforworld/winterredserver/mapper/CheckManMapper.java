@@ -15,4 +15,6 @@ import java.util.List;
  */
 public interface CheckManMapper extends BaseMapper<CheckMan> {
     List<CheckMan> queryCheckMan(CheckMan checkMan);
+
+    List<CheckMan> queryCheckMen(String nation);
 }
