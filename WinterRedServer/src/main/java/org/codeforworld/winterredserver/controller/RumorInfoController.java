@@ -36,8 +36,7 @@ public class RumorInfoController {
     public Result queryAll(RumorInfo rumorInfo) {
         Result result = new Result();
         List<RumorInfo> list = rumorInfoService.queryRumorInfo(rumorInfo);
-        PageInfo<RumorInfo> page = new PageInfo<>(list);
-        result.setResults(page);
+        result.setResults(list);
         return result;
     }
 
