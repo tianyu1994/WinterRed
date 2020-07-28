@@ -1,7 +1,7 @@
 package org.codeforworld.winterredserver;
 
 import lombok.extern.slf4j.Slf4j;
-import org.codeforworld.winterredserver.util.BlockchainUtil;
+import org.codeforworld.winterredserver.utils.BlockchainUtil;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

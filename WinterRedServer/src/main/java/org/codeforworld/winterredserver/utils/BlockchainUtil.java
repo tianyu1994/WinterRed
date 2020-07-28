@@ -1,4 +1,4 @@
-package org.codeforworld.winterredserver.util;
+package org.codeforworld.winterredserver.utils;
 
 import org.codeforworld.winterredserver.blockChain.Agent;
 import org.codeforworld.winterredserver.blockChain.Block;
@@ -12,6 +12,10 @@ import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author: kfzx-menghj
+ * @Time: 2020/7/28  10:37
+ */
 @Component
 public class BlockchainUtil {
     @Autowired

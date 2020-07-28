@@ -1,6 +1,7 @@
 package org.codeforworld.winterredserver.util;
 
 import org.codeforworld.winterredserver.entity.RumorInfo;
+import org.codeforworld.winterredserver.utils.BlockchainUtil;
 import org.junit.Test;
 
 public class BlockchainUtilTest {

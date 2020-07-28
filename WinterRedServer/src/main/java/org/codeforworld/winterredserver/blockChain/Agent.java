@@ -1,7 +1,5 @@
 package org.codeforworld.winterredserver.blockChain;
 
-import org.codeforworld.winterredserver.util.BlockchainUtil;
-import org.codeforworld.winterredserver.utils.MailUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,7 +7,6 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 /**
  * 对区块链的代理类
