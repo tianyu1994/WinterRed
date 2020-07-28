@@ -27,7 +27,7 @@ public class BlockchainUtilTest {
         RumorInfo rumorInfo = new RumorInfo();
         rumorInfo.setId(3);
         rumorInfo.setAskUserId(4);
-        rumorInfo.setBody("你好你好你好你好");
+        rumorInfo.setQuotedContent("你好你好你好你好");
         BlockchainUtil.pushRumorInfo2Chain(rumorInfo);
 
     }
