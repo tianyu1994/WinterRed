@@ -52,6 +52,9 @@
         <if test="professionalFieldId != null">
             <![CDATA[ AND professional_field_id = #{professionalFieldId}]]>
         </if>
+        <if test="keyWord != null and keyWord != ''">
+            <![CDATA[ AND (title like "%"#{keyWord}"%" or abstract_info like "%"#{keyWord}"%" or quoted_content like "%"#{keyWord}"%" or check_point like "%"#{keyWord}"%" )]]>
+        </if>
     </sql>
 
     <select id="queryRumorInfo" parameterType="org.codeforworld.winterredserver.entity.RumorInfo"

@@ -108,4 +108,10 @@ public class RumorInfo implements Serializable {
      */
     @TableField(exist = false)
     private String organizationName;
+
+    /**
+     * 关键字查询
+     */
+    @TableField(exist = false)
+    private String keyWord;
 }
