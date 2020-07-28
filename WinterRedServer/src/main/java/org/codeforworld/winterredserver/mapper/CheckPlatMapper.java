@@ -15,4 +15,8 @@ import java.util.List;
  */
 public interface CheckPlatMapper extends BaseMapper<CheckPlat> {
     List<CheckPlat> queryCheckPlat(CheckPlat checkPlat);
+
+    List<String> getAllOrganizationName(CheckPlat checkPlat);
+
+    List<String> getAllBelongArea(CheckPlat checkPlat);
 }

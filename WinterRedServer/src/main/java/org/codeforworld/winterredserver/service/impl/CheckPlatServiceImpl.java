@@ -52,6 +52,18 @@ public class CheckPlatServiceImpl extends ServiceImpl<CheckPlatMapper, CheckPlat
         return result;
     }
 
+    @Override
+    public List<String> getAllOrganizationName(CheckPlat checkPlat) {
+        List<String> list = checkPlatMapper.getAllOrganizationName(checkPlat);
+        return list;
+    }
+
+    @Override
+    public List<String> getAllBelongArea(CheckPlat checkPlat) {
+        List<String> list = checkPlatMapper.getAllBelongArea(checkPlat);
+        return list;
+    }
+
     /**
      * 检查唯一索引
      * @param checkPlat

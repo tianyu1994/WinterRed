@@ -54,4 +54,21 @@ public class CheckPlatController {
         }
         return result;
     }
+
+    @GetMapping("/getAllOrganizationName")
+    public Result getAllOrganizationName(CheckPlat checkPlat){
+        Result result = new Result();
+        List<String> list = checkPlatService.getAllOrganizationName(checkPlat);
+        result.setResults(list);
+        return result;
+    }
+
+    @GetMapping("/getAllBelongArea")
+    public Result getAllBelongArea(CheckPlat checkPlat){
+        Result result = new Result();
+        List<String> list = checkPlatService.getAllBelongArea(checkPlat);
+        result.setResults(list);
+        return result;
+    }
+
 }

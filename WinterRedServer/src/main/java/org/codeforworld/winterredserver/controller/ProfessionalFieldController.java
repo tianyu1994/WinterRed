@@ -26,6 +26,14 @@ import java.util.List;
 public class ProfessionalFieldController {
     @Resource
     private ProfessionalFieldService professionalFieldService;
+    
+    @GetMapping("/queryAll")
+    public Result queryAll (ProfessionalField professionalField) {
+        Result result = new Result();
+        List<ProfessionalField> list = professionalFieldService.queryProfessionalField(professionalField);
+        result.setResults(list);
+        return result;
+    }
 
     @GetMapping("/queryByPage")
     public Result queryByPage (@RequestParam("curPage") Integer curPage, @RequestParam("pageSize") Integer pageSize, ProfessionalField professionalField) {

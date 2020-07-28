@@ -18,4 +18,8 @@ public interface CheckPlatService extends IService<CheckPlat> {
     List<CheckPlat> queryCheckPlat(CheckPlat checkPlat);
 
     Result saveOrUpdateCheckPlat(CheckPlat checkPlat);
+
+    List<String> getAllOrganizationName(CheckPlat checkPlat);
+
+    List<String> getAllBelongArea(CheckPlat checkPlat);
 }

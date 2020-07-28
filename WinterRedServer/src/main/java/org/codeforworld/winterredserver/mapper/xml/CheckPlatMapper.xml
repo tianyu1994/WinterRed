@@ -35,4 +35,24 @@
             <include refid="base_where"/>
         </where>
     </select>
+
+    <select id="getAllOrganizationName" parameterType="org.codeforworld.winterredserver.entity.CheckPlat"
+            resultType="String">
+        select
+        organization_name
+        from check_plat
+        <where>
+            <include refid="base_where"/>
+        </where>
+    </select>
+
+    <select id="getAllBelongArea" parameterType="org.codeforworld.winterredserver.entity.CheckPlat"
+            resultType="String">
+        select
+        belong_area
+        from check_plat
+        <where>
+            <include refid="base_where"/>
+        </where>
+    </select>
 </mapper>
