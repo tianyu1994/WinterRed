@@ -8,11 +8,7 @@
       <div class='absolute-aligned-right'>
         <el-row style='margin-right:15px;'>
           <el-col :span='12'><subscribe/></el-col>
-          <el-col :span='12'>
-            <el-button type='primary' @click='checkerRegist' plain>
-              专家注册<i class='el-icon-user el-icon--right'></i>
-            </el-button>
-          </el-col>
+          <el-col :span='12'><checkerRegist/></el-col>
         </el-row>
       </div>
       <div class='absolute-aligned'>
@@ -62,6 +58,7 @@
 
 <script>
 import subscribe from './component/subscribe'
+import checkerRegist from './component/checkerRegist'
 import addRumorDialog from './component/addRumorDialog.vue'
 import { getPerssionalField, queryRumor } from '@/api/api.js'
 
@@ -69,6 +66,7 @@ export default {
   name: 'List',
   components: {
     subscribe,
+    checkerRegist,
     addRumorDialog
   },
   created() {
