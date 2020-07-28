@@ -67,3 +67,11 @@ export function queryRumorById(params) {
     params: params
   })
 }
+
+export function saveOrUpdateCheck(params) {
+  return request({
+    url: '/rumorInfo/saveOrUpdateCheck',
+    method: 'post',
+    data: params
+  })
+}

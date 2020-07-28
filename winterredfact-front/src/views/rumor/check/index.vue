@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { queryRumorById, saveOrUpdate } from '@/api/api.js'
+import { queryRumorById, saveOrUpdateCheck } from '@/api/api.js'
 
 export default {
   name: 'checkRumor',
@@ -90,7 +90,7 @@ export default {
             ...this.rumor,
             ...this.checkRumorForm
           }
-          saveOrUpdate(params).then(rep => {
+          saveOrUpdateCheck(params).then(rep => {
             if (rep.status === 'success') {
               this.$message.success('提交成功。')
             } else {
