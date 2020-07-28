@@ -1,9 +1,8 @@
 package org.codeforworld.winterredserver.enumType;
 
 public enum  CheckStatus {
-    WAIT_CHECK("待核查"),CHECK_PASS("核查通过"),CHECK_NO_PASS("核查不通过");
-
-    private CheckStatus(String value) {
+    WAIT_CHECK("待核查"),CHECK_PASS("真"),CHECK_NO_PASS("假"),UN_KNOWN("存疑");
+    CheckStatus(String value) {
         this.value = value;
     }
 
