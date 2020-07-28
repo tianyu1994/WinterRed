@@ -1,16 +1,21 @@
 package org.codeforworld.winterredserver.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.codeforworld.winterredserver.entity.SubscribeUser;
+import org.codeforworld.winterredserver.entity.UserFieldRelation;
 import org.codeforworld.winterredserver.lang.Result;
 import org.codeforworld.winterredserver.service.SubscribeUserService;
+import org.codeforworld.winterredserver.service.UserFieldRelationService;
+import org.codeforworld.winterredserver.util.IdentifyingCodeUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -28,6 +33,8 @@ import java.util.List;
 public class SubscribeUserController {
     @Resource
     private SubscribeUserService subscribeUserService;
+    @Resource
+    private UserFieldRelationService userFieldRelationService;
 
     @GetMapping("/queryByPage")
     public Result queryByPage (@RequestParam("curPage") Integer curPage, @RequestParam("pageSize") Integer pageSize, SubscribeUser subscribeUser) {
@@ -55,5 +62,78 @@ public class SubscribeUserController {
             result.setFailedMsg("删除失败！");
         }
         return result;
+    }
+
+
+    /**
+     * 更新用户订阅
+     * @param email
+     * @param professionalFieldId
+     * @return
+     */
+    @PostMapping("/saveOrUpdateByemail")
+    public Result saveOrUpdateByemail(String email, Integer professionalFieldId)  throws IOException {
+        Result result = new Result();
+
+        UserFieldRelation userFieldRelation = new UserFieldRelation();
+        //查邮箱是否保存
+        QueryWrapper<SubscribeUser> queryWrapper = new QueryWrapper<SubscribeUser>();
+        queryWrapper.eq("email",email);
+        int i = subscribeUserService.count(queryWrapper);
+        Integer id = null;
+        if (i == 0){
+            SubscribeUser sub = new SubscribeUser();
+            sub.setEmail(email);
+            saveOrUpdate(sub);
+            id = sub.getId();
+        }
+        else {
+            SubscribeUser subscribeUser = subscribeUserService.getOne(queryWrapper);
+            id = subscribeUser.getId();
+        }
+        userFieldRelation.setUserId(id);
+        userFieldRelation.setProfessionalFieldId(professionalFieldId);
+        boolean isSuccess = userFieldRelationService.saveOrUpdate(userFieldRelation);
+
+        if (isSuccess){
+            result.setSuccessMsg("删除成功！");
+        }else {
+            result.setFailedMsg("删除失败！");
+        }
+        return result;
+    }
+
+    @GetMapping("/sendEmail")
+    public Result sendEmail(String email) throws Exception{
+        Result result = new Result();
+        //产生6位随机数验证码
+        String identifyingCode = String.valueOf((int) (Math.random()*9+1)*167894);
+        //发送邮件
+        IdentifyingCodeUtils identifyingCodeUtils = new IdentifyingCodeUtils();
+        identifyingCodeUtils.sendEmail(email,identifyingCode);
+        //更新验证码配置文件
+        boolean isSuccess = identifyingCodeUtils.updateFile(email,identifyingCode);
+
+        if(isSuccess){
+            result.setSuccessMsg("保存成功！");
+        }else {
+            result.setFailedMsg("保存失败！");
+        }
+        return result;
+    }
+
+    @GetMapping("/checkIdentifyingCode")
+    public Result checkIdentifyingCode(String email, String identifyingCode, Integer professionalFieldId)  throws IOException {
+        Result result = new Result();
+        //更新验证码配置文件
+        IdentifyingCodeUtils identifyingCodeUtils = new IdentifyingCodeUtils();
+
+        if (identifyingCodeUtils.checkFile(email, identifyingCode)){
+            return saveOrUpdateByemail(email,professionalFieldId);
+        }
+        else {
+            result.setFailedMsg("验证码验证失败");
+            return result;
+        }
     }
 }
