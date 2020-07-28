@@ -17,7 +17,7 @@
       </div>
       <div class='absolute-aligned'>
         <el-col :span='18'>
-          <el-input placeholder='请输入内� size='large'>
+          <el-input placeholder='请输入内容' size='large'>
             <el-button slot='append' style='color:#fff; background:#EB6368;' @click='queryRumor'>
               搜索<i class='el-icon-search el-icon--right'></i>
             </el-button>
@@ -45,7 +45,7 @@
             <el-link target="_blank" style='font-size:24px; margin-right:15px;' @click="handleClickRumor(item.id)">
               {{item.title}}
             </el-link>
-            <el-tag :type='item.status === "待核� ? "info" : (item.status === "核查通过" ? "success" : "danger")'>
+            <el-tag :type='item.status === "待核查" ? "info" : (item.status === "核查通过" ? "success" : "danger")'>
               {{item.status}}
             </el-tag>
           </div>
@@ -79,18 +79,18 @@ export default {
       input: '',
       words: '',
       img: require('@/assets/100false.png'),
-      tableData: []
-      ],
+      tableData: [],
       addRumorDialogVisible: false,
       professionalList: [
         {
           id: 1,
-          fieldName: '计算机科�
+          fieldName: '计算机科学'
         },
         {
           id: 2,
           fieldName: '医学'
         }
+      ]
     }
   },
   methods: {
@@ -141,29 +141,12 @@ export default {
     dateFormat(time) {
       var date = new Date(time)
       var year = date.getFullYear()
-      /* 在日期格式中，月份是�开始的，因此要�
-      * 使用三元表达式在小于10的前面加0，以达到格式统一  �09:11:05
-      * */
       var month = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1
       var day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate()
       var hours = date.getHours() < 10 ? '0' + date.getHours() : date.getHours()
       var minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
       var seconds = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds()
-      // 拼接
       return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds
-    },
-    // 保存谣言
-    saveAddRumorDiglog(rumorFormData) {
-      this.addRumorDialogVisible = false
-      console.log(rumorFormData)
-    },
-    // 获取领域列表
-    getprofessionalList() {
-      getPerssionalField().then(res => {
-        if (res.status === 'success') {
-          this.professionalList = res.results
-        }
-      })
     }
   },
   mounted() {
