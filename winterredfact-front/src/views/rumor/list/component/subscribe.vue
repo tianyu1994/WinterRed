@@ -4,8 +4,9 @@
       订阅<i class="el-icon-star-off el-icon--right"></i>
     </el-button>
 
-    <el-drawer title='订阅我，消息快人一步！' :visible.sync='subscribeDialog' direction='rtl' ref='drawer'>
+    <el-drawer :with-header="false" :visible.sync='subscribeDialog' direction='rtl' ref='drawer'>
       <div style='padding:20px;'>
+        <p>订阅我，消息快人一步！</p><br/>
         <el-form :model='subscribeForm' :rules='subscribeRules' ref='subscribeForm'>
           <el-form-item label='邮箱' :label-width='formLabelWidth' prop='email'>
             <el-input v-model='subscribeForm.email' autocomplete='off'>
