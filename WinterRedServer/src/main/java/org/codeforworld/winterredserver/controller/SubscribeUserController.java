@@ -105,9 +105,9 @@ public class SubscribeUserController {
         boolean isSuccess = userFieldRelationService.saveOrUpdate(userFieldRelation);
 
         if (isSuccess){
-            result.setSuccessMsg("删除成功！");
+            result.setSuccessMsg("保存成功！");
         }else {
-            result.setFailedMsg("删除失败！");
+            result.setFailedMsg("保存失败！");
         }
         return result;
     }
