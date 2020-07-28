@@ -24,11 +24,19 @@
           </el-input>
         </el-col>
           <el-col :span="6">
-            <el-button type="danger" size="large" style='margin-left:15px; background:#EB6368;'>
+            <el-button type="danger" @click="showAddRumorDiglog" size="large" style='margin-left:15px; background:#EB6368;'>
               我要提问<i class="el-icon-mouse el-icon--right"></i>
             </el-button>
           </el-col>
       </div>
+    </div>
+    <div>
+      <add-rumor-dialog
+        :addRumorDialogVisible="addRumorDialogVisible"
+        :professionalList="professionalList"
+        @handle-cancel-dialog="cancelAddRumorDiglog"
+        @handle-save-dialog="saveAddRumorDiglog">
+      </add-rumor-dialog>
     </div>
     <div v-for='(item,index) in tableData' :key='index'>
       <el-row style='line-height:2;'>
@@ -50,11 +58,14 @@
 
 <script>
 import subscribe from './component/subscribe'
+import addRumorDialog from './component/addRumorDialog.vue'
+import { getPerssionalField } from '@/api/api.js'
 
 export default {
   name: 'List',
   components: {
-    subscribe
+    subscribe,
+    addRumorDialog
   },
   data() {
     return {
@@ -97,6 +108,17 @@ export default {
           result: '谣言',
           info: '钟南山院士已抵达新疆乌鲁木齐抗击疫情'
         }
+      ],
+      addRumorDialogVisible: false,
+      professionalList: [
+        {
+          id: 1,
+          fieldName: '计算机科学'
+        },
+        {
+          id: 2,
+          fieldName: '医学'
+        }
       ]
     }
   },
@@ -104,6 +126,30 @@ export default {
   methods: {
     checkerRegist() {
       this.$router.push('/rumor/checkerRegist')
+    },
+    handleClick() {
+      this.$router.push({
+        path: '/rumor/detail'
+      })
+    },
+    // 打开新增谣言页面
+    showAddRumorDiglog() {
+      this.addRumorDialogVisible = true
+    },
+    // 取消
+    cancelAddRumorDiglog() {
+      this.addRumorDialogVisible = false
+    },
+    // 保存谣言
+    saveAddRumorDiglog(rumorFormData) {
+      this.addRumorDialogVisible = false
+      console.log(rumorFormData)
+    },
+    // 获取领域列表
+    getprofessionalList() {
+      const rep = getPerssionalField()
+      this.professionalList = rep.results
+      console.log(rep.results)
     }
   }
 }
