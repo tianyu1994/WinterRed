@@ -1,14 +1,17 @@
 package org.codeforworld.winterredserver.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.codeforworld.winterredserver.entity.RumorInfo;
+import org.codeforworld.winterredserver.enumType.RumorSource;
 import org.codeforworld.winterredserver.lang.Result;
 import org.codeforworld.winterredserver.service.RumorInfoService;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -65,7 +68,12 @@ public class RumorInfoController {
      */
     @PostMapping("/saveOrUpdate")
     public Result saveOrUpdate(@RequestBody @Valid RumorInfo rumorInfo) {
-        Result result = rumorInfoService.saveOrUpdateRumorInfo(rumorInfo);
+        Result result = new Result();
+        if(!Arrays.asList(RumorSource.values()).contains(rumorInfo.getSource())){
+            result.setErrorMsg("信息来源渠道必须为：" + JSONArray.toJSONString(Arrays.asList(RumorSource.values())) + "中的一种！");
+            return result;
+        }
+        result = rumorInfoService.saveOrUpdateRumorInfo(rumorInfo);
         return result;
     }
 
