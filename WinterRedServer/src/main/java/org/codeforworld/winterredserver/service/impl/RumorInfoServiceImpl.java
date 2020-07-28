@@ -88,6 +88,27 @@ public class RumorInfoServiceImpl extends ServiceImpl<RumorInfoMapper, RumorInfo
     public Result saveOrUpdateRumorInfo(RumorInfo rumorInfo) {
         Result result = new Result();
         int count = 0;
+        if(rumorInfo.getId() == null){
+            rumorInfo.setStatus(CheckStatus.WAIT_CHECK.getName());
+            rumorInfo.setCreateOn(LocalDateTime.now());
+            rumorInfo.setUpdateOn(LocalDateTime.now());
+            count = rumorInfoMapper.insert(rumorInfo);
+        }else{
+            rumorInfo.setUpdateOn(LocalDateTime.now());
+            count = rumorInfoMapper.updateById(rumorInfo);
+        }
+        if(count > 0){
+            result.setSuccessMsg("保存成功！");
+        }else {
+            result.setFailedMsg("保存失败！");
+        }
+        return result;
+    }
+
+    @Override
+    public Result saveOrUpdateRumorInfoCheck(RumorInfo rumorInfo) {
+        Result result = new Result();
+        int count = 0;
         List<String> checkPointList = rumorInfo.getCheckPoints();
         StringBuffer checkPoint = new StringBuffer();
         if(checkPointList != null && checkPointList.size() > 0){

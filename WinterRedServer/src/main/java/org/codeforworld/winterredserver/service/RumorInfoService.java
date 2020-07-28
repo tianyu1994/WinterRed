@@ -23,6 +23,8 @@ public interface RumorInfoService extends IService<RumorInfo> {
 
     Result saveOrUpdateRumorInfo(RumorInfo rumorInfo);
 
+    Result saveOrUpdateRumorInfoCheck(RumorInfo rumorInfo);
+
     Result modifyStatus(RumorInfo rumorInfo);
 
     RumorInfo queryById(Integer id);

@@ -82,6 +82,25 @@ public class RumorInfoController {
         return result;
     }
 
+    /**
+     * 保存核查信息
+     * @param rumorInfo
+     * @return
+     */
+    @PostMapping("/saveOrUpdateCheck")
+    public Result saveOrUpdateCheck(@RequestBody @Valid RumorInfo rumorInfo) {
+        Result result = new Result();
+        if(!RumorSource.getAllNames().contains(rumorInfo.getSource())){
+            result.setErrorMsg("信息来源渠道必须为：" + RumorSource.getAllNames().toString() + "中的一种！");
+            return result;
+        }
+        if(!CheckStatus.getAllNames().contains(rumorInfo.getStatus())){
+            result.setErrorMsg("辟谣状态必须为：" + CheckStatus.getAllNames().toString() + "中的一种！");
+            return result;
+        }
+        result = rumorInfoService.saveOrUpdateRumorInfoCheck(rumorInfo);
+        return result;
+    }
 
     /**
      * 更新核查状态
