@@ -92,4 +92,15 @@ public class RumorInfo implements Serializable {
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateOn;
 
+    /**
+     * 核查人员名字
+     */
+    @TableField(exist = false)
+    private String checkManName;
+
+    /**
+     * 核查人员领域名称
+     */
+    @TableField(exist = false)
+    private String professionalFieldName;
 }
