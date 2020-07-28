@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.codeforworld.winterredserver.entity.RumorInfo;
+import org.codeforworld.winterredserver.enumType.CheckStatus;
 import org.codeforworld.winterredserver.enumType.RumorSource;
 import org.codeforworld.winterredserver.lang.Result;
 import org.codeforworld.winterredserver.service.RumorInfoService;
@@ -70,7 +71,11 @@ public class RumorInfoController {
     public Result saveOrUpdate(@RequestBody @Valid RumorInfo rumorInfo) {
         Result result = new Result();
         if(!RumorSource.getAllNames().contains(rumorInfo.getSource())){
-            result.setErrorMsg("信息来源渠道必须为：" + JSONArray.toJSONString(RumorSource.getAllNames()) + "中的一种！");
+            result.setErrorMsg("信息来源渠道必须为：" + RumorSource.getAllNames().toString() + "中的一种！");
+            return result;
+        }
+        if(!CheckStatus.getAllNames().contains(rumorInfo.getStatus())){
+            result.setErrorMsg("辟谣状态必须为：" + CheckStatus.getAllNames().toString() + "中的一种！");
             return result;
         }
         result = rumorInfoService.saveOrUpdateRumorInfo(rumorInfo);

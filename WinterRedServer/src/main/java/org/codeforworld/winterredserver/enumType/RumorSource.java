@@ -1,7 +1,5 @@
 package org.codeforworld.winterredserver.enumType;
 
-import org.codeforworld.winterredserver.entity.RumorInfo;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
