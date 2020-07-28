@@ -1,17 +1,26 @@
 package org.codeforworld.winterredserver.controller;
 
 import com.alibaba.fastjson.JSONArray;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.codeforworld.winterredserver.entity.AskUser;
 import org.codeforworld.winterredserver.entity.RumorInfo;
+import org.codeforworld.winterredserver.entity.SubscribeUser;
+import org.codeforworld.winterredserver.entity.UserFieldRelation;
 import org.codeforworld.winterredserver.enumType.CheckStatus;
 import org.codeforworld.winterredserver.enumType.RumorSource;
 import org.codeforworld.winterredserver.lang.Result;
+import org.codeforworld.winterredserver.service.AskUserService;
 import org.codeforworld.winterredserver.service.RumorInfoService;
+import org.codeforworld.winterredserver.service.SubscribeUserService;
+import org.codeforworld.winterredserver.service.UserFieldRelationService;
+import org.codeforworld.winterredserver.util.IdentifyingCodeUtils;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,6 +39,12 @@ import java.util.List;
 public class RumorInfoController {
     @Resource
     private RumorInfoService rumorInfoService;
+    @Resource
+    private AskUserService askUserService;
+    @Resource
+    private SubscribeUserService subscribeUserService;
+    @Resource
+    private UserFieldRelationService userFieldRelationService;
 
     /**
      * 查询所有记录
@@ -70,15 +85,32 @@ public class RumorInfoController {
     @PostMapping("/saveOrUpdate")
     public Result saveOrUpdate(@RequestBody @Valid RumorInfo rumorInfo) {
         Result result = new Result();
-        if(!RumorSource.getAllNames().contains(rumorInfo.getSource())){
-            result.setErrorMsg("信息来源渠道必须为：" + RumorSource.getAllNames().toString() + "中的一种！");
-            return result;
+        try {
+            Integer askUserId = rumorInfo.getAskUserId();
+            AskUser askUser = askUserService.getById(askUserId);
+            //更新验证码配置文件
+            IdentifyingCodeUtils identifyingCodeUtils = new IdentifyingCodeUtils();
+            if (identifyingCodeUtils.checkFile(askUser.getEmail(), rumorInfo.getIdentifyingCode())){
+                subscribeUserService.saveOrUpdateByemail(askUser.getEmail(),rumorInfo.getProfessionalFieldId());
+            } else {
+                result.setFailedMsg("验证码错误!");
+                return result;
+            }
+
+            if(!RumorSource.getAllNames().contains(rumorInfo.getSource())){
+                result.setErrorMsg("信息来源渠道必须为：" + RumorSource.getAllNames().toString() + "中的一种！");
+                return result;
+            }
+            if(!CheckStatus.getAllNames().contains(rumorInfo.getStatus())){
+                result.setErrorMsg("辟谣状态必须为：" + CheckStatus.getAllNames().toString() + "中的一种！");
+                return result;
+            }
+            result = rumorInfoService.saveOrUpdateRumorInfo(rumorInfo);
+        }catch (Exception e){
+            e.printStackTrace();
+            log.error("保存谣言信息发生异常", e);
+            result.setErrorMsg("保存谣言信息发生异常");
         }
-        if(!CheckStatus.getAllNames().contains(rumorInfo.getStatus())){
-            result.setErrorMsg("辟谣状态必须为：" + CheckStatus.getAllNames().toString() + "中的一种！");
-            return result;
-        }
-        result = rumorInfoService.saveOrUpdateRumorInfo(rumorInfo);
         return result;
     }
 

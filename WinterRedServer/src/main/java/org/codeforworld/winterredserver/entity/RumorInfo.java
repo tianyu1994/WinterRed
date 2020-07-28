@@ -129,4 +129,10 @@ public class RumorInfo implements Serializable {
      */
     @TableField(exist = false)
     private List<String> checkPoints;
+
+    /**
+     * 验证码
+     */
+    @TableField(exist = false)
+    private String identifyingCode;
 }

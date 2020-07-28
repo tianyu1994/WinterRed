@@ -77,7 +77,6 @@
         <where>
             id = #{id}
         </where>
-        order by update_on desc
     </select>
 
     <select id="queryRumorInfoById" parameterType="string"

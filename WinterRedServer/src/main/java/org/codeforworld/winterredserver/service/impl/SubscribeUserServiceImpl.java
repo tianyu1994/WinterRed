@@ -2,8 +2,10 @@ package org.codeforworld.winterredserver.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.codeforworld.winterredserver.entity.SubscribeUser;
+import org.codeforworld.winterredserver.entity.UserFieldRelation;
 import org.codeforworld.winterredserver.lang.Result;
 import org.codeforworld.winterredserver.mapper.SubscribeUserMapper;
+import org.codeforworld.winterredserver.mapper.UserFieldRelationMapper;
 import org.codeforworld.winterredserver.service.SubscribeUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,8 @@ import java.util.List;
 public class SubscribeUserServiceImpl extends ServiceImpl<SubscribeUserMapper, SubscribeUser> implements SubscribeUserService {
     @Resource
     private SubscribeUserMapper subscribeUserMapper;
+    @Resource
+    private UserFieldRelationMapper userFieldRelationMapper;
 
     @Override
     public List<SubscribeUser> querySubscribeUser(SubscribeUser subscribeUser) {
@@ -48,6 +52,42 @@ public class SubscribeUserServiceImpl extends ServiceImpl<SubscribeUserMapper, S
             result.setSuccessMsg("保存成功！");
         }else {
             result.setFailedMsg("保存失败！");
+        }
+        return result;
+    }
+
+    @Override
+    public Result saveOrUpdateByemail(String email, Integer professionalFieldId) {
+        Result result = new Result();
+        UserFieldRelation userFieldRelation = new UserFieldRelation();
+        //查邮箱是否保存
+        SubscribeUser param = new SubscribeUser();
+        param.setEmail(email);
+        int i = subscribeUserMapper.countSubscribeUser(param);
+        Integer id = null;
+        if (i == 0){
+            SubscribeUser sub = new SubscribeUser();
+            sub.setEmail(email);
+            saveOrUpdate(sub);
+            id = sub.getId();
+        } else {
+            List<SubscribeUser> subscribeUserList = subscribeUserMapper.querySubscribeUser(param);
+            if(subscribeUserList != null && subscribeUserList.size() > 0){
+                id = subscribeUserList.get(0).getId();
+            }
+        }
+        userFieldRelation.setUserId(id);
+        userFieldRelation.setProfessionalFieldId(professionalFieldId);
+        QueryWrapper<UserFieldRelation> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("professional_field_id", professionalFieldId);
+        queryWrapper.eq("user_id", id);
+        userFieldRelationMapper.delete(queryWrapper);
+        int count = userFieldRelationMapper.insert(userFieldRelation);
+        result.setResults(userFieldRelation);
+        if(count > 0){
+            result.setSuccessMsg("保存成功!");
+        }else {
+            result.setSuccessMsg("保存失败！");
         }
         return result;
     }

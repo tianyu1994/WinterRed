@@ -31,4 +31,15 @@
             <include refid="base_where"/>
         </where>
     </select>
+
+
+    <select id="countSubscribeUser" parameterType="org.codeforworld.winterredserver.entity.SubscribeUser"
+            resultType="Integer">
+        select
+        count(*)
+        from subscribe_user
+        <where>
+            <include refid="base_where"/>
+        </where>
+    </select>
 </mapper>

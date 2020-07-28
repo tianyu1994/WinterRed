@@ -15,4 +15,6 @@ import java.util.List;
  */
 public interface SubscribeUserMapper extends BaseMapper<SubscribeUser> {
     List<SubscribeUser> querySubscribeUser(SubscribeUser subscribeUser);
+
+    Integer countSubscribeUser(SubscribeUser subscribeUser);
 }
