@@ -21,7 +21,7 @@
     <div style="font-size: 24px; line-height:1.7; vertical-align:middle;">
       <div>
         <span class="common_title">鉴定结果：</span>
-        <img :src='rumorInfo.status === "真" ? trueSmallImg : (rumorInfo.status === "存疑" ? doubtSmallImg : falseSmallImg)' style="width:65px; height:26px; vertical-align: middle;">
+        <img :src='rumorInfo.status === "真" ? trueSmallImg : (rumorInfo.status === "存疑" ? doubtSmallImg : falseSmallImg)' style="height:26px; vertical-align: middle;">
       </div><br/>
       <div>
         <span class="common_title">查证要点：</span>
@@ -57,9 +57,9 @@ export default {
       falseImg: require('@/assets/100false.png'),
       doubtImg: require('@/assets/doubt.png'),
       trueImg: require('@/assets/true.png'),
-      falseSmallImg: require('@/assets/rumor.png'),
-      doubtSmallImg: require('@/assets/condition.png'),
-      trueSmallImg: require('@/assets/fact.png'),
+      falseSmallImg: require('@/assets/tmp/假谣言.png'),
+      doubtSmallImg: require('@/assets/tmp/争议.png'),
+      trueSmallImg: require('@/assets/tmp/真的.png'),
       rumorInfo: {},
       pointList: [
         '喀什网警巡查执法官方账号辟谣称：钟南山并没有来新疆，请大家不要放大疫情。请大家不要转发非官方信息。阿勒泰新闻网也在网络上辟谣：7月20日钟南山飞抵乌鲁木齐抗击疫情是谣言。',
