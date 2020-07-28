@@ -1,5 +1,7 @@
 package org.codeforworld.winterredserver.blockChain;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -18,7 +20,7 @@ public class Block implements Serializable {
     private String hash;
     private String previousHash;
     private String creator;
-    private String data;
+    private Object data;
 
     // for jackson
     public Block() {
@@ -89,11 +91,11 @@ public class Block implements Serializable {
         return previousHash;
     }
 
-    public void setData(String data) {
+    public void setData(Object data) {
         this.data = data;
     }
 
-    public String getData() {
+    public Object getData() {
         return data;
     }
 

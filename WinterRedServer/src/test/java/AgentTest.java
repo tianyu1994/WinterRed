@@ -52,8 +52,8 @@ public class AgentTest {
     @Test
     public void getBlockChain() {
         Agent a = new Agent("localhost",root, agents);
-        List<Block> blockch = a.deserializeBlockChain();
-        System.out.println(blockch);
+//        List<Block> blockch = a.readBlockChain();
+//        System.out.println(blockch);
     }
 
 }

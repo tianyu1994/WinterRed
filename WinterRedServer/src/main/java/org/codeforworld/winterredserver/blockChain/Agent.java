@@ -92,7 +92,7 @@ public class Agent {
         return true;
     }
 
-    public boolean serializeBlockChain() {
+    public boolean writeBlockChain() {
         try {
             ObjectOutputStream oo = new ObjectOutputStream(new FileOutputStream(
                     new File("src/main/resources/blockchain.txt")));
@@ -106,19 +106,18 @@ public class Agent {
         } catch (IOException e) {
             e.printStackTrace();
             logger.info("blockchain序列化存储失败！");
-        } finally {
-            return false;
         }
+        return false;
     }
 
-    public List<Block> deserializeBlockChain() {
+    public boolean readBlockChain() {
         List<Block> newBlockchain = new ArrayList<>();
         try {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(
                     new File("src/main/resources/blockchain.txt")));
-            newBlockchain = (List<Block>) ois.readObject();
+            blockchain = (List<Block>) ois.readObject();
             logger.info("blockchain反序列化取得成功！");
-            return newBlockchain;
+            return true;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -126,7 +125,7 @@ public class Agent {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return null;
+        return false;
     }
 
 
