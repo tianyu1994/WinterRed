@@ -1,9 +1,8 @@
-package org.codeforworld.winterredserver.util;
+package org.codeforworld.winterredserver.utils;
 
 import com.sun.mail.util.MailSSLSocketFactory;
 
 import javax.mail.Message;
-import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
@@ -11,9 +10,6 @@ import javax.mail.internet.MimeMessage;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.Authenticator;
-import java.net.InetAddress;
-import java.net.PasswordAuthentication;
 import java.util.Properties;
 
 public class IdentifyingCodeUtils {

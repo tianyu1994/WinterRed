@@ -1,14 +1,10 @@
 package org.codeforworld.winterredserver.controller;
 
-import com.alibaba.fastjson.JSONArray;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.codeforworld.winterredserver.entity.AskUser;
 import org.codeforworld.winterredserver.entity.RumorInfo;
-import org.codeforworld.winterredserver.entity.SubscribeUser;
-import org.codeforworld.winterredserver.entity.UserFieldRelation;
 import org.codeforworld.winterredserver.enumType.CheckStatus;
 import org.codeforworld.winterredserver.enumType.RumorSource;
 import org.codeforworld.winterredserver.lang.Result;
@@ -16,12 +12,10 @@ import org.codeforworld.winterredserver.service.AskUserService;
 import org.codeforworld.winterredserver.service.RumorInfoService;
 import org.codeforworld.winterredserver.service.SubscribeUserService;
 import org.codeforworld.winterredserver.service.UserFieldRelationService;
-import org.codeforworld.winterredserver.util.IdentifyingCodeUtils;
+import org.codeforworld.winterredserver.utils.IdentifyingCodeUtils;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 /**
