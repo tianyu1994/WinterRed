@@ -54,10 +54,7 @@ public class IdentifyingCodeUtils {
         props.load(iFile);
         iFile.close();
         String identifyingCodeTemp = props.getProperty(email);
-        if (!identifyingCodeTemp.equals(identifyingCode)){
-            return false;
-        }
-        return true;
+        return identifyingCodeTemp != null && identifyingCodeTemp.equals(identifyingCode);
     }
 
     public void sendEmail(String email, String identifyingCode) throws Exception{

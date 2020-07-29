@@ -122,7 +122,7 @@ public class SubscribeUserController {
         String identifyingCode = subscribeRequest.getIdentifyingCode();
         boolean isSuccess = true;
         if (identifyingCodeUtils.checkFile(email, identifyingCode)){
-            if (subscribeRequest.getProfessionalFieldIdList() != null && !"".equals(subscribeRequest.getProfessionalFieldIdList())){
+            if (subscribeRequest.getProfessionalFieldIdList() != null && subscribeRequest.getProfessionalFieldIdList().size() > 0){
                 List<Integer> professionalFieldIdList = subscribeRequest.getProfessionalFieldIdList();
                 for(Integer professionalFieldId : professionalFieldIdList){
                     result = subscribeUserService.saveOrUpdateByemail(email,professionalFieldId);
@@ -135,6 +135,9 @@ public class SubscribeUserController {
                 result.setFailedMsg("您没有选择订阅的领域");
                 return result;
             }
+        } else {
+            result.setFailedMsg("验证码不正确, 请重新输入");
+            return result;
         }
         if(isSuccess){
             result.setSuccessMsg("订阅成功");

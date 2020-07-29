@@ -79,7 +79,11 @@ export default {
         id: this.$route.query.rumorId
       }
       queryRumor(queryParam).then((res) => {
-        this.rumorInfo = res.results[0]
+        if (res.status !== 'success') {
+          this.$message.error(res.msg)
+        } else {
+          this.rumorInfo = res.results[0]
+        }
       }).catch((err) => {
         this.$message.error(err)
       })

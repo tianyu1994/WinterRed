@@ -101,7 +101,11 @@ export default {
         queryParam.keyWord = this.keyWord
       }
       queryRumor(queryParam).then((res) => {
-        this.tableData = res.results
+        if (res.status !== 'success') {
+          this.$message.error(res.msg)
+        } else {
+          this.tableData = res.results
+        }
       }).catch((err) => {
         this.$message.error(err)
       })

@@ -68,11 +68,16 @@ export default {
     handleSubscribe() {
       this.$refs.subscribeForm.validate((valid) => {
         if (valid) {
-          subscribe(this.subscribeForm).then(() => {
-            this.$message({
-              message: '订阅成功',
-              type: 'success'
-            })
+          subscribe(this.subscribeForm).then((res) => {
+            if (res.status !== 'success') {
+              this.$message.error(res.msg)
+            } else {
+              this.$message({
+                message: res.msg,
+                type: 'success'
+              })
+              this.subscribeDialog = false
+            }
           }).catch((err) => {
             this.$message.error(err)
           })
@@ -87,10 +92,9 @@ export default {
           email: this.subscribeForm.email
         }
         getEmailCode(queryParam).then((res) => {
-          this.$message({
-            message: res.msg,
-            type: 'success'
-          })
+          if (res.status !== 'success') {
+            this.$message.error(res.msg)
+          }
         }).catch((err) => {
           this.$message.error(err)
         })
@@ -113,7 +117,11 @@ export default {
   },
   mounted() {
     queryAllPerssional().then((res) => {
-      this.fieldList = res.results
+      if (res.status !== 'success') {
+        this.$message.error(res.msg)
+      } else {
+        this.fieldList = res.results
+      }
     }).catch((err) => {
       this.$message.error(err)
     })
