@@ -7,13 +7,12 @@
     <el-form ref='checkRumorForm' :model="checkRumorForm" :rules="formRule">
       <el-form-item label="鉴定" prop="status">
         <el-radio-group v-model="rumor.status">
-          <el-radio label="待核查">待核查</el-radio>
           <el-radio label="假">假</el-radio>
           <el-radio label="真">真</el-radio>
           <el-radio label="存疑">存疑</el-radio>
         </el-radio-group>
       </el-form-item>
-      <font>查证要点</font>
+      <font style="margin-right:15px;">查证要点</font>
       <el-button @click="addCheckPoint" type="primary" icon="el-icon-circle-plus-outline" circle></el-button>
       <el-form-item
         v-for="(checkPoint, index) in checkRumorForm.checkPoints"
@@ -26,7 +25,8 @@
       >
         <el-input type="textarea" v-model="checkPoint.value" placeholder="请输入内容" rows=2>
         </el-input>
-        <el-button type="danger" icon="el-icon-delete" v-if="index>0" @click.prevent="removeCheckPoint(checkPoint)" circle></el-button>
+        <el-button type="danger" icon="el-icon-delete" v-if="index>0" style="margin-top:15px;"
+          @click.prevent="removeCheckPoint(checkPoint)" circle></el-button>
       </el-form-item>
       <el-form-item label="引用内容" prop="quotedContent">
         <el-input v-model="checkRumorForm.quotedContent" placeholder="请输入内容"></el-input>
@@ -129,7 +129,10 @@ export default {
 
 <style>
   .checkRumor {
-    padding: 0.55rem 11.20rem 0.55rem 11.20rem;
+    line-height:1.7;
+    margin:15px 300px;
+    padding:15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
   }
   .title {
     font-size: 2.5rem;
