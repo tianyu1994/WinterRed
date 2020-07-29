@@ -55,7 +55,9 @@ export default {
         abstractInfo: '',
         professionalFieldId: '',
         professionalFieldName: '',
-        status: '待核查'
+        status: '待核查',
+        source: '',
+        askUserId: ''
       },
       checkRumorForm: {
         id: '',
@@ -80,12 +82,19 @@ export default {
         id: id
       }
       queryRumorById(params).then(rep => {
-        this.rumor = rep.results[0]
+        this.rumor = rep.results
+      }).catch(err => {
+        this.$message.error(err)
       })
     },
     handleSave() {
       this.$refs.checkRumorForm.validate(valid => {
         if (valid) {
+          var checkPoints = []
+          this.checkRumorForm.checkPoints.forEach(element => {
+            checkPoints.push(element.value)
+          })
+          this.checkRumorForm.checkPoints = checkPoints
           var params = {
             ...this.rumor,
             ...this.checkRumorForm
