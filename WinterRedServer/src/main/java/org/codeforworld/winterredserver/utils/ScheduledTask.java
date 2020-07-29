@@ -36,7 +36,7 @@ public class ScheduledTask {
     /**
      * 每天中午十二点触发定时分发任务
      */
-//    @Scheduled(cron = "*/5 * * * * ?") //这里为每5S触发一次 测试用
+//    @Scheduled(cron = "*/5 * * * * ?") //这里为每5S触发一次
     @Scheduled(cron = "0 0 12 * * ?")
     public void distributeTask() {
         logger.info("分发任务启动");
@@ -62,7 +62,7 @@ public class ScheduledTask {
             Distributor distributor = new Distributor();
             //拿到最近24小时待核查谣言
             QueryWrapper<RumorInfo> queryWrapper = new QueryWrapper<>();
-            queryWrapper.eq("status", "存疑");
+            queryWrapper.gt("update_on", yesterday).eq("status", "存疑");
             List<RumorInfo> rumorInfoList = rumorInfoMapper.selectList(queryWrapper);
 
             //遍历调用接口,给每个checkMan发邮件
