@@ -41,7 +41,7 @@ public class Distributor {
      * @return 专家 or null
      * @throws IOException
      */
-    public CheckMan checkRumorInfo(RumorInfo rumorInfo) throws IOException {
+    public List<CheckMan> checkRumorInfo(RumorInfo rumorInfo) throws IOException {
         //这是从数据库传来的一条信息，一些数据信息应该已经初始化了，比如领域已保存了领域ID
 
         //发生地
@@ -71,7 +71,7 @@ public class Distributor {
             }
         }
         if (checkMenOfNationAndProfession.size() != 0) {
-            return checkMenOfNationAndProfession.get(0);
+            return checkMenOfNationAndProfession;
         }
 
         //无事发地专家or事发地专家无该领域专家，则返回该领域内的专家们
@@ -87,7 +87,7 @@ public class Distributor {
             checkMenOfProfession.add(checkMan);
         }
         if (checkMenOfProfession.size() != 0) {
-            return checkMenOfProfession.get(0);
+            return checkMenOfProfession;
         }
         return null;
     }
