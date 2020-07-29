@@ -15,11 +15,12 @@
         <result column="check_man_id" property="checkManId"/>
         <result column="professional_field_id" property="professionalFieldId"/>
         <result column="ask_user_id" property="askUserId"/>
+        <result column="source" property="source"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, title, abstract_info, quoted_content, check_point, status, create_on, update_on, check_man_id, professional_field_id, ask_user_id
+        id, title, abstract_info, quoted_content, check_point, status, create_on, update_on, check_man_id, professional_field_id, ask_user_id, source
     </sql>
 
     <sql id="base_where">
@@ -34,6 +35,9 @@
         </if>
         <if test="askUserId != null">
             <![CDATA[ AND ask_user_id = #{askUserId}]]>
+        </if>
+        <if test="source != null and source != ''">
+            <![CDATA[ AND source = #{source}]]>
         </if>
         <if test="quotedContent != null and quotedContent != ''">
             <![CDATA[ AND quoted_content = #{quotedContent}]]>
