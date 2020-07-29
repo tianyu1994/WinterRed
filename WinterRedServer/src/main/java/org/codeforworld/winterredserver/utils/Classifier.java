@@ -5,11 +5,12 @@ import com.hankcs.hanlp.classification.classifiers.IClassifier;
 import com.hankcs.hanlp.classification.classifiers.NaiveBayesClassifier;
 import com.hankcs.hanlp.classification.models.NaiveBayesModel;
 import com.hankcs.hanlp.corpus.io.IOUtil;
+import com.hankcs.hanlp.corpus.tag.Nature;
 import com.hankcs.hanlp.seg.Segment;
 import com.hankcs.hanlp.seg.common.Term;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Classifier {
@@ -21,17 +22,35 @@ public class Classifier {
      * 模型保存路径
      */
     public static final String MODEL_PATH = "./src/main/resources/data/classification/model/classification-model.ser";
+    private static final String COUNTRY_PATH = "./src/main/resources/country.txt";
 
     public static String recognizeTopicOf(String msg) throws IOException {
         IClassifier classifier = new NaiveBayesClassifier(trainOrLoadModel());
         return classifier.classify(msg);
     }
 
-    public static String recognizeLocationOf(String msg) {
+    public static String recognizeLocationOf(String msg) throws IOException {
+        File file = new File(COUNTRY_PATH);
+        FileInputStream fileInputStream = new FileInputStream(file);
+        BufferedReader bf = new BufferedReader(new InputStreamReader(fileInputStream));
         Segment segment = HanLP.newSegment().enablePlaceRecognize(true);
         List<Term> termList = segment.seg(msg);
+        List<String> placeName = new ArrayList<>();
+        for (Term term : termList) {
+            if (term.nature.equals(Nature.ns)) {
+                placeName.add(term.word);
+            }
+        }
+        String country = null;
+        for (String ns : placeName) {
+            while ((country = bf.readLine()) != null) {
+                if (country.equals(ns)) {
+                    return country;
+                }
+            }
+        }
         //todo 国家地区解析
-        return "中国";
+        return "";
     }
 
     private static NaiveBayesModel trainOrLoadModel() throws IOException
@@ -57,6 +76,6 @@ public class Classifier {
     }
 
     public static void main(String[] args) throws IOException {
-        System.out.println(recognizeTopicOf("黄土高原近些年的水土流失程度有所减轻"));
+        System.out.println(recognizeLocationOf("中华人民共和国从去年3月的废水检出新冠病毒相关研究漏洞大"));
     }
 }

@@ -4,6 +4,7 @@ import com.hankcs.hanlp.corpus.io.IOUtil;
 import com.hankcs.hanlp.mining.word2vec.DocVectorModel;
 import com.hankcs.hanlp.mining.word2vec.Word2VecTrainer;
 import com.hankcs.hanlp.mining.word2vec.WordVectorModel;
+import org.codeforworld.winterredserver.service.impl.ProfessionalFieldServiceImpl;
 
 import java.io.File;
 import java.io.IOException;

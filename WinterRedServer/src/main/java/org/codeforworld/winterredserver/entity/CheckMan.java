@@ -60,9 +60,9 @@ public class CheckMan implements Serializable {
     private String userName;
 
     /**
-     * 所属领域
+     * 所属地区
      */
-    @NotNull(message = "所属领域不能为空")
+    @NotNull(message = "所属地区不能为空")
     private String belongArea;
 
     /**
