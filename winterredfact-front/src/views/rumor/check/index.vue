@@ -51,6 +51,7 @@ export default {
   data() {
     return {
       rumor: {
+        id: '',
         title: '',
         abstractInfo: '',
         professionalFieldId: '',
@@ -60,7 +61,6 @@ export default {
         askUserId: ''
       },
       checkRumorForm: {
-        id: '',
         checkManId: '',
         checkPoints: [
           {
@@ -105,6 +105,8 @@ export default {
             } else {
               this.$message.error(rep.msg)
             }
+          }).catch(err => {
+            this.$message.error(err)
           })
         }
       })
