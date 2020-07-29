@@ -63,4 +63,16 @@ public class AskUserController {
         }
         return result;
     }
+
+    @GetMapping("/getAskUserIdByEmail")
+    public Result getAskUserIdByEmail(@RequestParam("email") String email) {
+        Result result = new Result();
+        Integer askUserId = askUserService.getAskUserIdByEmail(email);
+        if(askUserId == null) {
+            result.setFailedMsg("获取提问人id失败！");
+        } else {
+            result.setResults(askUserId);
+        }
+        return result;
+    }
 }

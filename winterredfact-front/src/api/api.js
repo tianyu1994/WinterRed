@@ -72,3 +72,11 @@ export function saveOrUpdateCheck(params) {
     data: params
   })
 }
+
+export function getAskUserIdByEmail(params) {
+  return request({
+    url: '/askUser/getAskUserIdByEmail',
+    method: 'get',
+    params: params
+  })
+}

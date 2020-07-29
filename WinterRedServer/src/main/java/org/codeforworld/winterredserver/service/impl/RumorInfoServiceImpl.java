@@ -118,8 +118,7 @@ public class RumorInfoServiceImpl extends ServiceImpl<RumorInfoMapper, RumorInfo
         StringBuffer checkPoint = new StringBuffer();
         if(checkPointList != null && checkPointList.size() > 0){
             for (int i = 0; i < checkPointList.size(); i++) {
-                int order = i + 1;
-                checkPoint.append(order).append("、").append(checkPointList.get(i)).append(SEPARATE);
+                checkPoint.append(checkPointList.get(i)).append(SEPARATE);
             }
             rumorInfo.setCheckPoint(checkPoint.toString());
         }

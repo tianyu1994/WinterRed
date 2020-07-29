@@ -23,8 +23,8 @@
             <el-button slot="append" :disabled="disabled" @click="sendCode">{{btntxt}}</el-button>
           </el-input>
         </el-form-item>
-        <el-form-item label='验证码' prop='code'>
-          <el-input v-model='rumorForm.code' autocomplete='off'></el-input>
+        <el-form-item label='验证码' prop='identifyingCode'>
+          <el-input v-model='rumorForm.identifyingCode' autocomplete='off'></el-input>
         </el-form-item>
         <el-form-item>
           <el-button @click="handleClose">取 消</el-button>
@@ -35,6 +35,8 @@
   </div>
 </template>
 <script>
+import { getEmailCode, saveOrUpdate, getAskUserIdByEmail } from '@/api/api.js'
+
 export default {
   name: 'addRumorDialog',
   props: {
@@ -59,9 +61,10 @@ export default {
         abstractInfo: '',
         professionalFieldId: '',
         email: '',
-        code: '',
+        identifyingCode: '',
         askUserId: '',
-        source: '提问人录入'
+        source: '用户提问',
+        status: '待核查'
       },
       formRule: {
         title: [
@@ -78,7 +81,7 @@ export default {
         email: [
           { required: true, message: '请输入邮箱', trigger: 'blur' }
         ],
-        code: [
+        identifyingCode: [
           { required: true, message: '请输入验证码', trigger: 'blur' }
         ]
       }
@@ -93,8 +96,28 @@ export default {
     handleSave() {
       this.$refs.rumorForm.validate(valid => {
         if (valid) {
-          this.$emit('handle-save-dialog', this.rumorForm)
-          this.$refs.rumorForm.resetFields()
+          // 获取提问人id
+          const queryAskUser = {
+            email: this.rumorForm.email
+          }
+          getAskUserIdByEmail(queryAskUser).then((res1) => {
+            if (res1.status !== 'success') {
+              this.$message.error(res1.msg)
+            } else {
+              this.rumorForm.askUserId = res1.results
+              saveOrUpdate(this.rumorForm).then((res) => {
+                if (res.status === 'success') {
+                  this.$message.success('提问成功。')
+                  this.$emit('handle-cancel-dialog')
+                  this.$refs.rumorForm.resetFields()
+                } else {
+                  this.$message.error(res.msg)
+                }
+              })
+            }
+          }).catch((err) => {
+            this.$message.error(err)
+          })
         }
       })
     },
@@ -102,6 +125,17 @@ export default {
       if (this.rumorForm.email === '') {
         this.$message.error('请先输入邮箱')
       } else {
+        const queryParam = {
+          email: this.rumorForm.email
+        }
+        getEmailCode(queryParam).then((res) => {
+          if (res.status !== 'success') {
+            this.$message.error(res.msg)
+          }
+        }).catch((err) => {
+          this.$message.error(err)
+        })
+
         this.time = 60
         this.disabled = true
         this.timer()

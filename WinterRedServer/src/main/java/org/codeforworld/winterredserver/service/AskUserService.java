@@ -18,4 +18,6 @@ public interface AskUserService extends IService<AskUser> {
     List<AskUser> queryAskUser(AskUser askUser);
 
     Result saveOrUpdateAskUser(AskUser askUser);
+
+    Integer getAskUserIdByEmail(String email);
 }

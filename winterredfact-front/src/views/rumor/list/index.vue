@@ -30,8 +30,7 @@
       <add-rumor-dialog
         :addRumorDialogVisible="addRumorDialogVisible"
         :professionalList="professionalList"
-        @handle-cancel-dialog="cancelAddRumorDiglog"
-        @handle-save-dialog="saveAddRumorDiglog">
+        @handle-cancel-dialog="cancelAddRumorDiglog">
       </add-rumor-dialog>
     </div>
     <div v-for='(item, index) in tableData' :key='index'>
@@ -61,7 +60,7 @@
 import subscribe from './component/subscribe'
 import checkerRegist from './component/checkerRegist'
 import addRumorDialog from './component/addRumorDialog.vue'
-import { getPerssionalField, queryRumor, saveOrUpdate } from '@/api/api.js'
+import { getPerssionalField, queryRumor } from '@/api/api.js'
 
 export default {
   name: 'List',
@@ -125,18 +124,6 @@ export default {
     // 取消
     cancelAddRumorDiglog() {
       this.addRumorDialogVisible = false
-    },
-    // 保存谣言
-    saveAddRumorDiglog(rumorFormData) {
-      this.addRumorDialogVisible = false
-      saveOrUpdate(rumorFormData).then(res => {
-        if (res.status === 'success') {
-          this.$message.success('提问成功。')
-          this.addRumorDialogVisible = false
-        } else {
-          this.$message.error(res.msg)
-        }
-      })
     },
     // 获取领域列表
     getprofessionalList() {

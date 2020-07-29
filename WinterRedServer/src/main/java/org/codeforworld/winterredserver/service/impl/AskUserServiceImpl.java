@@ -52,6 +52,18 @@ public class AskUserServiceImpl extends ServiceImpl<AskUserMapper, AskUser> impl
         return result;
     }
 
+    @Override
+    public Integer getAskUserIdByEmail(String email) {
+        AskUser askUser = new AskUser();
+        askUser.setEmail(email);
+        boolean isExists = checkUnique(askUser);
+        if(!isExists) {
+            askUserMapper.insert(askUser);
+        }
+        List<AskUser> askUserList = askUserMapper.queryAskUser(askUser);
+        return askUserList.size() > 0 ? askUserList.get(0).getId() : null;
+    }
+
     /**
      * 检查唯一索引
      * @param askUser
