@@ -8,6 +8,7 @@ import com.hankcs.hanlp.corpus.io.IOUtil;
 import com.hankcs.hanlp.corpus.tag.Nature;
 import com.hankcs.hanlp.seg.Segment;
 import com.hankcs.hanlp.seg.common.Term;
+import org.codeforworld.winterredserver.WinterRedServerStartUp;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class Classifier {
     private static final String COUNTRY_PATH = "./src/main/resources/country.txt";
 
     public static String recognizeTopicOf(String msg) throws IOException {
-        IClassifier classifier = new NaiveBayesClassifier(trainOrLoadModel());
+        IClassifier classifier = new NaiveBayesClassifier(WinterRedServerStartUp.model);
         return classifier.classify(msg);
     }
 
@@ -53,7 +54,7 @@ public class Classifier {
         return "";
     }
 
-    private static NaiveBayesModel trainOrLoadModel() throws IOException
+    public static NaiveBayesModel trainOrLoadModel() throws IOException
     {
         System.out.println("加载模型ing");
         NaiveBayesModel model = (NaiveBayesModel) IOUtil.readObjectFrom(MODEL_PATH);
@@ -76,6 +77,6 @@ public class Classifier {
     }
 
     public static void main(String[] args) throws IOException {
-        System.out.println(recognizeLocationOf("中华人民共和国从去年3月的废水检出新冠病毒相关研究漏洞大"));
+        System.out.println(recognizeLocationOf("猫科"));
     }
 }
