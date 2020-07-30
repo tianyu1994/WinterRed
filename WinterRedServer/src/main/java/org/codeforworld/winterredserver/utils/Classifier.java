@@ -14,6 +14,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+//@author hankcs
+//Github：https://github.com/kervin521/HanLP
 public class Classifier {
     /**
      * 搜狗文本分类语料库5个类目，每个类目下1000篇文章，共计5000篇文章
@@ -74,9 +76,5 @@ public class Classifier {
         model = (NaiveBayesModel) classifier.getModel();
         IOUtil.saveObjectTo(model, MODEL_PATH);
         return model;
-    }
-
-    public static void main(String[] args) throws IOException {
-        System.out.println(recognizeLocationOf("猫科"));
     }
 }

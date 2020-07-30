@@ -9,6 +9,8 @@ import org.codeforworld.winterredserver.service.impl.ProfessionalFieldServiceImp
 import java.io.File;
 import java.io.IOException;
 
+//@author hankcs
+//Github：https://github.com/kervin521/HanLP
 public class Comparator {
     //两个文本关键词的余弦相似度阈值0.5
     private static final double SIMILARITY_THRESHOLD_VALUE_INSERT = 0.55F;
@@ -31,10 +33,6 @@ public class Comparator {
             return degree >= SIMILARITY_THRESHOLD_VALUE_INSERT;
         }
         return degree >= SIMILARITY_THRESHOLD_VALUE_RECOMMEND;
-    }
-
-    public static void main(String[] args) throws IOException {
-        System.out.println(compareTwoTextSimilarity("黄土高原近些年的水土流失程度有所减轻", "黄土高原近些年的水土流失问题得到了很好的控制", true));
     }
 
     private static boolean isFileExisted(String path) {
