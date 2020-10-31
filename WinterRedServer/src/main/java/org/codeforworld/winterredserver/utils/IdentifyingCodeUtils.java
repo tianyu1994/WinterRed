@@ -55,14 +55,14 @@ public class IdentifyingCodeUtils {
 
     public void sendEmail(String email, String identifyingCode) throws Exception{
 
-        mailFrom = "1254926326@qq.com";
-        password_mailFrom="nfokuqkhwxvagidf";
+        mailFrom = "menghanjun001@126.com";
+        password_mailFrom="MNNJHUOFHXIVTSKD";
         mailTo = email;
         mailTittle="This is the identifying code!";
         mailText = "The identifying code:" + identifyingCode;
 
         Properties prop = System.getProperties();
-        prop.setProperty("mail.host","smtp.qq.com");
+        prop.setProperty("mail.host","smtp.126.com");
         prop.setProperty("mail.transport.protocol", "smtp");
         prop.setProperty("mail.smtp.auth", "true");
 
@@ -82,7 +82,7 @@ public class IdentifyingCodeUtils {
         Transport transport = session.getTransport();
 
         //连接服务器
-        transport.connect("smtp.qq.com",mailFrom,password_mailFrom);
+        transport.connect("smtp.126.com",mailFrom,password_mailFrom);
 
         //创建邮件对象
         MimeMessage mimeMessage = new MimeMessage(session);
