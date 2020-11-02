@@ -30,23 +30,25 @@
         </div>
         <div class='absolute-aligned-right'>
           <el-row style='margin-right:15px;'>
-            <el-col :span='12'><subscribe/></el-col>
-            <el-col :span='12'><checkerRegist/></el-col>
-          </el-row>
-        </div>
-        <div class='absolute-aligned'>
-          <el-col :span='18'>
-            <el-input placeholder='请输入内容' size='large' v-model="keyWord">
-              <el-button slot='append' style='color:#fff; background:#EB6368;' @click='queryRumor'>
-                搜索<i class='el-icon-search el-icon--right'></i>
-              </el-button>
-            </el-input>
-          </el-col>
-            <el-col :span='6'>
-              <el-button type="danger" @click="showAddRumorDiglog" size="large" style='margin-left:15px; background:#EB6368;'>
+            <el-col :span='9'>
+              <el-button type="danger" @click="showAddRumorDiglog">
                 我要提问<i class='el-icon-mouse el-icon--right'></i>
               </el-button>
             </el-col>
+            <el-col :span='9'><checkerRegist/></el-col>
+            <el-col :span='6'><subscribe/></el-col>
+          </el-row>
+        </div>
+        <div class='absolute-aligned'>
+          <el-row>
+            <el-col :span='18'>
+              <el-autocomplete  :fetch-suggestions="querySuggestSearch" placeholder='请输入内容' size='large' v-model="keyWord">
+                <el-button slot='append' style='color:#fff; background:#EB6368;' @click='queryRumor'>
+                  搜索<i class='el-icon-search el-icon--right'></i>
+                </el-button>
+              </el-autocomplete>
+            </el-col>
+          </el-row>
         </div>
       </div>
       <div>
@@ -95,7 +97,7 @@ export default {
   },
   created() {
     this.getprofessionalList()
-    this.timer = setInterval(this.getNewMsg, 6000)
+    this.timer = setInterval(this.getNewMsg, 9000)
   },
   beforeDestroy() {
     clearInterval(this.timer)
@@ -127,7 +129,8 @@ export default {
           title: '超人大战哥斯拉',
           source: '地球防卫部'
         }
-      ]
+      ],
+      suggestSearch: []
     }
   },
   methods: {
@@ -199,10 +202,32 @@ export default {
           source: '用户提问'
         }
       )
+    },
+    querySuggestSearch(queryString, cb) {
+      var suggestSearch = this.suggestSearch
+      var results = queryString ? suggestSearch.filter(this.createFilter(queryString)) : suggestSearch
+      // 调用 callback 返回建议列表的数据
+      cb(results)
+    },
+    createFilter(queryString) {
+      return (suggestSearchTmp) => {
+        return (suggestSearchTmp.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0)
+      }
+    },
+    loadAll() {
+      return [
+        {
+          value: '新疆'
+        },
+        {
+          value: '日本'
+        }
+      ]
     }
   },
   mounted() {
     this.queryRumor()
+    this.suggestSearch = this.loadAll()
   }
 }
 </script>
