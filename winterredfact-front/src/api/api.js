@@ -88,3 +88,11 @@ export function checkPlatQueryAll(params) {
     params: params
   })
 }
+
+export function getAskUserIdByEmail(params) {
+  return request({
+    url: '/askUser/getAskUserIdByEmail',
+    method: 'get',
+    params: params
+  })
+}

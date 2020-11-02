@@ -41,8 +41,8 @@
         </div>
         <div class='absolute-aligned'>
           <el-row>
-            <el-col :span='18'>
-              <el-autocomplete  :fetch-suggestions="querySuggestSearch" placeholder='请输入内容' size='large' v-model="keyWord">
+            <el-col :span='24' align="center">
+              <el-autocomplete  :fetch-suggestions="querySuggestSearch" placeholder='请输入内容' size='large' v-model="keyWord" style="width: 450px;">
                 <el-button slot='append' style='color:#fff; background:#EB6368;' @click='queryRumor'>
                   搜索<i class='el-icon-search el-icon--right'></i>
                 </el-button>
