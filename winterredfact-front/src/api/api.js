@@ -96,3 +96,11 @@ export function getAskUserIdByEmail(params) {
     params: params
   })
 }
+
+export function queryCurrentHotKeywords(params) {
+  return request({
+    url: '/currentHotKeywords/queryAll',
+    method: 'get',
+    params: params
+  })
+}

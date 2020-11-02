@@ -181,4 +181,17 @@ public class RumorInfoController {
         result.setResults(rumorInfo);
         return result;
     }
+
+    /**
+     * 根据id查记录
+     * @param id
+     * @return
+     */
+    @GetMapping("/queryRolledRumorInfoById")
+    public Result queryRolledRumorInfoById(Integer id) {
+        Result result = new Result();
+        RumorInfo rumorInfo = rumorInfoService.queryRolledRumorInfoById(id);
+        result.setResults(rumorInfo);
+        return result;
+    }
 }

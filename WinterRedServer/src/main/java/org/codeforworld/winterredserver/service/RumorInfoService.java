@@ -30,4 +30,6 @@ public interface RumorInfoService extends IService<RumorInfo> {
     RumorInfo queryById(Integer id);
 
     RumorInfo queryRumorInfoById(String id);
+
+    RumorInfo queryRolledRumorInfoById(Integer id);
 }

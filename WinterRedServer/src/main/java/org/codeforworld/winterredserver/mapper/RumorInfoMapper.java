@@ -19,4 +19,5 @@ public interface RumorInfoMapper extends BaseMapper<RumorInfo> {
     RumorInfo queryById(Integer id);
     RumorInfo queryRumorInfoById(String id);
 
+    RumorInfo queryRolledRumorInfoById(Integer id);
 }

@@ -86,7 +86,7 @@
 import subscribe from './component/subscribe'
 import checkerRegist from './component/checkerRegist'
 import addRumorDialog from './component/addRumorDialog.vue'
-import { getPerssionalField, queryRumor } from '@/api/api.js'
+import { getPerssionalField, queryRumor, queryCurrentHotKeywords } from '@/api/api.js'
 
 export default {
   name: 'List',
@@ -309,21 +309,17 @@ export default {
       return (suggestSearchTmp) => {
         return (suggestSearchTmp.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0)
       }
-    },
-    loadAll() {
-      return [
-        {
-          value: '新疆'
-        },
-        {
-          value: '日本'
-        }
-      ]
     }
   },
   mounted() {
     this.queryRumor()
-    this.suggestSearch = this.loadAll()
+    queryCurrentHotKeywords().then(res => {
+      if (res.results !== null) {
+        this.suggestSearch = res.results
+      } else {
+        this.suggestSearch = []
+      }
+    })
   }
 }
 </script>
