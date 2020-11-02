@@ -48,6 +48,8 @@
 </template>
 
 <script>
+import { getEmailCode } from '@/api/api.js'
+
 export default {
   data() {
     return {
@@ -130,7 +132,16 @@ export default {
       if (this.form.email === '') {
         this.$message.error('请先输入邮箱')
       } else {
-        console.log('发送验证吗')
+        const queryParam = {
+          email: this.form.email
+        }
+        getEmailCode(queryParam).then((res) => {
+          if (res.status !== 'success') {
+            this.$message.error(res.msg)
+          }
+        }).catch((err) => {
+          this.$message.error(err)
+        })
 
         this.time = 60
         this.disabled = true

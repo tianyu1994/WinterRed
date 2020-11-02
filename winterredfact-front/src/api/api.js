@@ -57,6 +57,14 @@ export function saveOrUpdate(params) {
   })
 }
 
+export function saveOrUpdateCheckMan(params) {
+  return request({
+    url: '/checkMan/saveOrUpdate',
+    method: 'post',
+    data: params
+  })
+}
+
 export function queryRumorById(params) {
   return request({
     url: '/rumorInfo/queryById',
@@ -73,9 +81,9 @@ export function saveOrUpdateCheck(params) {
   })
 }
 
-export function getAskUserIdByEmail(params) {
+export function checkPlatQueryAll(params) {
   return request({
-    url: '/askUser/getAskUserIdByEmail',
+    url: '/checkPlat/queryAll',
     method: 'get',
     params: params
   })
