@@ -86,7 +86,7 @@
 import subscribe from './component/subscribe'
 import checkerRegist from './component/checkerRegist'
 import addRumorDialog from './component/addRumorDialog.vue'
-import { getPerssionalField, queryRumor, queryCurrentHotKeywords } from '@/api/api.js'
+import { getPerssionalField, queryRumor, queryCurrentHotKeywords, queryRolledRumorInfoById } from '@/api/api.js'
 
 export default {
   name: 'List',
@@ -288,16 +288,17 @@ export default {
       return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds
     },
     getNewMsg() {
-      if (this.newMsg.length > 15) {
-        this.newMsg.pop()
+      const queryParam = {
+        id: /^[0-9]+$/.test(this.newMsg[0].id) ? this.newMsg[0].id : 0
       }
-      this.newMsg.unshift(
-        {
-          id: 5,
-          title: '2020年10月31日新疆新增新三例冠病毒案例',
-          source: '用户提问'
+      queryRolledRumorInfoById(queryParam).then(res => {
+        if (res.results !== null) {
+          if (this.newMsg.length > 15) {
+            this.newMsg.pop()
+          }
+          this.newMsg.unshift(res.results)
         }
-      )
+      })
     },
     querySuggestSearch(queryString, cb) {
       var suggestSearch = this.suggestSearch

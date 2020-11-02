@@ -164,7 +164,7 @@ public class RumorInfoServiceImpl extends ServiceImpl<RumorInfoMapper, RumorInfo
     public RumorInfo queryRolledRumorInfoById(Integer id){
         RumorInfo rumorInfo = rumorInfoMapper.queryRolledRumorInfoById(id);
         if (rumorInfo == null){
-            return rumorInfoMapper.queryRolledRumorInfoById(Integer.valueOf(1));
+            return rumorInfoMapper.queryRolledRumorInfoById(0);
         }
         return rumorInfo;
     }

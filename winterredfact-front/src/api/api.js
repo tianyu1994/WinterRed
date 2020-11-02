@@ -104,3 +104,11 @@ export function queryCurrentHotKeywords(params) {
     params: params
   })
 }
+
+export function queryRolledRumorInfoById(params) {
+  return request({
+    url: '/rumorInfo/queryRolledRumorInfoById',
+    method: 'get',
+    params: params
+  })
+}
