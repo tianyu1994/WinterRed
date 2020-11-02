@@ -3,13 +3,13 @@
     <div class="msgBox">
       <el-card class="box-card" shadow="always">
         <div slot="header" style="font-size:16px;">
-          <span>实时数据</span>
+          <span>实时同步数据</span>
         </div>
         <div v-for="msg in newMsg" :key="msg.id">
           <el-row style='line-height:2;'>
             <el-col :span='18' align="left">
               <span style='font-size:14px; margin-right:15px;' >
-                {{msg.title.substr(0, 20) + '..'}}
+                {{msg.title.substr(0, 15) + '..'}}
               </span>
             </el-col>
             <el-col :span='6' align="right">
@@ -97,7 +97,8 @@ export default {
   },
   created() {
     this.getprofessionalList()
-    this.timer = setInterval(this.getNewMsg, 9000)
+    this.displayNewMsg()
+    this.timer = setInterval(this.getNewMsg, 6000)
   },
   beforeDestroy() {
     clearInterval(this.timer)
@@ -113,23 +114,109 @@ export default {
       tableData: [],
       addRumorDialogVisible: false,
       professionalList: [],
-      newMsg: [
+      fackNewMsg: [
         {
-          id: 1,
-          title: '2020年10月31日新疆新增新三例冠病毒案例',
-          source: '用户提问'
+          id: 'a',
+          title: '李兰娟院士提醒北京疫情可能将全面大爆发',
+          source: '区块链'
         },
         {
-          id: 2,
-          title: '火星人玩转地球预演',
-          source: '火星研究所'
+          id: 'b',
+          title: '大学生青海失联十余天未立案',
+          source: '区块链'
         },
         {
-          id: 3,
-          title: '超人大战哥斯拉',
-          source: '地球防卫部'
+          id: 'c',
+          title: '坠湖公交司机女儿投湖自杀',
+          source: '区块链'
+        },
+        {
+          id: 'd',
+          title: '猪流感真的要来了',
+          source: '区块链'
+        },
+        {
+          id: 'e',
+          title: '上海北外滩拆迁最高一户赔偿6.8亿',
+          source: '区块链'
+        },
+        {
+          id: 'f',
+          title: '网传银川百辆消防车支援凉山',
+          source: '区块链'
+        },
+        {
+          id: 'g',
+          title: '天津取消住房限购',
+          source: '区块链'
+        },
+        {
+          id: 'h',
+          title: '部分四川户口在重庆购房可减免房产税',
+          source: '区块链'
+        },
+        {
+          id: 'i',
+          title: '鄄城出现新冠肺炎患者',
+          source: '区块链'
+        },
+        {
+          id: 'j',
+          title: '济南地铁8号线未批先建',
+          source: '区块链'
+        },
+        {
+          id: 'k',
+          title: '成都地铁庆祝18号线开通免费送地铁卡',
+          source: '区块链'
+        },
+        {
+          id: 'l',
+          title: '北京新增四例确诊新冠肺炎病例',
+          source: '区块链'
+        },
+        {
+          id: 'm',
+          title: '哈同高速公路桥梁坍塌',
+          source: '区块链'
+        },
+        {
+          id: 'n',
+          title: '湖南平江近两千亩稻田绝收',
+          source: '区块链'
+        },
+        {
+          id: 'o',
+          title: '心脏病发作或猝死前用力咳嗽就能救命',
+          source: '区块链'
+        },
+        {
+          id: 'p',
+          title: '四川甘孜道孚猪肉出现问题不能食用',
+          source: '区块链'
+        },
+        {
+          id: 'q',
+          title: '益阳市赫山区出现新冠肺炎患者',
+          source: '区块链'
+        },
+        {
+          id: 'r',
+          title: '黑龙江省2020年度公务员省考笔试泄题',
+          source: '区块链'
+        },
+        {
+          id: 's',
+          title: '江西省普通高校专升本“第二次调剂”',
+          source: '区块链'
+        },
+        {
+          id: 't',
+          title: '西安市医保卡将终止使用',
+          source: '区块链'
         }
       ],
+      newMsg: [],
       suggestSearch: []
     }
   },
@@ -141,6 +228,15 @@ export default {
           rumorId: rumorId
         }
       })
+    },
+    displayNewMsg() {
+      for (let i = 1; i < this.fackNewMsg.length; i++) {
+        const random = Math.floor(Math.random() * (i + 1))
+        const t = this.fackNewMsg[i]
+        this.fackNewMsg[i] = this.fackNewMsg[random]
+        this.fackNewMsg[random] = t
+      }
+      this.newMsg = this.fackNewMsg.slice(0, 16)
     },
     queryRumor() {
       const queryParam = {}
