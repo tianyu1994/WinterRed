@@ -222,6 +222,7 @@ export default {
   },
   methods: {
     handleClickRumor(rumorId) {
+      localStorage.setItem('newMagCache', JSON.stringify(this.newMsg))
       this.$router.push({
         path: '/rumor/detail',
         query: {
@@ -230,13 +231,18 @@ export default {
       })
     },
     displayNewMsg() {
-      for (let i = 1; i < this.fackNewMsg.length; i++) {
-        const random = Math.floor(Math.random() * (i + 1))
-        const t = this.fackNewMsg[i]
-        this.fackNewMsg[i] = this.fackNewMsg[random]
-        this.fackNewMsg[random] = t
+      const newMsgCache = JSON.parse(localStorage.getItem('newMagCache'))
+      if (newMsgCache !== undefined && newMsgCache !== null) {
+        this.newMsg = newMsgCache
+      } else {
+        for (let i = 1; i < this.fackNewMsg.length; i++) {
+          const random = Math.floor(Math.random() * (i + 1))
+          const t = this.fackNewMsg[i]
+          this.fackNewMsg[i] = this.fackNewMsg[random]
+          this.fackNewMsg[random] = t
+        }
+        this.newMsg = this.fackNewMsg.slice(0, 16)
       }
-      this.newMsg = this.fackNewMsg.slice(0, 16)
     },
     queryRumor() {
       const queryParam = {}
@@ -254,9 +260,11 @@ export default {
       })
     },
     checkerRegist() {
+      localStorage.setItem('newMagCache', JSON.stringify(this.newMsg))
       this.$router.push('/rumor/checkerRegist')
     },
     handleClick() {
+      localStorage.setItem('newMagCache', JSON.stringify(this.newMsg))
       this.$router.push({
         path: '/rumor/detail'
       })
