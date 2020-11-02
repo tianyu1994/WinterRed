@@ -29,7 +29,7 @@
           </el-form-item>
           <el-form-item label="机构组织" prop="orgOptions" :label-width='formLabelWidth'>
             <el-select v-model="form.orgn" placeholder="请选择所属机构组织">
-              <el-option v-for="item in orgOptions" :key="item.name" :value="item.name"></el-option>
+              <el-option v-for="item in orgOptions" :key="item.id" :label="item.organizationName" :value="item.id"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="所属地区" prop="areaOptions" :label-width='formLabelWidth'>
@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import { getEmailCode } from '@/api/api.js'
+import { checkPlatQueryAll, getEmailCode, saveOrUpdateCheckMan } from '@/api/api.js'
 
 export default {
   data() {
@@ -69,16 +69,7 @@ export default {
           name: '英国'
         }
       ],
-      orgOptions: [
-        {
-          id: 1,
-          name: '较真'
-        },
-        {
-          id: 2,
-          name: '是真的吗'
-        }
-      ],
+      orgOptions: [],
       disabled: false,
       time: 0,
       btntxt: '获取验证码',
@@ -117,14 +108,40 @@ export default {
       }
     }
   },
+  created() {
+    this.checkPlatQueryAll()
+  },
   methods: {
     cancelForm() {
       this.registDialog = false
     },
+    checkPlatQueryAll() {
+      checkPlatQueryAll().then(res => {
+        if (res.status === 'success') {
+          this.orgOptions = res.results
+        }
+      })
+    },
     onSubmit() {
       this.$refs.form.validate((valid) => {
         if (valid) {
-          console.log(this.form)
+          const saveParam = {
+            organizationId: this.form.orgn,
+            checkmanName: this.form.name,
+            sex: this.form.sex,
+            email: this.form.email,
+            userName: this.form.user,
+            belongArea: this.form.area
+          }
+          saveOrUpdateCheckMan(saveParam).then((res) => {
+            if (res.status === 'success') {
+              this.$message.success('注册成功。')
+              this.registDialog = false
+              this.$refs.form.resetFields()
+            } else {
+              this.$message.error(res.msg)
+            }
+          })
         }
       })
     },
