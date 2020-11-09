@@ -58,14 +58,25 @@ public class RumorProcessor implements PageProcessor {
         rumorInfo.setAbstractInfo(rumor);
         rumorInfo.setQuotedContent(content);
         rumorInfo.setCheckPoint(title);
-        rumorInfo.setStatus(status);
+        if ("谣言".equals(status)){
+            rumorInfo.setStatus("假");
+        }else if ("待论证".equals(status)){
+            rumorInfo.setStatus("待核查");
+        }else if ("证实".equals(status)){
+            rumorInfo.setStatus("真");
+        }
+
         rumorInfo.setCreateOn(now);
         rumorInfo.setUpdateOn(now);
         rumorInfo.setCheckManId(1);
         rumorInfo.setProfessionalFieldId(12);
         rumorInfo.setAskUserId(1);
-        rumorInfo.setSource(source);
-        rumorInfo.setUpdateBy("系统");
+        if ("北京日报".equals(source)) {
+            rumorInfo.setSource("区块链");
+        }else {
+            rumorInfo.setSource(source);
+        }
+        rumorInfo.setUpdateBy("系统扫描");
 
         if (StringUtils.isNotEmpty(status)) {
             rumorProcessor.rumorInfoMapper.insert(rumorInfo);

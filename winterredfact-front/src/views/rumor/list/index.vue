@@ -5,13 +5,13 @@
         <div slot="header" style="font-size:16px;">
           <span>实时同步数据</span>
         </div>
-        <div v-for="(msg, index) in newMsg" :key="msg.id">
+        <div v-for="(msg, index) in newMsg" :key="index">
           <el-row style='line-height:2;'>
             <el-col :span='18' align="left">
               <span style='font-size:14px; margin-right:15px;' >
                 {{msg.title.substr(0, 15) + '..'}}
               </span>
-            </el-col>
+            </el-col> 
             <el-col :span='6' align="right">
               <el-tag :type='index % 2 === 0 ? "success" : (index % 3 ? "warning" : "primary")'>
                 {{msg.source}}
