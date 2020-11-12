@@ -29,7 +29,7 @@ public class handleDataTest {
         List<RumorInfo> rumorInfoList = rumorInfoService.queryRumorInfo(rumorInfo);
 
         for (RumorInfo rumorInfo1 : rumorInfoList){
-//            c rumorInfo1
+            
         }
     }
 

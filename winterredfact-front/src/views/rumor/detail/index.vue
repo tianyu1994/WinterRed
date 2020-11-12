@@ -33,7 +33,7 @@
       </div>
       <div>
         <span class="common_title">查证者：</span>
-        <span>{{rumorInfo.organizationName + ' • ' + rumorInfo.checkManName}}</span>
+        <span>{{(rumorInfo.organizationName ? rumorInfo.organizationName : '') + ' • ' + (rumorInfo.checkManName ? rumorInfo.checkManName : '')}}</span>
       </div>
     </div>
     <div>
