@@ -75,6 +75,7 @@
             and status !='待核查'
         </where>
         order by update_on desc
+        limit 40;
     </select>
 
     <select id="queryById" parameterType="org.codeforworld.winterredserver.entity.RumorInfo"
