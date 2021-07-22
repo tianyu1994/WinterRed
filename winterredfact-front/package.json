@@ -20,7 +20,7 @@
     "jsonlint": "^1.6.3",
     "file-saver": "^2.0.2",
     "js-cookie": "^2.2.1",
-    "xlsx": "^0.15.6"
+    "xlsx": "^0.17.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.4.0",
